@@ -35,15 +35,15 @@
 
     },
     {
-    "name": "AI Studio",
+    "name": "AI Studio", 
     "link": { "b": "aistudio.google.com", "x": false }
     },
     {
-    "name": "Jules",
+    "name": "Jules", 
     "link": { "b": "jules.google.com", "x": false }
     },
     {
-    "name": "NotebookLM",
+    "name": "NotebookLM", 
     "link": { "b": "notebooklm.google.com", "x": false }
     }
     ]

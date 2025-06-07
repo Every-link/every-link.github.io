@@ -126,6 +126,7 @@ categories: JSON.parse(localStorage.getItem('categories')) || [
   { name: "Education", id: "education", icon: "school", v: false },
   { name: "Contacts", id: "contacts", icon: "contacts", v: false },
   { name: "Developers", id: "developers", icon: "terminal", v: false },
+  { name: "torrent", id: "torrent", icon: "dns", v: false },
   { name: "Others", id: "others", icon: "more_horiz", v: false },
 ],
   
