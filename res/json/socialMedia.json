@@ -1,0 +1,28 @@
+[
+    
+{
+    "name": "Facebook",
+    "url": "facebook.com"
+},
+{
+    "name": "Instagram",
+    "url": "instagram.com",
+    "p": "/explore/tags/"
+},
+{
+    "name": "X.com",
+    "url": "x.com",
+    "p": "/search?q="
+},
+{
+    "name": "Reddit",
+    "url": "reddit.com",
+    "p": "/search/?q="
+},
+{
+    "name": "Tumblr",
+    "url": "www.tumblr.com",
+    "p": "/search/"
+}
+
+]

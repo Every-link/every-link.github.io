@@ -1,0 +1,20 @@
+[
+{
+"name": "ChatGpt", 
+"icon": "chat.openai.com", 
+"advanced": true,
+"link": {"b": "chat.openai.com", "p": "?q=", "s": "", "x": false},
+"deepLink": {"b": "com.openai.chat://", "p": "", "s": ""},
+"app": {
+    "android": "com.google.android.googlequicksearchbox", 
+    "ios": "id284815942"
+    },
+
+"alt": [
+            
+            
+]
+        
+}
+
+]

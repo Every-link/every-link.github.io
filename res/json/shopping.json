@@ -1,0 +1,82 @@
+[
+
+{
+    "name": "Amazon",
+    "type":"homepage",
+    "url": "amazon.com", "p": "/s?k=",
+     "more": {
+        "android": "com.google.android.googlequicksearchbox",
+        "ios": "id284815942",
+        "deepLink": "com.amazon.mobile.shopping.web://amazon.com"
+    },
+
+    "alt": [
+        { 
+            "name": "Google AI Studio",
+            "url": "/aistudio.google.com",
+            "homepage": true
+        },
+        { 
+            "name": "Google AI Studio",
+            "url": "/aistudio.google.com",
+            "homepage": true
+        },
+        { 
+            "name": "Google Jules (for coding)",
+            "url": "jules.google.com",
+            "homepage": true
+        },
+        { 
+            "name": "Google NotebookLM",
+            "url": "notebooklm.google.com",
+            "homepage": true
+        }
+    ]
+
+},
+
+
+
+
+
+{
+    "name": "amazon",
+    "url": "chat.openai.com", 
+    "p": "?q=",
+    
+    "alt": [
+        
+        { 
+            "name": "amazon",
+            "url": "chat.openai.com",
+            "p": "?q="
+        },
+        
+        {
+            "name": "amazon",
+            "url": "chat.openai.com",
+            "p": "?q="
+        }
+    ]
+    
+    
+    
+},
+
+
+
+
+
+
+
+
+{
+    "name": "Facebook Marketplace", 
+    "url": "facebook.com", 
+    "p": "/marketplace/search/?query="
+}
+
+]
+
+
+

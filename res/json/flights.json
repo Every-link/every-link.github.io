@@ -1,0 +1,34 @@
+[
+
+
+{
+   "name": "FlightRadar24",
+   "url": "flightradar24.com",
+   "p": "/data/flights/"
+},
+{
+   "name": "AirNavRadar",
+   "url": "airnavradar.com",
+   "p": "/data/flights/"
+},
+{
+   "name": "PlaneFinder",
+   "url": "planefinder.net",
+   "p": "/data/flight/"
+},
+{
+   "name": "FlightAware",
+   "url": "flightaware.com",
+   "p": "/live/airport/"
+},
+{
+   "name": "FlightStats",
+   "url": "flightstats.com"
+},
+{
+   "name": "FlightView",
+   "url": "flightview.com"
+    }
+
+
+]

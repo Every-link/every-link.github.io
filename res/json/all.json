@@ -1,0 +1,41 @@
+
+{
+  "name": "Images", id: "images", icon: "image",
+  visibility: JSON.parse(localStorage.getItem("images") || "true"),
+  sites: [
+    {"name": "Google Images", "url": "google.com/search?udm=2&q=", p: ""},
+    {"name": "Google Photos", "url": "photos.google.com/search/", p: ""},
+    ]
+  },
+        
+
+{
+  "name": "Shopping", id: "shopping", icon: "shopping_cart",
+  visibility: JSON.parse(localStorage.getItem("shopping") || "true"),
+  sites: [
+    {"name": "Amazone", "url": "amazon.com/s?k=", p: ""},
+    {"name": "Ebay", "url": "ebay.com/sch/i.html?_nkw=", p: ""},
+  ]
+},
+  
+
+
+{
+  "name": "Education", id: "education", icon: "school",
+  visibility: JSON.parse(localStorage.getItem("education") || "true"),
+  sites: [
+    
+    {"name": "Google scholar", "url": "scholar.google.com/scholar?q=", p: ""},
+    {"name": "Library of Congress", "url": "www.loc.gov/search/?q=", p: ""},
+    {"name": "Library and Archives of Canada", "url": "recherche-collection-search.bac-lac.gc.ca/eng/Home/Search?q=", p: ""},
+    
+    {"name": "Base", "url": "www.base-search.net/Search/Results?lookfor=", p: ""},
+    
+    {"name": "Encyclopedia", "url": "www.encyclopedia.com/gsearch?q=", p: ""},
+
+
+  ]
+},
+  
+
+  ]

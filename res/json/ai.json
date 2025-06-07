@@ -1,0 +1,86 @@
+[
+    
+
+{
+"name": "ChatGpt",  "icon": "chat.openai.com",  "advanced": true,
+"link": {"b": "chat.openai.com", "p": "?q=", "x": false},
+"deepLink": {"b": "com.openai.chat://"},
+"app": {
+    "android": "com.openai.chatgpt", 
+    "ios": "id6448311069"
+    }
+},
+
+
+    
+{
+"name": "Grok", "icon": "x.ai",
+"link": {"b": "grok.com", "p": "/?q=", "x": false}
+},
+
+{
+"name": "Micorsoft Copilot",
+"link": {"b": "copilot.microsoft.com", "p": "/search?showconv=1&sendquery=1&q=", "x": false}
+},
+
+    
+{
+"name": "Google ai", "icon": "gemini.google.com",
+"alt": [
+    {
+    "name": "Gemini",
+    "link": { "b": "gemini.google.com", "x": false },
+    "deepLink": { "b": "com.openai.chat://" },
+    "app": { "android": "", "ios": "id6477489729" }
+
+    },
+    {
+    "name": "AI Studio",
+    "link": { "b": "aistudio.google.com", "x": false }
+    },
+    {
+    "name": "Jules",
+    "link": { "b": "jules.google.com", "x": false }
+    },
+    {
+    "name": "NotebookLM",
+    "link": { "b": "notebooklm.google.com", "x": false }
+    }
+    ]
+},
+
+    
+ 
+{
+"name": "Perplexity",
+"link": {"b": "www.perplexity.ai", "p": "/search?q=", "x": false}
+},
+
+
+{
+"name": "Claude ai",
+"link": {"b": "claude.ai", "p": "/new?q=", "x": false}
+},
+  
+
+{
+"name": "Ecosia ai",
+"link": {"b": "ecosia.org", "p": "/chat?q=", "s": "", "x": false}
+},
+
+
+{
+"name": "duckduckgo ai", "icon": "duckduckgo.com",
+"link": {"b": "Duck.ai", "p": "/new?q=", "s": "", "x": false}
+},
+
+
+{
+"name": "Yep ai",
+"link": {"b": "yep.com", "p": "/chat/?q=", "s": "", "x": false}
+}
+
+
+
+    
+]

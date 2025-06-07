@@ -1,0 +1,142 @@
+[
+
+
+
+{ 
+"name": "Google", "icon": "chat.openai.com",
+"link": {"b": "google.com", "p": "/search?q=", "s": "&hl=ar","x": false},
+"deepLink": {
+    "android": {"b": "google://search","p": "?q="},
+    "ios": {"b": "google://search","p": "?q="}
+},
+"app": {
+    "android": "com.google.android.googlequicksearchbox",
+    "ios": "id284815942"
+    }
+    
+},
+
+
+{
+"name": "Bing",
+"link": {"b": "bing.com", "p": "/search?q=", "x": false}
+},
+
+{
+"name": "Yandex",
+"link": {"b": "yandex.com", "p": "/search?text=", "x": false}
+},
+
+{
+"name": "Yahoo",
+"link": {"b": "search.yahoo.com", "p": "/search?p=", "x": false}
+},
+
+    
+{
+"name": "Baidu (Chinese)",
+"link": {"b": "baidu.com", "p": "/s?word=", "x": false}
+},
+
+{
+"name": "Naver (Korean)",
+"link": {"b": "search.naver.com", "p": "/search.naver?query=", "x": false}
+},
+
+{
+"name": "Startpage",
+"link": {"b": "startpage.com", "p": "/do/search?q=", "x": false}
+},
+
+{
+"name": "Qwant",
+"link": {"b": "www.qwant.com", "p": "?q=", "x": false}
+},
+
+{
+"name": "Ecosia",
+"link": {"b": "ecosia.org", "p": "/search?q=", "x": false}
+},
+
+{
+"name": "Presearch",
+"link": {"b": "presearch.com", "p": "/search?q=", "x": false}
+},
+
+{
+"name": "Dsearch",
+"link": {"b": "dsearch.com", "p": "/search?q=", "x": false}
+},
+
+{
+"name": "Aol",
+"link": {"b": "search.aol.com", "p": "/aol/search/?q=", "x": false}
+},
+
+{
+"name": "Searchalot",
+"link": {"b": "searchalot.com", "p": "/?q=", "x": false}
+},
+
+{
+"name": "Ask",
+"link": {"b": "ask.com", "p": "/web?q=", "x": false}
+},
+
+{
+"name": "Marginalia",
+"link": {"b": "marginalia-search.com", "p": "/search?query=", "x": false}
+},
+
+{
+"name": "Duckduckgo",
+"exEngin": true,
+"link": {"b": "duckduckgo.com", "p": "/?q=", "x": false}
+},
+
+{
+"name": "Brave",
+"link": {"b": "search.brave.com", "p": "/search?q=", "x": false}
+},
+
+{
+"name": "Yep",
+"link": {"b": "yep.com", "p": "/web?q=", "x": false}
+},
+
+{
+"name": "Mojeek",
+"link": {"b": "www.mojeek.com", "p": "/search?q=", "x": false}
+},
+
+{
+"name": "Gibiru",
+"link": {"b": "gibiru.com", "p": "/results.html?q=", "x": false}
+},
+
+{
+"name": "Myallsearch",
+"link": {"b": "www.myallsearch.com", "p": "/search?q=", "x": false}
+},
+
+{
+"name": "Onesearch",
+"link": { "b": "onesearch.com", "p": "/yhs/search?p=", "x": false}
+},
+
+{
+"name": "Archive",
+"link": {"b": "archive.org", "p": "/search?query=", "x": false}
+},
+
+{
+"name": "Wikipedia",
+"link": {"b": "wikipedia.org", "p": "/wiki/", "x": false}
+}
+
+
+
+
+]
+
+

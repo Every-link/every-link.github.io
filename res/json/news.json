@@ -1,0 +1,109 @@
+[
+
+
+{
+"name": "Google News", 
+"link": {"b": "news.google.com", "p": "/search?q="}
+},
+{
+"name": "Bing News", 
+"link": {"b": "www.bing.com", "p": "/news/search?q="}
+},
+{
+"name": "BBC News", 
+"link": {"b": "bbc.com", "p": "/search?q="}
+},
+{
+"name": "BBC Arabic", 
+"link": {"b": "bbc.com/arabic/", "x": true}
+},
+{
+"name": "CNN", 
+"link": {"b": "cnn.com", "p": "/search?q="}
+},
+{
+"name": "CNN Arabic", 
+"link": {"b": "arabic.cnn.com", "p": "/search?q="}
+},
+{
+"name": "The New York Times", 
+"link": {"b": "nytimes.com", "p": "/search?query="}
+},
+{
+"name": "Reuters", 
+"link": {"b": "reuters.com", "p": "/site-search/?query="}
+},
+{
+"name": "The Washington Post", 
+"link": {"b": "washingtonpost.com", "p": "/search/?query="}
+},
+{
+"name": "NPR", 
+"link": {"b": "www.npr.org", "p": "/search?query="}
+},
+{
+"name": "The Guardian", 
+"link": {"b": "theguardian.com", "x": true }
+},
+{
+"name": "Bloomberg", 
+"link": {"b": "bloomberg.com", "p": "/search?query="}
+},
+{
+"name": "CBS News", 
+"link": {"b": "cbsnews.com", "p": "/search/?q="}
+},
+{
+"name": "Axios", 
+"link": {"b": "axios.com", "p": "/results?q="}
+},
+{
+"name": "TIME", 
+"link": {"b": "time.com", "p": "/search/?q="}
+},
+{
+"name": "ProPublica", 
+"link": {"b": "propublica.org", "p": "/search/?qss="}
+},
+{
+"name": "Vox", 
+"link": {"b": "vox.com", "p": "/search?q="}
+},
+{
+"name": "Associated Press", 
+"link": {"b": "apnews.com", "p": "/search?q="}
+},
+{
+"name": "The Independent", 
+"link": {"b": "independent.co.uk", "x": true}
+},
+{
+"name": "Al Jazeera", 
+"link": {"b": "aljazeera.com", "p": "/search/"}
+},
+{
+"name": "Al Jazeera Arabic", 
+"link": {"b": "aljazeera.net", "p": "/search/"}
+},
+{
+"name": "NBC News", 
+"link": {"b": "nbcnews.com", "p": "/search?q="}
+},
+{
+"name": "ABC News", 
+"link": {"b": "abcnews.go.com", "p": "/search?searchtext="}
+},
+{
+"name": "Fox News", 
+"link": {"b": "foxnews.com", "p": "/search-results/search#q="}
+},
+{
+"name": "The Wall Street Journal", 
+"link": {"b": "www.wsj.com", "p": "/search?query="}
+}
+
+
+]
+
+
+
