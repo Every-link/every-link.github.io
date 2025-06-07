@@ -242,9 +242,9 @@
     </label>
     
     <label v-else>
-      <i v-if="S.deepLink">phone_iphone</i>
-      <i class="blue-text" v-if="S.link.x">travel_explore</i>
       <i class="red-text" v-if="!S.link.p && !S.link.x">search_off</i>
+      <i class="blue-text" v-if="S.link.x">travel_explore</i>
+      <i v-if="S.deepLink">phone_iphone</i>
     </label>
 </div>
 
@@ -458,7 +458,7 @@ rel="nofollow">
 
 <div class="tabs scroll">
 <a v-for="(A, I) in S.alt" :key="A.link.b" :class="[{'active': step == I}, 'vertical']" @click="step = I ">
-  <img class="circle" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (A.icon ? A.icon : S.icon)" alt="icon" loading="lazy">
+  <img class="circle" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (A.icon ? A.icon : S.icon)" alt="icon" loading="lazy" >
   <span v-text="A.name"></span>
 </a>
 </div>

@@ -1,38 +1,53 @@
 [
   
+  
 {
-  "name": "Booking.com",
-  "url": "booking.com",
-  "p": "/searchresults.en-gb.html?ss="
+"name": "Booking.com",
+"link": {"b": "booking.com", "p": "/searchresults.en-gb.html?ss=", "x": false},
+"deepLink": {"b": "booking://", "p": "searchresults?ss="},
+"app": {"android": "com.booking", "ios": "id367003839"}
 },
-{
-  "name": "Expedia.com",
-  "url": "expedia.com",
-  "p": "/Hotel-Search?destination="
-},
-{
-  "name": "Hotels.com",
-  "url": "hotels.com",
-  "p": "/Hotel-Search?destination="
-},
-{
-  "name": "Vrbo.com",
-  "url": "vrbo.com",
-  "p": "/search?destination="
-},
-{
-  "name": "Kayak.com",
-  "url": "kayak.com"
-},
-{
-  "name": "Airbnb.com",
-  "link": {"b": "www.airbnb.com" ,"p": "/s/", "s": "/homes"}
-},
-{
-  "name": "Tripadvisor",
-  "url": "tripadvisor.com",
-  "p": "/Search?q="
-}
 
+{
+"name": "Expedia.com",
+"link": {"b": "expedia.com", "p": "/Hotel-Search?destination=", "x": false},
+"deepLink": {"b": "booking://", "p": "searchresults?ss="},
+"app": {"android": "com.booking", "ios": "id367003839"}
+},
+
+{
+"name": "Hotels.com",
+"link": {"b": "hotels.com", "p": "/Hotel-Search?destination=", "x": false},
+"deepLink": {"b": "booking://", "p": "searchresults?ss="},
+"app": {"android": "com.booking", "ios": "id367003839"}
+},
+
+{
+"name": "Vrbo.com",
+"link": {"b": "vrbo.com", "p": "/search?destination=", "x": false},
+"deepLink": {"b": "booking://", "p": "searchresults?ss="},
+"app": {"android": "com.booking", "ios": "id367003839"}
+},
+
+{
+"name": "Kayak.com",
+"link": {"b": "kayak.com", "x": false},
+"deepLink": {"b": "booking://", "p": "searchresults?ss="},
+"app": {"android": "com.booking", "ios": "id367003839"}
+},
+
+{
+"name": "Airbnb.com",
+"link": {"b": "www.airbnb.com" ,"p": "/s/", "s": "/homes", "x": false},
+"deepLink": {"b": "booking://", "p": "searchresults?ss="},
+"app": {"android": "com.booking", "ios": "id367003839"}
+},
+
+{
+"name": "Tripadvisor",
+"link": {"b": "tripadvisor.com", "p": "/Search?q=", "x": false},
+"deepLink": {"b": "booking://", "p": "searchresults?ss="},
+"app": {"android": "com.booking", "ios": "id367003839"}
+}
 
 ]

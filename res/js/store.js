@@ -248,7 +248,7 @@ $template: `
 <span>Close</span><i>close</i>
 </button>
 </nav></header>
-
+<div class="divider"></div>
 <!---------------------------------------------------------->
 <div> <ul class="list border">
 
