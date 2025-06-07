@@ -4,5 +4,4 @@ Allow: /search.html
 Disallow: /search.html?q=*
 Sitemap: https://website.com/sitemap.xml
 
-
-Sitemap: https://spa-github-pages.rafgraph.dev/sitemap.txt
+Sitemap: https://https://every-link.github.io/sitemap.txt
