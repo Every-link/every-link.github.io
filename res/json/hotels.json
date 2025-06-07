@@ -12,7 +12,7 @@
 "name": "Expedia.com",
 "link": {"b": "expedia.com", "p": "/Hotel-Search?destination=", "x": false},
 "deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.booking", "ios": "id367003839"}
+"app": {"android": "com.expedia.bookings", "ios": "id427916203"}
 },
 
 {

@@ -233,7 +233,7 @@
     
     <div class="max">
     <h5 class="small" v-text="S.name"></h5>
-    <p v-if="!S.alt && S.link.b" v-text="'https://' + S.link.b" class="link"></p>
+    <p v-if="!S.alt && S.link.b" v-text="'https://' + S.link.b" class="link wrap"></p>
     </div>
 
 
@@ -260,7 +260,7 @@ rel="nofollow">
     
     <div class="max">
     <h5 class="small" v-text="S.name"></h5>
-    <p v-if="!S.alt" v-text="'https://' + S.link.b" class="link"></p>
+    <p v-if="!S.alt" v-text="'https://' + S.link.b" class="link wrap"></p>
     </div>
 
     <label>
@@ -322,7 +322,7 @@ rel="nofollow">
     
 <div class="max">
   <h5 class="small" v-text="link.n"></h5>
-  <p v-text="'https://' + link.b" class="link"></p>
+  <p v-text="'https://' + link.b" class="link wrap"></p>
 </div>
 
 <label v-show="!edit">
@@ -383,7 +383,7 @@ rel="nofollow">
   <i>close</i>
 </button>
   
- <button class="secondary small-round large" type="submit">
+ <button class="primary small-round large" type="submit">
   <span>add</span><i>add</i>
 </button>
 </nav>
@@ -399,7 +399,6 @@ rel="nofollow">
 </main>
 
 
-
 <div v-for="(C, I) in $S.categories.filter(C => C.id == $S.R.tab)" :key="C.id">
 
 <dialog v-for="(S, I) in sites" :key="S.b" :class="[$S.device.display == 's' && !S.alt  ? 'bottom no-padding' : '' , 'scroll']" :id="'dialog_site_' + I">
@@ -413,10 +412,10 @@ rel="nofollow">
   <i>phone_iphone</i>
   <h5 class="max small" v-text="S.name + ' App'"></h5>
   
-  <a v-if="S.app !== undefined && $S.device.os == 'android'"  class="row" :href="'https://play.google.com/store/apps/details?id=' + S.app.android)" rel="nofollow">
+  <a v-if="S.app !== undefined && $S.device.os == 'android'"  class="row" :href="'market://details?id=' + S.app.android)" rel="nofollow">
     <button><i>download</i></button>
   </a>
-  <a v-if="S.app !== undefined && $S.device.os == 'ios'"  class="row" :href="'https://apps.apple.com/app/' + S.app.ios" rel="nofollow">
+  <a v-if="S.app !== undefined && $S.device.os == 'ios'"  class="row" :href="'itms-apps://itunes.apple.com/app/' + S.app.ios" rel="nofollow">
     <button><i>download</i></button>
   </a>
   
@@ -475,10 +474,10 @@ rel="nofollow">
   <i>phone_iphone</i>
   <h5 class="max small" v-text="A.name + ' App'"></h5>
   
-  <a v-if="$S.device.os == 'android'"  class="row" :href="'https://play.google.com/store/apps/details?id=' + (S.app !== undefined ? + S.app.android : A.app.android)" rel="nofollow">
+  <a v-if="$S.device.os == 'android'"  class="row" :href="'market://details?id=' + (S.app !== undefined ? + S.app.android : A.app.android)" rel="nofollow">
     <button><i>download</i></button>
   </a>
-  <a v-if="$S.device.os == 'ios'"  class="row" :href="'https://apps.apple.com/app/' + (S.app !== undefined ? + S.app.ios : A.app.ios)" rel="nofollow">
+  <a v-if="$S.device.os == 'ios'"  class="row" :href="'itms-apps://itunes.apple.com/app/' + (S.app !== undefined ? + S.app.ios : A.app.ios)" rel="nofollow">
     <button><i>download</i></button>
   </a>
   
@@ -524,11 +523,6 @@ rel="nofollow">
 
 </dialog>
 </div>
-
-
-
-
-
 
 <div class="overlay small-blur"></div>
 <dialog id="drawer" class="left scroll no-padding" v-scope="$S.navDialog()">
