@@ -6,7 +6,7 @@ const store = PetiteVue.reactive({
   
 W: {
   
-title: "Searchy",
+title: "Every-Link",
 
 menu: [
 {name: "Homepage", icon: "home", device: "s m l", url: "/index.html", },
