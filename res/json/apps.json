@@ -12,7 +12,7 @@
 },
 {
   "name": "huawei appgallery", "icon": "huawei.com",
-  "link": { "b": "appgallery.huawei.com/#/mwsearch", "x": false },
+  "link": { "b": "appgallery.huawei.com", "x": false },
   "deepLink": { "b": "appmarket://details", "p": "?id=" }
 },
 {
@@ -22,7 +22,7 @@
 },
 {
   "name": "apkmirror",
-  "link": { "b": "www.apkmirror.com", "p": "/?s=", "x": false },
+  "link": { "b": "apkmirror.com", "p": "/?s=", "x": false },
   "deepLink": { "b": "apkmirror://search", "p": "?s=" }
 },
 {

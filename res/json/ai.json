@@ -1,8 +1,7 @@
 [
-    
-
+ 
 {
-"name": "ChatGpt",  "icon": "chat.openai.com",  "advanced": true,
+"name": "ChatGpt",  "icon": "chat.openai.com",
 "link": {"b": "chat.openai.com", "p": "?q=", "x": false},
 "deepLink": {"b": "com.openai.chat://"},
 "app": {
@@ -23,7 +22,6 @@
 "link": {"b": "copilot.microsoft.com", "p": "/search?showconv=1&sendquery=1&q=", "x": false}
 },
 
-    
 {
 "name": "Google ai", "icon": "gemini.google.com",
 "alt": [
@@ -48,8 +46,6 @@
     }
     ]
 },
-
-    
  
 {
 "name": "Perplexity",
@@ -62,6 +58,11 @@
 "link": {"b": "claude.ai", "p": "/new?q=", "x": false}
 },
   
+{
+"name": "Meta ai",
+"link": {"b": "meta.ai", "x": false},
+"app": {"android": "com.facebook.stella", "ios": "id1558240027"}
+},
 
 {
 "name": "Ecosia ai",

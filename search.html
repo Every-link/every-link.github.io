@@ -187,19 +187,19 @@
 <div class="small-margin">
   
 <nav class="tabs left-align row scroll">
-<a v-for="(C, I) in $S.categories.filter(C => C.v || C.id == $S.R.tab )" :key="C.id" :class="[{'active' : C.id == $S.R.tab}, `vertical padding ripple`]" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" rel="nofollow">
+<a v-for="(C, I) in $S.categories.filter(C => C.v || C.id == $S.R.tab )" :key="C.id" :class="[{'active' : C.id == $S.R.tab}, `vertical padding ripple`]" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery">
 <i v-text="C.icon"></i>
 <span v-text="C.name"></span>
 </a>
 
 
-<a data-ui="#advanced" :class="[{'active' : $S.R.tab == 'advanced'}, `vertical padding ripple`]" v-show="$S.exVisibility" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery" rel="nofollow">
+<a data-ui="#advanced" :class="[{'active' : $S.R.tab == 'advanced'}, `vertical padding ripple`]" v-show="$S.exVisibility" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery">
   <i>pageview</i>
   <span>Advanced</span>
 </a>
 
 
-<a data-ui="#links" :class="[{'active' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" rel="nofollow">
+<a data-ui="#links" :class="[{'active' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery">
   <i>forms_add_on</i>
   <span>My List</span>
 </a>
@@ -242,9 +242,9 @@
     </label>
     
     <label v-else>
-      <i class="red-text" v-if="!S.link.p && !S.link.x">search_off</i>
-      <i class="blue-text" v-if="S.link.x">travel_explore</i>
       <i v-if="S.deepLink">phone_iphone</i>
+      <i class="blue-text" v-else-if="S.link.x">travel_explore</i>
+      <i class="red-text" v-else-if="!S.link.p && !S.link.x">search_off</i>
     </label>
 </div>
 
@@ -252,9 +252,7 @@
 
 <a class="row" v-if="$S.device.type != 'mobile' && !S.alt"
 
-:href="'https://' + S.link.x ?  + $S.engine.url + 'site:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '')"
-
-rel="nofollow">
+:href="'https://' + S.link.x ?  + $S.engine.url + 'site:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '')" rel="nofollow" target="_blank">
   
     <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.icon ? S.icon : S.link.b)" alt="icon" loading="lazy">
     
@@ -316,7 +314,7 @@ rel="nofollow">
   
 <article class="s12 m6 l4 small-round padding" v-for="(link, I) in links">
   
-<a class="row" :href="'https://' + (link.p ? link.b + link.p + $S.R.encodedQuery : $S.engine.url + 'site:' + link.b + '+&quot;' + $S.R.encodedQuery + '&quot;')" rel="nofollow">
+<a class="row" :href="'https://' + (link.p ? link.b + link.p + $S.R.encodedQuery : $S.engine.url + 'site:' + link.b + '+&quot;' + $S.R.encodedQuery + '&quot;')" rel="nofollow" target="_blank">
 
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + link.b" alt="icon" loading="lazy">
     
@@ -427,24 +425,24 @@ rel="nofollow">
 <li v-if="S.link && S.link.p">
   <i>pageview</i>
   <h5 class="max small" v-text="S.name + ' Search'"></h5>
-  <a class="row" :href="S.link.x ? $S.engine + 'S:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : 'https://' + S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '')" rel="nofollow">
-    <button>Search</button>
+  <a class="row" :href="S.link.x ? $S.engine + 'S:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : 'https://' + S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '')" rel="nofollow" target="_blank">
+    <button>open</button>
   </a>
 </li>
 
 <li v-if="S.x != false && S.link && S.link.b">
   <i class="green-text">home_app_logo</i>
-  <h5 class="max small" v-text="S.name + ' Homepage'"></h5>
-  <a class="row" :href="'https://' + S.link.b" rel="nofollow">
+  <h5 class="max small" v-text="S.name + ' Website'"></h5>
+  <a class="row" :href="'https://' + S.link.b" rel="nofollow" target="_blank">
     <button>open</button>
   </a>
 </li>
   
 <li v-if="S.link.x != false && S.link && S.link.b">
   <i class="blue-text">travel_explore</i>
-  <h5 class="max small" v-text="'search using ' + $S.engine.name"></h5>
-  <a class="row" :href="'https://' + $S.engine.url + 'site:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow">
-    <button>Search</button>
+  <h5 class="max small" v-text="'External Search_' + $S.engine.name"></h5>
+  <a class="row" :href="'https://' + $S.engine.url + 'site:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+    <button>open</button>
   </a>
 </li>
 
@@ -491,7 +489,7 @@ rel="nofollow">
 <li v-if="A.link.p !== undefined">
   <i>pageview</i>
   <h5 class="max small" v-text="A.name + ' Search'"></h5>
-  <a class="row" :href="A.link.x ? $S.engine + 'S:' + A.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : 'https://' + A.link.b + (A.link.p ? A.link.p + $S.R.encodedQuery : '') + (A.link.s ? A.link.s : '')" rel="nofollow">
+  <a class="row" :href="A.link.x ? $S.engine + 'S:' + A.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : 'https://' + A.link.b + (A.link.p ? A.link.p + $S.R.encodedQuery : '') + (A.link.s ? A.link.s : '')" rel="nofollow" target="_blank">
     <button>Search</button>
   </a>
 </li>
@@ -500,7 +498,7 @@ rel="nofollow">
 <li v-if="A.link.x !== undefined && A.link.x === false">
   <i class="green-text">home_app_logo</i>
   <h5 class="max small" v-text="A.name + ' Homepage'"></h5>
-  <a class="row" :href="'https://' + A.link.b" rel="nofollow">
+  <a class="row" :href="'https://' + A.link.b" rel="nofollow" target="_blank">
     <button>open</button>
   </a>
 </li>
@@ -509,7 +507,7 @@ rel="nofollow">
 <li v-if="A.link.x !== undefined && A.link.x !== false">
   <i class="blue-text">travel_explore</i>
   <h5 class="max small" v-text="'search using ' + $S.engine.name"></h5>
-  <a class="row" :href="'https://' + $S.engine.url + 'site:' + A.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow">
+  <a class="row" :href="'https://' + $S.engine.url + 'site:' + A.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
     <button>Search</button>
   </a>
 </li>
