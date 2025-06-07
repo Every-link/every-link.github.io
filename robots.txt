@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /search.html
+Disallow: /search.html?q=*
+Sitemap: https://website.com/sitemap.xml
+
+
+Sitemap: https://spa-github-pages.rafgraph.dev/sitemap.txt
