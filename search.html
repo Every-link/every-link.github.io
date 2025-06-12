@@ -150,7 +150,7 @@
 <body class="auto">
 
   
-<div id="app" v-scope :class="$S.W.theme" v-cloak v-effect="watch()" @vue:mounted="mounted">
+<div id="app" v-scope v-cloak v-effect="watch()" @vue:mounted="mounted">
 
 <nav class="top primary" v-scope="$S.navTop(false)"></nav>
 <nav class="drawer l left scroll" v-scope="$S.navDrawer()"></nav>
@@ -183,8 +183,7 @@
 
 
 
-
-<div class="small-margin">
+<div>
   
 <nav class="tabs left-align row scroll">
 <a v-for="(C, I) in $S.categories.filter(C => C.v || C.id == $S.R.tab )" :key="C.id" :class="[{'active' : C.id == $S.R.tab}, `vertical padding ripple`]" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery">
@@ -210,8 +209,6 @@
   <span>Edit</span>
 </a>
 </nav>
-
-
 
 <div class="space"></div>
 
@@ -252,7 +249,7 @@
 
 <a class="row" v-if="$S.device.type != 'mobile' && !S.alt"
 
-:href="'https://' + S.link.x ?  + $S.engine.url + 'site:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '')" rel="nofollow" target="_blank">
+:href="'https://' + S.link.x ?  $S.engine.url + 'site:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;' : S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '')" rel="nofollow" target="_blank">
   
     <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.icon ? S.icon : S.link.b)" alt="icon" loading="lazy">
     
@@ -276,6 +273,8 @@
 
 
 </div>
+
+
 
 
 <div class="page left active large-padding" v-show="$S.R.tab == 'advanced'">
@@ -305,7 +304,7 @@
     
 </form>
 
-</div>
+</div><!-- advanced tab end -->
 
 
 <div v-show="$S.R.tab == 'links'" v-scope="{edit: false}">
@@ -399,7 +398,7 @@
 
 <div v-for="(C, I) in $S.categories.filter(C => C.id == $S.R.tab)" :key="C.id">
 
-<dialog v-for="(S, I) in sites" :key="S.b" :class="[$S.device.display == 's' && !S.alt  ? 'bottom no-padding' : '' , 'scroll']" :id="'dialog_site_' + I">
+<dialog v-for="(S, I) in sites" :key="S.b" :class="[$S.device.display == 's' && !S.alt ? 'bottom no-padding' : '' , 'scroll']" :id="'dialog_site_' + I">
 
 
 <div v-if="S.alt === undefined">
@@ -527,7 +526,7 @@
 </dialog>
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll no-padding" v-scope="$S.settingsDialog()">
+<dialog id="settings" class="right scroll" v-scope="$S.settingsDialog()">
 </dialog>
 
 

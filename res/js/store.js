@@ -198,7 +198,6 @@ navDrawer() {return {
 
 $template: `
 
-
 <header>
   <nav>
     <img src="https://www.beercss.com/favicon.png" class="circle">
@@ -218,21 +217,25 @@ navDialog() {return {
 
 $template: `
 
-<nav class="drawer">
 
-<header class="fixed"><nav>
+<header class="fixed">
+<nav>
 <h6 class="max lin" v-text="$S.W.title"></h6>
 <button class="transparent border link" data-ui="#drawer">
 <span>Close</span> <i>close</i>
 </button>
-</nav></header>
-
-<a v-for="link in $S.W.menu" :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')" :class="[{active: $S.R.path === link.url}, link.device]">
-<i v-text="link.icon"></i>
-<span v-text="link.name"></span>
-</a>
-
 </nav>
+</header>
+<div class="space"></div>
+
+<ul class="list">
+<li class="wave round" v-for="link in $S.W.menu">
+<a :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')" :class="[{active: $S.R.path === link.url}, link.device]"><i v-text="link.icon"></i><span v-text="link.name"></span></a>
+  </li>
+
+    
+
+
 
 
 `}},
@@ -241,17 +244,19 @@ $template: `
 settingsDialog() {return {
 $template: `
 
-<nav class="drawer">
 
-<header class="fixed"><nav>
+<header class="fixed">
+<nav>
 <h6 class="max">Settings</h6>
 <button class="transparent border link" data-ui="#settings">
 <span>Close</span><i>close</i>
 </button>
-</nav></header>
-<div class="divider"></div>
-<!---------------------------------------------------------->
-<div> <ul class="list border">
+</nav>
+</header> 
+<div class = "space" > </div>
+
+
+<ul class="list border">
 
 <li v-for="(cat, i) in $S.categories" :key="cat.id">
   <i v-text="cat.icon"></i>
@@ -295,9 +300,10 @@ $template: `
   </label>
 </li>
 
-
 </ul>
-  
+</div>
+
+<!--
 
 <div class="field label suffix border">
 <select v-model="$S.engine" @change="$S.select()">
@@ -307,13 +313,12 @@ $template: `
   <i>arrow_drop_down</i>
 </div>
 
+-->
 
 
-</ul> </div>
 
 
-<!---------------------------------------------------------->
-</nav>
+
 
 
 
