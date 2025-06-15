@@ -152,8 +152,8 @@
   
 <div id="app" v-scope v-cloak v-effect="watch()" @vue:mounted="mounted">
 
-<nav class="top primary" v-scope="$S.navTop(false)"></nav>
-<nav class="drawer l left scroll" v-scope="$S.navDrawer()"></nav>
+<nav class="top primary" v-scope="$S.navTop()"></nav>
+<nav class="left max l scroll" v-scope="$S.navLeft()"></nav>
 
 
 <main class="responsive">
@@ -185,30 +185,30 @@
 
 <div>
   
-<nav class="tabs left-align row scroll">
+
+<nav class="scroll">
+  
 <a v-for="(C, I) in $S.categories.filter(C => C.v || C.id == $S.R.tab )" :key="C.id" :class="[{'active' : C.id == $S.R.tab}, `vertical padding ripple`]" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery">
-<i v-text="C.icon"></i>
-<span v-text="C.name"></span>
+<i v-text="C.icon"></i> <span v-text="C.name"></span>
 </a>
 
 
 <a data-ui="#advanced" :class="[{'active' : $S.R.tab == 'advanced'}, `vertical padding ripple`]" v-show="$S.exVisibility" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery">
-  <i>pageview</i>
-  <span>Advanced</span>
+  <i>pageview</i> <span>Advanced</span>
 </a>
 
 
 <a data-ui="#links" :class="[{'active' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery">
-  <i>forms_add_on</i>
-  <span>My List</span>
+  <i>forms_add_on</i> <span>My List</span>
 </a>
 
 
 <a data-ui="#settings" class="vertical padding">
-  <i>edit_note</i>
-  <span>Edit</span>
+  <i>edit_note</i> <span>Edit</span>
 </a>
+
 </nav>
+
 
 <div class="space"></div>
 
@@ -522,7 +522,7 @@
 </div>
 
 <div class="overlay small-blur"></div>
-<dialog id="drawer" class="left scroll no-padding" v-scope="$S.navDialog()">
+<dialog id="drawer" class="left scroll" v-scope="$S.navDialog()">
 </dialog>
 
 <div class="overlay small-blur"></div>

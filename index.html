@@ -145,12 +145,30 @@
 
 <body class="auto">
   
-<div id="app" v-scope :class="$S.W.theme" v-cloak v-effect="watch()" @vue:mounted="mounted">
-
-<nav class="top primary" v-scope="$S.navTop(false)"></nav>
-<nav class="drawer l left scroll" v-scope="$S.navDrawer()"></nav>
+<div id="app" v-scope v-cloak v-effect="watch()" @vue:mounted="mounted">
 
 
+<nav class="top max primary" v-scope="$S.navTop(false)"></nav>
+<nav class="left max l scroll" v-scope="$S.navLeft()"></nav>
+
+
+<header class="max center-align primary black-text">
+
+  <h3 class="center-align">Aladdin Tours</h3>
+  <h5 class="center-align">provided by sun International</h5>
+      
+  <div class="small-space"></div>
+      
+  <nav class="center-align">
+    <button class="small-round black-text border black-border large" data-ui="#contact"><i>phone</i><span>contact me</span></button>
+    
+    
+    <button @click="scroll('tours')" class="small-round black white-text large"><i>sailing</i><span>Pick a Tour</span></button>
+    
+  </nav>
+        
+
+</header>
 
 
 
@@ -212,10 +230,11 @@
 
 </main>
 
-
+<div class="overlay small-blur"></div>
 <dialog id="drawer" class="left scroll" v-scope="$S.navDialog()">
 </dialog>
 
+<div class="overlay small-blur"></div>
 <dialog id="settings" class="right scroll" v-scope="$S.settingsDialog()">
 </dialog>
 

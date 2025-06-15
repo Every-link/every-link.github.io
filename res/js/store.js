@@ -175,7 +175,7 @@ changeTheme() {
 $template: `
 
 
-<button class="border link round transparent s m" data-ui="#drawer">
+<button class="border round transparent" data-ui="#drawer">
 <i>menu</i><span>Menu</span>
 </button>
 
@@ -193,21 +193,20 @@ $template: `
 `}},
 /*________________________________________________________________*/
 
-navDrawer() {return {
-
+/*________________________________________________________________*/
+navLeft() {return {
 
 $template: `
 
-<header>
-  <nav>
-    <img src="https://www.beercss.com/favicon.png" class="circle">
-    <h6 class="l" v-text="$S.W.title"></h6>
-  </nav>
+<header class="fixed">
+<h6 class="max lin" v-text="$S.W.title"></h6>
 </header>
 
-<a v-for="link in $S.W.menu" :href="link.url + '?q=' + $S.R.query" :class="[{active: $S.R.path === link.url}, link.device]">
-<i v-text="link.icon"></i>
-<div v-text="link.name"></div>
+<div class="space"></div>
+
+<a v-for="link in $S.W.menu" :class="[{active: $S.R.path === link.url}, link.device, 'wave', 'round']" :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')">
+<i v-text="link.icon">
+</i><span v-text="link.name"></span>
 </a>
 
 
@@ -217,7 +216,6 @@ navDialog() {return {
 
 $template: `
 
-
 <header class="fixed">
 <nav>
 <h6 class="max lin" v-text="$S.W.title"></h6>
@@ -225,18 +223,21 @@ $template: `
 <span>Close</span> <i>close</i>
 </button>
 </nav>
-</header>
-<div class="space"></div>
+</header> 
 
-<ul class="list">
-<li class="wave round" v-for="link in $S.W.menu">
-<a :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')" :class="[{active: $S.R.path === link.url}, link.device]"><i v-text="link.icon"></i><span v-text="link.name"></span></a>
-  </li>
+<div class="space"> </div>
 
-    
+<ul class="list" >
+<li v-for="link in $S.W.menu" :class="[{active: $S.R.path === link.url}, link.device, 'wave', 'round']">
+<a :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')">
+<i v-text="link.icon"></i>
+<span v-text="link.name"></span>
+</a>
+</li> 
 
+<li class="active"><a>test</a></li>
 
-
+</ul>
 
 `}},
 /*________________________________________________________________*/
