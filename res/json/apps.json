@@ -37,7 +37,7 @@
 },
 {
   "name": "f-droid",
-  "link": { "b": "f-droid.org", "p": "/en/packages/", "x": false },
+  "link": { "b": "search.f-droid.org", "p": "/?q=", "x": false },
   "deepLink": { "b": "fdroid://" }
 },
 {
