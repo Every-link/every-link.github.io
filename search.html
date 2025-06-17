@@ -159,12 +159,13 @@
 
 <main class="responsive">
 
+
 <form class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
 <nav :class="$S.device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
 <div class="max field prefix border left-round">
   <i class="front">search</i>
   <input type="hidden" name="tab" :value="$S.R.tab">
-  <input type="text" name="q" :value="$S.R.query" :placeholder="$S.R.query">
+  <input type="text" name="q" v-model="$S.R.query">
 </div>
   <button type="submit" class="large right-round border">Search</button>
 </nav>
@@ -207,7 +208,7 @@
 <article class="s12 m6 l4 round" v-for="(S, I) in sites || []">
 
 <div class="row">
-<a class="row max" :href="'https://' + S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '')" rel="nofollow" target="_blank">
+<a class="row max" :href="'https://' + S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '') + (S.link.p || S.link.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
   
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.icon ? S.icon : S.link.b)" alt="icon" loading="lazy">
     
@@ -226,7 +227,7 @@
 <menu :id="'sites-menu-' + I" class="left no-wrap">
 
 <li v-if="S.link.p">
-<a class="row" :href="'https://' + S.link.b" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + S.link.b + '?' + $S.R.ref" rel="nofollow" target="_blank">
   <i class="green-text">home_app_logo</i>
   <span>Homepage</span>
 </a>
@@ -258,7 +259,6 @@
 
 <div v-show="S.alt" class="divider"></div>
 
-
 <li v-for="(s, i) in S.alt || []" :data-ui="'#menu-' + s.link.p">
 <div class="left-padding row">
   <img class="tiny circle" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.icon ? s.icon : s.link.b)" alt="icon" loading="lazy">
@@ -268,7 +268,7 @@
 
 <menu :id="'menu-' + s.link.p" class="left no-wrap">
 <li v-if="s.link.b">
-<a class="row" :href="'https://' + s.link.b + (s.link.p ? s.link.p + $S.R.encodedQuery : '') + (s.link.s ? s.link.s : '')" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + s.link.b + (s.link.p ? s.link.p + $S.R.encodedQuery : '') + (s.link.s ? s.link.s : '') + (s.link.p || s.link.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
   <i>open_in_new</i><span v-text="s.name"></span>
 </a>
 </li>
@@ -440,7 +440,7 @@
 <script>
 const App = PetiteVue.createApp({ 
 /*________________________________________________________________*/
-$delimiters: ['${', '}'],
+$delimiters: ['{{', '}}'],
 $S: store,
 /*________________________________________________________________*/
 links: JSON.parse(localStorage.getItem('links')) || [],
@@ -484,7 +484,7 @@ this.$S.mounted();
 
 
 //if no query
-if(!this.$S.R.query){this.$S.R.q = "every-link"};
+if(!this.$S.R.query){this.$S.R.query = "every-link"};
 
 
 

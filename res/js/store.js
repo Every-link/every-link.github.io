@@ -20,23 +20,23 @@ menu: [
 /*________________________________________________________________*/
 //router
 R: {
-url: window.location.origin + window.location.pathname,
-currentUrl: window.location.href,
+ 
+ //url 
+name: window.location.hostname,
+root: window.location.origin,
 path: window.location.pathname,
+url: window.location.origin + window.location.pathname, // nor params
+fullUrl: window.location.href,
+//url
+
 get separator(){return this.currentUrl.includes('?') ? '&' : '?'},
 
+query: new URLSearchParams(window.location.search).get('q'),
+tab: new URLSearchParams(window.location.search).get('tab') || "web",
 
-q:"",
-get query() {
-  if (this.q) {return this.q}
-  else {return new URLSearchParams(window.location.search).get('q')}
-},
-  
 get encodedQuery() {return encodeURIComponent(this.query)},
 
-get tab() {return new URLSearchParams(window.location.search).get('tab') || "web"},
-
-get mobile(){return new URLSearchParams(window.location.search).get('m') === '1' ? 1 : 0},
+get ref(){return "ref=" + this.name},
 
 },//router
 
