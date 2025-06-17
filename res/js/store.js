@@ -21,7 +21,10 @@ menu: [
 //router
 R: {
 url: window.location.origin + window.location.pathname,
+currentUrl: window.location.href,
 path: window.location.pathname,
+get separator(){return this.currentUrl.includes('?') ? '&' : '?'},
+
 
 q:"",
 get query() {
@@ -32,6 +35,9 @@ get query() {
 get encodedQuery() {return encodeURIComponent(this.query)},
 
 get tab() {return new URLSearchParams(window.location.search).get('tab') || "web"},
+
+get mobile(){return new URLSearchParams(window.location.search).get('m') === '1' ? 1 : 0},
+
 },//router
 
   
@@ -93,7 +99,7 @@ cVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
 
 engines: [
   {name:"Google",url:"google.com/search?q="},
-  {name:"Bing",url:"bing.com.com/search?q="},
+  {name:"Bing",url:"bing.com/search?q="},
   {name:"Yandex",url:"yandex.com/search?text="},
 ],
 
@@ -204,7 +210,7 @@ $template: `
 
 <div class="space"></div>
 
-<a v-for="link in $S.W.menu" :class="[{active: $S.R.path === link.url}, link.device, 'wave', 'round']" :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')">
+<a v-for="link in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === link.url}, link.device, 'wave', 'round']" :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')">
 <i v-text="link.icon">
 </i><span v-text="link.name"></span>
 </a>
@@ -228,16 +234,16 @@ $template: `
 <div class="space"> </div>
 
 <ul class="list" >
-<li v-for="link in $S.W.menu" :class="[{active: $S.R.path === link.url}, link.device, 'wave', 'round']">
-<a :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')">
+<li v-for="link in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === link.url}, link.device, 'wave', 'round']">
+<a :href="link.url + ( $S.R.query ? '?q=' + $S.R.query : '')">
 <i v-text="link.icon"></i>
 <span v-text="link.name"></span>
 </a>
 </li> 
 
-<li class="active"><a>test</a></li>
 
 </ul>
+
 
 `}},
 /*________________________________________________________________*/
@@ -304,7 +310,7 @@ $template: `
 </ul>
 </div>
 
-<!--
+
 
 <div class="field label suffix border">
 <select v-model="$S.engine" @change="$S.select()">
@@ -314,7 +320,7 @@ $template: `
   <i>arrow_drop_down</i>
 </div>
 
--->
+
 
 
 
@@ -332,7 +338,14 @@ $template: `
 mounted(){
 
 let theme = JSON.parse(localStorage.getItem('theme')) || "auto";
-document.body.className = theme;
+ document.body.className = theme;
+
+
+/* // mobile version
+if (this.R.mobile !== 1 && this.device.type === 'mobile') {
+window.location.href = this.R.currentUrl + this.R.separator + 'm=1';
+};
+*/
 
 
 },

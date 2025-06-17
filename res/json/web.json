@@ -3,7 +3,7 @@
 
 
 { 
-"name": "Google", "icon": "chat.openai.com",
+"name": "Google",
 "link": {"b": "google.com", "p": "/search?q=", "s": "&hl=ar","x": false},
 "deepLink": {
     "android": {"b": "google://search","p": "?q="},

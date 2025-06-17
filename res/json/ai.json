@@ -23,15 +23,11 @@
 },
 
 {
-"name": "Google ai", "icon": "gemini.google.com",
+"name": "Gemini", "icon": "gemini.google.com",
+"link": { "b": "gemini.google.com", "x": false },
+"deepLink": { "b": "com.openai.chat://" },
+"app": { "android": "", "ios": "id6477489729" },
 "alt": [
-    {
-    "name": "Gemini",
-    "link": { "b": "gemini.google.com", "x": false },
-    "deepLink": { "b": "com.openai.chat://" },
-    "app": { "android": "", "ios": "id6477489729" }
-
-    },
     {
     "name": "AI Studio", 
     "link": { "b": "aistudio.google.com", "x": false }
