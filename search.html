@@ -261,8 +261,9 @@
 
 <li v-for="(s, i) in S.alt || []" :data-ui="'#menu-' + s.link.p">
 <div class="left-padding row">
-  <i>arrow_drop_down</i>
+  <img class="tiny circle" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.icon ? s.icon : s.link.b)" alt="icon" loading="lazy">
   <span v-text="s.name"></span>
+  <i>arrow_drop_down</i>
 </div>
 
 <menu :id="'menu-' + s.link.p" class="left no-wrap">
