@@ -418,7 +418,14 @@
 
 </div> <!-- end links tab -->
 
-</main>
+
+<button class="circle margin extra fixed bottom right s m" @click="share" v-show="$S.device.type === 'mobile' || $S.device.type === 'tablet'">
+<i>share</i>
+<div class="snackbar error" id="share">Your browser is not supported</div>
+</button>
+  
+
+
 
 
 
@@ -431,6 +438,8 @@
 </dialog>
 
 
+<div class="large-space"></div>
+</main>
 </div><!-- /app -->
 
 
@@ -466,14 +475,16 @@ exSearch(){
  , '_blank') 
 },
 /*________________________________________________________________*/
+async share() {
+  if (!navigator.share) { ui("#share") };
+  await navigator.share({ title: document.title, url: window.location.href })
+},
+/*________________________________________________________________*/
 
 
 
-
- 
 /*________________________________________________________________*/
 watch(){
-
 
 },
 /*________________________________________________________________*/
