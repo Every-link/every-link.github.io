@@ -183,7 +183,7 @@ changeTheme() {
 $template: `
 
 
-<button class="border round transparent" data-ui="#drawer">
+<button class="border small-round transparent" data-ui="#drawer">
 <i>menu</i><span>Menu</span>
 </button>
 
@@ -191,11 +191,11 @@ $template: `
 <h5 class="center-align" v-text="$S.W.title"></h5>
 <div class="max"></div>
 
-<button v-show="settings !== false" :class="[{'circle': $S.device.display == 's'}, 'chip', 'transparent']" data-ui="#settings">
+<button v-show="settings !== false" :class="[{'square': $S.device.display == 's'}, 'chip', 'transparent']" data-ui="#settings">
   <i>settings</i><span class="l m">Settings</span>
 </button>
 
-<button class="chip circle transparent" @click="changeTheme()">
+<button class="chip square transparent" @click="changeTheme()">
  <i v-text="theme === 'auto' ? 'night_sight_auto' : theme + '_mode'"></i>
 </button>
 `}},
@@ -212,7 +212,7 @@ $template: `
 
 <div class="space"></div>
 
-<a v-for="link in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === link.url}, link.device, 'wave', 'round']" :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')">
+<a v-for="link in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === link.url}, link.device, 'wave', 'small-round']" :href="link.url + ( $S.R.query ?'?q=' + $S.R.query : '')">
 <i v-text="link.icon">
 </i><span v-text="link.name"></span>
 </a>
@@ -227,7 +227,7 @@ $template: `
 <header class="fixed">
 <nav>
 <h6 class="max lin" v-text="$S.W.title"></h6>
-<button class="transparent border link" data-ui="#drawer">
+<button class="transparent border link small-round" data-ui="#drawer">
 <span>Close</span> <i>close</i>
 </button>
 </nav>
@@ -236,7 +236,7 @@ $template: `
 <div class="space"> </div>
 
 <ul class="list" >
-<li v-for="link in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === link.url}, link.device, 'wave', 'round']">
+<li v-for="link in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === link.url}, link.device, 'wave', 'small-round']">
 <a :href="link.url + ( $S.R.query ? '?q=' + $S.R.query : '')">
 <i v-text="link.icon"></i>
 <span v-text="link.name"></span>
@@ -257,7 +257,7 @@ $template: `
 <header class="fixed">
 <nav>
 <h6 class="max">Settings</h6>
-<button class="transparent border link" data-ui="#settings">
+<button class="transparent border link small-round" data-ui="#settings">
 <span>Close</span><i>close</i>
 </button>
 </nav>
