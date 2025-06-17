@@ -455,7 +455,7 @@ this.saveLinks();
 /*________________________________________________________________*/
 sites: null,
  /*________________________________________________________________*/
-async load(id) {
+async load(id){
   try { this.sites ||= await fetch(`/res/json/${id}.json`).then(data => data.json()) } catch (error) { this.sites = null }
 },
  /*________________________________________________________________*/
@@ -481,13 +481,18 @@ this.$S.mounted();
 
 //if(!this.$S.R.query){window.location.replace("/")};
 
+
 //if no query
 if(!this.$S.R.query){this.$S.R.q = "every-link"};
+
+
 
 //load json file
 if (this.$S.R.tab != 'advanced' && this.$S.R.tab != 'links') {
   this.load(this.$S.R.tab)
 };
+
+
 
 //scroll to tab
 document.querySelector(`[data-tab="${this.$S.R.tab}"]`).scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});

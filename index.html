@@ -151,7 +151,7 @@
 <nav class="top max primary" v-scope="$S.navTop(false)"></nav>
 <nav class="left max l scroll" v-scope="$S.navLeft()"></nav>
 
-
+<!--
 <header class="max center-align primary black-text">
 
   <h3 class="center-align">Aladdin Tours</h3>
@@ -169,8 +169,7 @@
         
 
 </header>
-
-
+-->
 
 
 <main class="responsive">
@@ -192,41 +191,44 @@
     
 
 <div class="grid">
-  
-<div class="field prefix label small-round border s12 m4 l4">
+    
+<div class="s12 m9 l0">
+<div class="field prefix label border">
   <i class="front">search</i>
   <input type="text" name="q" required>
   <label>search</label>
 </div>
-  
-  <div class="field prefix small-round border label s10 m4 l4">
-    <i class="front">search</i>
-    <select name="tab">
-      <option v-for="C in $S.categories.filter(C => C.v)" :key="C.id" v-text="C.name" :value="C.id"></option>
-      <option v-if="$S.cVisibility" value="links">My List</option>
-      <option v-if="$S.exVisibility" value="advanced">Advanced Search</option>
-    </select>
-    <label>Select Search Category</label>
-  </div>
-
-
-<button type="button" class="square border large s2 m2 l2" data-ui="#settings"><i>edit_note</i></button>
-
-<div class="s12 m2 l2">
- <button type="submit" class="large secondary small-round" >
-   <span>search</span><i>search</i>
- </button>
+</div>
+    
+<div class="s12 m3 l2">
+<div class="field prefix border label">
+  <i class="front">list</i>
+  <select name="tab">
+  <option v-for="C in $S.categories.filter(C => C.v)" :key="C.id" v-text="C.name" :value="C.id"></option>
+  <option v-if="$S.cVisibility" value="links">My List</option>
+  <option v-if="$S.exVisibility" value="advanced">Advanced Search</option>
+  </select>
+  <label>Category</label>
+</div>
+</div>
+    
 </div>
 
-  
-  
-  
-  </div>
 
-  
+<div class="space"></div>
+
+<nav class="center-align">
+<button type="button" class="border large small-round" data-ui="#settings">
+  <i>edit_note</i>
+</button>
+
+<button type="submit" class="large primary small-round max">
+  <span>Search</span><i>search</i>
+</button>
+</nav>
+
+
 </div></form>
-
-
 
 </main>
 
@@ -252,9 +254,6 @@ const App = PetiteVue.createApp({
 // $delimiters: ['${', '}'],
 $S: store,
 /*________________________________________________________________*/
-
-
-
 
 
  
