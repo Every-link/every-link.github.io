@@ -269,10 +269,7 @@ $template: `
 
 <li v-for="(cat, i) in $S.categories" :key="cat.id">
   <i v-text="cat.icon"></i>
-  <div class="max">
-    <h6 class="small" v-text="cat.name"></h6>
-  <!--  <div>Supporting text</div> -->
-  </div>
+  <h6 class="small max" v-text="cat.name"></h6>
   <label class="switch icon">
     <input v-model="cat.v" type="checkbox" @change="$S.categoriesV()" :disabled="i === 0">
     <span> <i>visibility_off</i> <i>visibility</i> </span>

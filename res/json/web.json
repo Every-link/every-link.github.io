@@ -125,13 +125,13 @@
 },
 
 {
-"name": "Archive",
-"link": {"b": "archive.org", "p": "/search?query=", "x": false}
+"name": "Internet Archive",
+"link": {"b": "archive.org", "p": "/search?query="}
 },
 
 {
 "name": "Wikipedia",
-"link": {"b": "wikipedia.org", "p": "/wiki/", "x": false}
+"link": {"b": "wikipedia.org", "p": "/wiki/"}
 }
 
 
