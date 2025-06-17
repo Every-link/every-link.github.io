@@ -162,29 +162,33 @@
 
 <form class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
 <nav :class="$S.device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
-<div class="max field prefix border left-round">
-  <i class="front">search</i>
+  
+<div class="max field border round primary-border">
   <input type="hidden" name="tab" :value="$S.R.tab">
   <input type="text" name="q" v-model="$S.R.query">
 </div>
-  <button type="submit" class="large right-round border">Search</button>
+<button type="submit" class="transparent border primary-border fill round large">
+  <i>search</i>
+  <span class="m l">Search</span>
+</button>
+
 </nav>
 </form>
 
 
 <div class="margin tabs medium-width scroll">
   
-<a v-for="(C, I) in $S.categories.filter(C => C.v || C.id == $S.R.tab )" :key="C.id" :class="[{'active fill' : C.id == $S.R.tab}, `vertical padding small-round ripple`]" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" :data-tab=" C.id">
+<a v-for="(C, I) in $S.categories.filter(C => C.v || C.id == $S.R.tab )" :key="C.id" :class="[{'active' : C.id == $S.R.tab}, `vertical padding small-round ripple`]" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" :data-tab=" C.id">
 <i v-text="C.icon"></i> <span v-text="C.name"></span>
 </a>
 
 
-<a data-ui="#advanced" :class="[{'active fill' : $S.R.tab == 'advanced'}, `vertical padding ripple`]" v-show="$S.exVisibility" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery" data-tab="advanced">
+<a data-ui="#advanced" :class="[{'active' : $S.R.tab == 'advanced'}, `vertical padding ripple`]" v-show="$S.exVisibility" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery" data-tab="advanced">
   <i>pageview</i> <span>Advanced</span>
 </a>
 
 
-<a data-ui="#links" :class="[{'active fill' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
+<a data-ui="#links" :class="[{'active' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
   <i>forms_add_on</i> <span>My List</span>
 </a>
 
@@ -327,7 +331,7 @@
 
 
 <nav class="center-align">
- <button class="large secondary small-round" type="submit">
+ <button class="large secondary round" type="submit">
   <span>search</span><i>search</i>
 </button>
 </nav>
@@ -340,7 +344,7 @@
 
 <div class="grid">
   
-<article class="s12 m6 l4 small-round padding" v-for="(link, I) in links">
+<article class="s12 m6 l4 round padding" v-for="(link, I) in links">
   
 <a class="row" :href="'https://' + (link.p ? link.b + link.p + $S.R.encodedQuery : $S.engine.url + 'site:' + link.b + '+&quot;' + $S.R.encodedQuery + '&quot;')" rel="nofollow" target="_blank">
 
@@ -348,7 +352,7 @@
     
 <div class="max">
   <h5 class="small" v-text="link.n"></h5>
-  <p v-text="'https://' + link.b" class="link wrap"></p>
+  <p v-text="'https://' + (link.p ? link.b + link.p + $S.R.encodedQuery : $S.engine.url + 'site:' + link.b + '+&quot;' + $S.R.encodedQuery + '&quot;')" class="link wrap"></p>
 </div>
 
 <label v-show="!edit">
@@ -358,7 +362,7 @@
 </a>
 
 <nav class="right-align" v-show="edit">
-  <button class="small-round border" @click="removeLink(I)">
+  <button class="round border" @click="removeLink(I)">
     <i class="red-text">delete</i>
   </button>
 </nav>
@@ -370,7 +374,7 @@
  
  
 <nav class="right-align" v-show="!edit">
-<button class="small-round border" @click="edit = !edit">
+<button class="fill border primary-border round" @click="edit = !edit">
   <i>forms_add_on</i>
 </button>
 </nav>
@@ -405,11 +409,11 @@
 <nav class="center-align">
 
 
-<button class="small-round border large" @click="edit = false">
+<button class="round border large" @click="edit = false">
   <i>close</i>
 </button>
   
- <button class="primary small-round large" type="submit">
+ <button class="transparent fill border border-primary round large" type="submit">
   <span>add</span><i>add</i>
 </button>
 </nav>
@@ -420,7 +424,7 @@
 </div> <!-- end links tab -->
 
 
-<button class="circle margin extra fixed bottom right s m" @click="share" v-show="$S.device.type === 'mobile' || $S.device.type === 'tablet'">
+<button class="transparent border primary-border fill round margin extra fixed bottom right s m" @click="share" v-show="$S.device.type === 'mobile' || $S.device.type === 'tablet'">
 <i>share</i>
 <div class="snackbar error" id="share">Your browser is not supported</div>
 </button>
