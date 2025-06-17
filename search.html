@@ -224,6 +224,7 @@
 
 <button :data-ui="'#sites-menu-' + I" class="transparent round">
  <i>more_vert</i>
+ 
 <menu :id="'sites-menu-' + I" class="left no-wrap">
 
 <li v-if="S.link.p">
@@ -275,7 +276,7 @@
 <li v-if="s.link.x != false">
 <a class="row" :href="'https://' + $S.engine.url + 'site:' + s.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
   <i class="blue-text">travel_explore</i>
-  <span v-text="$S.engine.name + 'Search'"></span>
+  <span v-text="$S.engine.name + ' Search'"></span>
 </a>
 </li>
 <li v-if="s.deepLink !== undefined && $S.device.type == 'mobile'">
