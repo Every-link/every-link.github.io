@@ -178,7 +178,7 @@
 
 <!-- tabs -->
 <div>
-<nav class="medium-width scroll" @vue:mounted="scroll">
+<nav :class="[device.display === 's' ? 'medium-width' : 'large-width', 'scroll']" @vue:mounted="scroll">
 
 <a v-for="(C, I) in categories.filter(C => C.v || C.id == R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == R.tab}, 'vertical padding small-round']" :href="R.path + '?tab=' + C.id + '&q=' + R.encodedQuery" :data-tab="C.id">
   <i v-text="C.i"></i>

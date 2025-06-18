@@ -207,7 +207,7 @@ $template: `
 <div class="max"></div>
 
 <button v-show="settings !== false" class="transparent border square" data-ui="#settings">
-<i>edit_note</i><span class="l m">Settings</span>
+<i>edit_note</i><span class="l m">Edit</span>
 </button>
 
 
