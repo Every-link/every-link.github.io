@@ -146,72 +146,39 @@
 
 
 <body class="dark">
-
 <div id="app" v-scope v-cloak v-effect="watch()" @vue:mounted="mounted">
 
-<nav class="top primary" v-scope="component.navTop()"></nav>
+<nav class="top primary" v-scope="component.navTop(settings = false)"></nav>
 
 <main class="responsive">
 
-<div class="padding center-align">
-<!--
-<img src="/" class="responsive small-width small-height">
--->
-
-<h1>Every-Link</h1>
-<p>Never miss a Link Search anything anywhere anytime</p>
-</div>
-
-<form action="/search.html" target="_self" method="GET">
-<div class="padding">
-
-<input type="hidden" name="tab" :value="R.tab">
-
-<div class="grid">
-
-<div class="s12 m9 l0">
-<div class="field prefix label border">
-<i class="front">search</i>
-<input type="text" name="q" required>
-<label>search</label>
-</div>
-</div>
-
-<div class="s12 m3 l2">
-<div class="field prefix border label">
-<i class="front">list</i>
-<select v-model="R.tab" required>
-<option v-for="C in categories.filter(C => C.v)" :key="C.id" v-text="C.name" :value="C.id"></option>
-<option v-if="linksVisibility" value="links">My List</option>
-<option v-if="advancedVisibility" value="advanced">Advanced Search</option>
-</select>
-<label>Category</label>
-</div>
-</div>
-
-</div>
 
 
 
-<nav class="center-align padding">
-<button type="submit" class="transparent border primary-border fill large small-round "><span>Search</span><i>search</i></button>
-</nav>
 
 
-</div>
-</form>
+
+
+
+
+
+
 
 </main>
 
 <div class="overlay small-blur"></div>
 <dialog id="drawer" class="left scroll" v-scope="component.drawer()"></dialog>
 
+<!--
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" v-scope="component.settings()"></dialog>
+<dialog id="settings" class="right scroll" v-scope="component.settings()">
+</dialog>
 
- <div v-scope="component.share()"></div>
- 
+<div v-scope="component.share()"></div>
+
 <div class="large-space"></div>
+-->
+
 </div><!-- /app -->
 
 <script src="/res/js/script.js"></script>
