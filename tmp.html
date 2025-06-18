@@ -188,7 +188,7 @@
 </a>
 
 
-<a data-ui="#links" :class="[{'active fill' : $S.R.tab == 'links'}, `vertical padding`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
+<a data-ui="#links" :class="[{'active fill' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
   <i>forms_add_on</i> <span>My List</span>
 </a>
 
@@ -250,7 +250,7 @@
   </a>
 </li>
 <li v-if="S.app !== undefined && $S.device.os == 'android'">
-<a class="row" :href="'market://details?id=' + S.app.android)" rel="nofollow">
+<a class="row" :href="'market://details?id=' + S.app.android" rel="nofollow">
   <i>system_update</i>
   <span>Download App</span>
 </a>
@@ -290,7 +290,7 @@
 </a>
 </li>
 <li v-if="s.app !== undefined && $S.device.os == 'android'">
-<a class="row" :href="'market://details?id=' + s.app.android)" rel="nofollow">
+<a class="row" :href="'market://details?id=' + s.app.android" rel="nofollow">
   <i>system_update</i><span>Download App</span>
 </a>
 </li>
@@ -460,7 +460,7 @@
 
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="left scroll" v-scope="$S.settingsDialog()">
+<dialog id="settings" class="right scroll" v-scope="$S.settingsDialog()">
 </dialog>
 
 

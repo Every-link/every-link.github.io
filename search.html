@@ -250,7 +250,7 @@
   </a>
 </li>
 <li v-if="S.app !== undefined && $S.device.os == 'android'">
-<a class="row" :href="'market://details?id=' + S.app.android)" rel="nofollow">
+<a class="row" :href="'market://details?id=' + S.app.android" rel="nofollow">
   <i>system_update</i>
   <span>Download App</span>
 </a>
@@ -290,7 +290,7 @@
 </a>
 </li>
 <li v-if="s.app !== undefined && $S.device.os == 'android'">
-<a class="row" :href="'market://details?id=' + s.app.android)" rel="nofollow">
+<a class="row" :href="'market://details?id=' + s.app.android" rel="nofollow">
   <i>system_update</i><span>Download App</span>
 </a>
 </li>
@@ -315,12 +315,15 @@
 
 <form class="padding" @submit.prevent="exSearch()">
 
-<div class="field label suffix border large">
+<div class="grid">
+  
+
+<div class="field label suffix border large s12 m7 l9">
   <input type="text" v-model="site" required>
   <label>website.com</label> <i>link</i>
 </div>
 
-<div class="field label suffix border">
+<div class="field label suffix border large s12 m5 l3">
   <select v-model="$S.engine" @change="$S.select()">
     <option v-for="e in $S.engines" :key="e.url" :value="e" :selected="$S.engine.url === e.url" v-text="e.name"></option>
   </select> 
@@ -329,6 +332,7 @@
   <i>arrow_drop_down</i>
 </div>
 
+</div>
 
 <nav class="center-align">
  <button class="transparent border primary-border fill large small-round" type="submit">
@@ -401,31 +405,34 @@
 </nav>
 
 
-<form class="padding" @submit.prevent="addLink()" v-show="edit">
+<form :class="[{'large-width': $S.device.display !== 's'}, 'padding']" @submit.prevent="addLink()" v-show="edit">
 
 <p class="row no-space">
-<s class="red-text">https://</s>
-<span class="green-text">google.com</span>
-<b class="blue-text">/search?q=</b>
-<s class="red-text">news</s>
+<s class="red-text">https://</s><span class="green-text">google.com</span><b class="blue-text">/search?q=</b><s class="red-text">news</s>
 </p>
 
-<div class="field label border large">
+
+<div class="grid">
+
+<div class="field label border large s12 m12 l12">
   <input type="text" v-model="newLink.n" required>
   <label><b class="red-text">*</b>website name</label> 
 </div>
 
-<div class="field label border large">
+<div class="field label border large s12 m7 l7">
   <input type="text" v-model="newLink.b" required>
 <label>
 <b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
 </label> 
 </div>
 
-<div class="max field label border large">
+<div class="max field label border large s12 m5 l5">
   <input type="text" v-model="newLink.p">
-  <label>parameter ex:<b class="blue-text">/search?q=</b></label> 
+  <label>ex:<b class="blue-text">/search?q=</b></label> 
 </div>
+
+</div>
+
 
 <nav class="center-align">
 
