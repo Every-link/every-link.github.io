@@ -94,10 +94,7 @@ get browser(){
 
 },//device
 
-/*________________________________________________________________*/
-//general
-advancedVisibility: JSON.parse(localStorage.getItem("advanced") || "false"),
-linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
+
  /*________________________________________________________________*/
 categories: JSON.parse(localStorage.getItem('categories')) || [
   { name: "Web", id: "web", icon: "globe", v: true },
@@ -136,6 +133,8 @@ try { this.sites ||= await fetch(`/res/json/${this.R.tab}.json`).then(data => da
 /*________________________________________________________________*/
 //advanced
 
+advancedVisibility: JSON.parse(localStorage.getItem("advanced") || "false"),
+
 engines: [
   {name:"Google",url:"google.com/search?q="},
   {name:"Bing",url:"bing.com/search?q="},
@@ -152,6 +151,10 @@ exSearch(){
 
 /*________________________________________________________________*/
 //links
+
+linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
+
+
 edit: false,
 links: JSON.parse(localStorage.getItem('links')) || [],
 newLink: {n: "", b: "", p: ""},
@@ -173,6 +176,9 @@ scroll() {
 
 /*________________________________________________________________*/
 //settings
+
+
+  
 visibility(name, status){localStorage.setItem(name, JSON.stringify(status))},
 
 categoriesVisibility(){
