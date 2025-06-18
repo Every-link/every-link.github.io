@@ -407,7 +407,6 @@ scroll(){
 if (this.R.query) { document.querySelector(`[data-tab="${this.R.tab}"]`).scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});}
 },
 
-
 $template: `
 
 <nav class="medium-width scroll" @vue:mounted="scroll">
@@ -417,16 +416,16 @@ $template: `
 </a>
 
 
-<a data-ui="#advanced" :class="[{'border primary-border fill' : R.tab == 'advanced'}, 'vertical padding']" v-show="advancedVisibility" :href="R.path + '?tab=advanced&q=' + R.encodedQuery" data-tab="advanced">
+<a data-ui="#advanced" :class="[{'border primary-border fill' : R.tab == 'advanced'}, 'vertical padding small-round']" v-show="advancedVisibility" :href="R.path + '?tab=advanced&q=' + R.encodedQuery" data-tab="advanced">
   <i>pageview</i> <span>Advanced</span>
 </a>
 
 
-<a data-ui="#links" :class="[{'border primary-border fill' : R.tab == 'links'}, 'vertical padding ripple']" v-show="linksVisibility" :href="R.path + '?tab=links&q=' + R.encodedQuery" data-tab="links">
+<a data-ui="#links" :class="[{'border primary-border fill' : R.tab == 'links'}, 'vertical padding small-round']" v-show="linksVisibility" :href="R.path + '?tab=links&q=' + R.encodedQuery" data-tab="links">
   <i>forms_add_on</i> <span>My List</span>
 </a>
 
-<a data-ui="#settings" class="vertical padding">
+<a data-ui="#settings" class="vertical padding small-round">
   <i>edit_note</i> <span>Edit</span>
 </a>
 
