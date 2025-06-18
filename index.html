@@ -130,7 +130,6 @@
 
 <script src="/res/js/petite-vue.js"></script>
 
-
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -147,7 +146,7 @@
 
 
 
-<body>
+<body class="auto">
 
   
 <div id="app" v-scope v-cloak v-effect="watch()" @vue:mounted="mounted">
@@ -157,6 +156,8 @@
 <nav class="bottom max s m green hide" v-scope="C.navBottom()"></nav>
 
 <main class="responsive">
+
+
 
 
 <template v-if="!R.p && R.q === null"><div class="page left active">
@@ -217,8 +218,8 @@
 
 </div><!-- /app -->
 
-
 <script src="/res/js/script.js"></script>
+
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11/dist/cdn/beer.min.js"></script>
 

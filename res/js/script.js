@@ -1,9 +1,9 @@
 const App = PetiteVue.createApp({ 
 /*________________________________________________________________*/
 $delimiters: ['{{', '}}'],
+// S : store,
 /*________________________________________________________________*/
-//settings
-  
+
 W: {
   
 title: "Every-Link",
@@ -18,7 +18,7 @@ menu: [
 },//W
 /*________________________________________________________________*/
 
-//router
+
 R: {
  
  //url 
@@ -93,20 +93,20 @@ get browser(){
 
 },//device
 
+
 /*________________________________________________________________*/
 advancedVisibility: JSON.parse(localStorage.getItem("advanced") || "false"),
+  
 linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
-/*________________________________________________________________*/
+  /*________________________________________________________________*/
 
 engines: [
   {name:"Google",url:"google.com/search?q="},
   {name:"Bing",url:"bing.com/search?q="},
   {name:"Yandex",url:"yandex.com/search?text="},
 ],
-/*________________________*/
 
 engine: JSON.parse(localStorage.getItem("engine")) || {name:"Google",url:"google.com/search?q="},
-/*________________________*/
 
 select(){ localStorage.setItem('engine', JSON.stringify(this.engine)) },
  
@@ -148,7 +148,7 @@ navTop() {return {
 
 theme: JSON.parse(localStorage.getItem('theme')) || "auto",
 changeTheme() {
-  if (this.theme === "auto") { this.theme = "dark" }
+  if (this.theme ==  null ) { this.theme = "dark" }
   else if (this.theme === "dark") { this.theme = "light" }
   else if (this.theme === "light") { this.theme = "dark" };
   localStorage.setItem('theme', JSON.stringify(this.theme))
@@ -402,7 +402,7 @@ $template: `
 `}},
 /*________________________________________________________________*/
 tabs() {return {
-
+  
 scroll(){
 if (this.R.query) { document.querySelector(`[data-tab="${this.R.tab}"]`).scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});}
 },
@@ -729,19 +729,15 @@ $template: `
 /*________________________________________________________________*/
 
 
-
-
-
 },//components
 /*________________________________________________________________*/
 watch(){ },
 /*________________________________________________________________*/
 mounted() {
 
-const theme = JSON.parse(localStorage.getItem('theme')) || "auto";
-document.body.className = theme;
-
-
+  
+const theme = JSON.parse(localStorage.getItem('theme'));
+if (theme != null) {document.body.className = theme}
 
 },
 /*________________________________________________________________*/
