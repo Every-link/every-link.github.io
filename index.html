@@ -178,7 +178,7 @@
 
 
 
-<template v-if="!R.p && R.q === null"><div>
+<div v-if="!R.p && R.q === null">
 
 <div class="padding center-align">
   
@@ -242,9 +242,9 @@
 
 </div>
 
-</div></template>
+</div>
 
-<template v-else-if="!R.p && R.q !== null"><div>
+<div v-else-if="!R.p && R.q !== null">
 
 <!-- form -->
 <div>
@@ -265,6 +265,7 @@
 </form>
 
 </div>
+
 
 <!-- tabs -->
 <div>
@@ -424,7 +425,6 @@
 
 </div>
 
-
 <nav class="center-align">
  <button class="transparent border primary-border fill large small-round" type="submit">
   <span>search</span><i>search</i>
@@ -544,18 +544,18 @@
 
 </div>
 
+</div>
 
-</div></template>
+
 
 <!-- more pages -->
-<template v-else-if="R.p === 'test'"><div>
+<div v-else-if="R.p === 'test'">
 
 
 <a href="/?page=test">page test</a>
 
 
-</div></template>
-
+</div>
 
 
 </main>
@@ -595,10 +595,9 @@
 
 </dialog>
 
-
-
 <div class="overlay small-blur"></div>
 <dialog id="settings" class="right scroll">
+  
 <header class="fixed">
 <nav>
 <h6 class="max">Settings</h6>
@@ -607,8 +606,7 @@
 </button>
 </nav>
 </header> 
-<div class = "space" > </div>
-
+<div class="space"></div>
 
 <ul class="list border">
 
@@ -652,9 +650,6 @@
 </li>
 
 </ul>
-</div>
-
-
 
 <div class="field label suffix border">
 <select v-model="engine" @change="select()">
@@ -663,7 +658,6 @@
   <label>Default Search Engine</label>
   <i>arrow_drop_down</i>
 </div>
-
 
 </dialog>
 
