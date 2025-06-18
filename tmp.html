@@ -188,7 +188,7 @@
 </a>
 
 
-<a data-ui="#links" :class="[{'active fill' : $S.R.tab == 'links'}, `vertical padding`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
+<a data-ui="#links" :class="[{'active fill' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
   <i>forms_add_on</i> <span>My List</span>
 </a>
 
@@ -250,7 +250,7 @@
   </a>
 </li>
 <li v-if="S.app !== undefined && $S.device.os == 'android'">
-<a class="row" :href="'market://details?id=' + S.app.android)" rel="nofollow">
+<a class="row" :href="'market://details?id=' + S.app.android" rel="nofollow">
   <i>system_update</i>
   <span>Download App</span>
 </a>
@@ -274,7 +274,8 @@
 <menu :id="'menu-' + s.link.p" class="left no-wrap">
 <li v-if="s.link.b">
 <a class="row" :href="'https://' + s.link.b + (s.link.p ? s.link.p + $S.R.encodedQuery : '') + (s.link.s ? s.link.s : '') + (s.link.p || s.link.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
-  <i>open_in_new</i><span v-text="s.name"></span>
+  <i class="green-text" v-text="s.link.p ? 'pageview' : 'home_app_logo'"></i>
+  <span v-text="s.name"></span>
 </a>
 </li>
 <li v-if="s.link.x != false">
@@ -290,7 +291,7 @@
 </a>
 </li>
 <li v-if="s.app !== undefined && $S.device.os == 'android'">
-<a class="row" :href="'market://details?id=' + s.app.android)" rel="nofollow">
+<a class="row" :href="'market://details?id=' + s.app.android" rel="nofollow">
   <i>system_update</i><span>Download App</span>
 </a>
 </li>
@@ -315,18 +316,22 @@
 
 <form class="padding" @submit.prevent="exSearch()">
 
-<div class="field label suffix border large">
+<div class="grid">
+  
+<div class="field label suffix border large s12 m8 l8">
   <input type="text" v-model="site" required>
   <label>website.com</label> <i>link</i>
 </div>
 
-<div class="field label suffix border">
+<div class="field label suffix border large s12 m4 l4">
   <select v-model="$S.engine" @change="$S.select()">
     <option v-for="e in $S.engines" :key="e.url" :value="e" :selected="$S.engine.url === e.url" v-text="e.name"></option>
   </select> 
   
   <label>Select Search Engine</label>
   <i>arrow_drop_down</i>
+</div>
+
 </div>
 
 
@@ -410,22 +415,28 @@
 <s class="red-text">news</s>
 </p>
 
-<div class="field label border large">
+
+<div class="grid">
+  
+<div class="field label border large s12 m12 l12">
   <input type="text" v-model="newLink.n" required>
   <label><b class="red-text">*</b>website name</label> 
 </div>
 
-<div class="field label border large">
+<div class="field label border large s12 m8 l8">
   <input type="text" v-model="newLink.b" required>
 <label>
 <b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
 </label> 
 </div>
 
-<div class="max field label border large">
+<div class="max field label border large s12 m4 l4">
   <input type="text" v-model="newLink.p">
-  <label>parameter ex:<b class="blue-text">/search?q=</b></label> 
+  <label> ex:<b class="blue-text">/search?q=</b></label> 
 </div>
+
+</div>
+
 
 <nav class="center-align">
 
@@ -445,7 +456,7 @@
 </div> <!-- end links tab -->
 
 
-<button class="transparent border primary-border fill small-round margin extra fixed bottom right s m" @click="share" v-show="$S.device.type === 'mobile' || $S.device.type === 'tablet'">
+<button class="transparent border primary-border fill small-round margin large fixed bottom right s m" @click="share" v-show="$S.device.type === 'mobile' || $S.device.type === 'tablet'">
 <i>share</i>
 <div class="snackbar error" id="share">Your browser is not supported</div>
 </button>
@@ -460,7 +471,7 @@
 
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="left scroll" v-scope="$S.settingsDialog()">
+<dialog id="settings" class="right scroll" v-scope="$S.settingsDialog()">
 </dialog>
 
 
