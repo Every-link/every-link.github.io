@@ -181,14 +181,14 @@ categoriesVisibility(){
 /*________________________________________________________________*/
 //theme
 
-theme: JSON.parse(localStorage.getItem('theme')),
+theme: JSON.parse(localStorage.getItem('theme')) || "auto",
 
 updateTheme(){
-  if (this.theme != null) {document.body.className = this.theme}
+  if (this.theme != "auto") {document.body.className = this.theme}
 },
 
 changeTheme() {
-  if (this.theme == null ) { this.theme = "dark" }
+  if (this.theme == auto ) { this.theme = "dark" }
   else if (this.theme === "dark") { this.theme = "light" }
   else if (this.theme === "light") { this.theme = "dark" };
   localStorage.setItem('theme', JSON.stringify(this.theme))
@@ -202,7 +202,14 @@ async share() {
   await navigator.share({ title: document.title, url: window.location.href })
 },
 /*________________________________________________________________*/
-//
+
+
+
+
+
+
+
+
 
 /*________________________________________________________________*/
 comp() {return {
