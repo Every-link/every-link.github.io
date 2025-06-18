@@ -1,34 +1,46 @@
 [
 
+{
+"N": "FlightRadar24",
+"L": { "b": "flightradar24.com", "p": "/data/flights/"},
+"DL": { "b": "test://", "p": "test" },
+"A": { "a": "com.test", "i": "id367003839" }
+},
 
 {
-   "name": "FlightRadar24",
-   "url": "flightradar24.com",
-   "p": "/data/flights/"
+"N": "AirNavRadar",
+"L": {  "b": "airnavradar.com", "p": "/data/flights/"},
+"DL": { "b": "test://", "p": "test" },
+"A": { "a": "com.test", "i": "id367003839" }
 },
+
 {
-   "name": "AirNavRadar",
-   "url": "airnavradar.com",
-   "p": "/data/flights/"
+"N": "PlaneFinder",
+"L": {"b": "planefinder.net", "p": "/data/flight/"},
+"DL": { "b": "test://", "p": "test" },
+"A": { "a": "com.test", "i": "id367003839" }
 },
+
 {
-   "name": "PlaneFinder",
-   "url": "planefinder.net",
-   "p": "/data/flight/"
+"N": "FlightAware",
+"L": { "b": "flightaware.com", "p": "/live/airport/"},
+"DL": { "b": "test://", "p": "test" },
+"A": { "a": "com.test", "i": "id367003839" }
 },
+
 {
-   "name": "FlightAware",
-   "url": "flightaware.com",
-   "p": "/live/airport/"
+"N": "FlightStats",
+"L": { "b": "flightstats.com"},
+"DL": { "b": "test://", "p": "test" },
+"A": { "a": "com.test", "i": "id367003839" }
 },
+
 {
-   "name": "FlightStats",
-   "url": "flightstats.com"
-},
-{
-   "name": "FlightView",
-   "url": "flightview.com"
-    }
+"N": "FlightView",
+"L": { "b": "flightview.com"},
+"DL": { "b": "test://", "p": "test" },
+"A": { "a": "com.test", "i": "id367003839" }
+}
 
 
 ]

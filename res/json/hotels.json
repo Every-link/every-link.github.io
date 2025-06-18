@@ -2,52 +2,50 @@
   
   
 {
-"name": "Booking.com",
-"link": {"b": "booking.com", "p": "/searchresults.en-gb.html?ss=", "x": false},
-"deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.booking", "ios": "id367003839"}
+"N": "Booking.com",
+"L": {"b": "booking.com", "p": "/searchresults.en-gb.html?ss="},
+"DL": {"b": "booking://", "p": "searchresults?ss="},
+"A": {"a": "com.booking", "i": "id367003839"}
 },
 
 {
-"name": "Expedia.com",
-"link": {"b": "expedia.com", "p": "/Hotel-Search?destination=", "x": false},
-"deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.expedia.bookings", "ios": "id427916203"}
+"N": "Expedia.com",
+"L": {"b": "expedia.com", "p": "/Hotel-Search?destination="},
+"DL": {"b": "booking://", "p": "searchresults?ss="},
+"A": {"a": "com.expedia.bookings", "i": "id427916203"}
 },
 
 {
-"name": "Hotels.com",
-"link": {"b": "hotels.com", "p": "/Hotel-Search?destination=", "x": false},
-"deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.booking", "ios": "id367003839"}
+"N": "Hotels.com",
+"L": {"b": "hotels.com", "p": "/Hotel-Search?destination="},
+"DL": {"b": "booking://", "p": "searchresults?ss="},
+"A": {"a": "com.booking", "i": "id367003839"}
 },
 
 {
-"name": "Vrbo.com",
-"link": {"b": "vrbo.com", "p": "/search?destination=", "x": false},
-"deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.booking", "ios": "id367003839"}
+"N": "Vrbo.com",
+"L": {"b": "vrbo.com", "p": "/search?destination="},
+"DL": {"b": "booking://", "p": "searchresults?ss="},
+"A": {"a": "com.booking", "i": "id367003839"}
 },
 
 {
-"name": "Kayak.com",
-"link": {"b": "kayak.com", "x": false},
-"deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.booking", "ios": "id367003839"}
+"N": "Kayak.com",
+"L": {"b": "kayak.com"},
+"DL": {"b": "booking://", "p": "searchresults?ss="},
+"A": {"a": "com.booking", "i": "id367003839"}
 },
 
 {
-"name": "Airbnb.com",
-"link": {"b": "www.airbnb.com" ,"p": "/s/", "s": "/homes", "x": false},
-"deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.booking", "ios": "id367003839"}
+"N": "Airbnb.com",
+"L": {"b": "www.airbnb.com" ,"p": "/s/", "s": "/homes"}
 },
 
 {
-"name": "Tripadvisor",
-"link": {"b": "tripadvisor.com", "p": "/Search?q=", "x": false},
-"deepLink": {"b": "booking://", "p": "searchresults?ss="},
-"app": {"android": "com.booking", "ios": "id367003839"}
+"N": "Tripadvisor",
+"L": {"b": "tripadvisor.com", "p": "/Search?q="},
+"DL": {"b": "booking://", "p": "searchresults?ss="},
+"A": {"a": "com.booking", "i": "id367003839"}
 }
 
 ]

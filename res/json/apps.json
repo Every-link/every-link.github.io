@@ -1,89 +1,89 @@
 [
 
 {
-  "name": "apple app store",
-  "link": { "b": "apps.apple.com", "p": "/search?term=", "x": false },
-  "deepLink": { "b": "itms-apps://itunes.apple.com", "p": "/search?term=" }
+"N": "apple app store",
+"L": { "b": "apps.apple.com", "p": "/search?term=", "x": false },
+"DL": { "b": "itms-apps://itunes.apple.com", "p": "/search?term=" }
 },
 {
-  "name": "google play",
-  "link": { "b": "play.google.com", "p": "/store/search?q=", "x": false },
-  "deepLink": { "b": "market://search", "p": "?q=" }
+"N": "google play",
+"L": { "b": "play.google.com", "p": "/store/search?q=", "x": false },
+"DL": { "b": "market://search", "p": "?q=" }
 },
 {
-  "name": "huawei appgallery", "icon": "huawei.com",
-  "link": { "b": "appgallery.huawei.com", "x": false },
-  "deepLink": { "b": "appmarket://details", "p": "?id=" }
+"N": "huawei appgallery", "icon": "huawei.com",
+"L": { "b": "appgallery.huawei.com", "x": false },
+"DL": { "b": "appmarket://details", "p": "?id=" }
 },
 {
-  "name": "samsung galaxy store",
-  "link": { "b": "galaxystore.samsung.com", "p": "/detail/", "x": false },
-  "deepLink": { "b": "samsungapps://", "p": "ProductDetail/" }
+"N": "samsung galaxy store",
+"L": { "b": "galaxystore.samsung.com", "p": "/detail/", "x": false },
+"DL": { "b": "samsungapps://", "p": "ProductDetail/" }
 },
 {
-  "name": "apkmirror",
-  "link": { "b": "apkmirror.com", "p": "/?s=", "x": false },
-  "deepLink": { "b": "apkmirror://search", "p": "?s=" }
+"N": "apkmirror",
+"L": { "b": "apkmirror.com", "p": "/?s=", "x": false },
+"DL": { "b": "apkmirror://search", "p": "?s=" }
 },
 {
-  "name": "amazon appstore",
-  "link": { "b": "www.amazon.com", "p": "/s?k=", "x": false },
-  "deepLink": { "b": "amzn://apps", "p": "/android?k=" }
+"N": "amazon appstore",
+"L": { "b": "www.amazon.com", "p": "/s?k=", "x": false },
+"DL": { "b": "amzn://apps", "p": "/a?k=" }
 },
 {
-  "name": "apkpure",
-  "link": { "b": "apkpure.com", "p": "/search?q=", "x": false },
-  "deepLink": { "b": "apkpure://search", "p": "?q=" }
+"N": "apkpure",
+"L": { "b": "apkpure.com", "p": "/search?q=", "x": false },
+"DL": { "b": "apkpure://search", "p": "?q=" }
 },
 {
-  "name": "f-droid",
-  "link": { "b": "search.f-droid.org", "p": "/?q=", "x": false },
-  "deepLink": { "b": "fdroid://" }
+"N": "f-droid",
+"L": { "b": "search.f-droid.org", "p": "/?q=", "x": false },
+"DL": { "b": "fdroid://" }
 },
 {
-  "name": "microsoft store",
-  "link": { "b": "apps.microsoft.com", "p": "/store/search?q=", "x": false },
-  "deepLink": { "b": "ms-windows-store://search", "p": "?query=" }
+"N": "microsoft store",
+"L": { "b": "apps.microsoft.com", "p": "/store/search?q=", "x": false },
+"DL": { "b": "ms-windows-store://search", "p": "?query=" }
 },
 {
-  "name": "mac app store",
-  "link": { "b": "apps.apple.com", "p": "/mac/search?term=", "x": false },
-  "deepLink": { "b": "macappstore://search", "p": "?term=" }
+"N": "mac app store",
+"L": { "b": "apps.apple.com", "p": "/mac/search?term=", "x": false },
+"DL": { "b": "macappstore://search", "p": "?term=" }
 },
 {
-  "name": "snap store",
-  "link": { "b": "snapcraft.io", "p": "/search?q=", "x": false },
-  "deepLink": { "b": "snap://" }
+"N": "snap store",
+"L": { "b": "snapcraft.io", "p": "/search?q=", "x": false },
+"DL": { "b": "snap://" }
 },
 {
-  "name": "steam",
-  "link": { "b": "store.steampowered.com", "p": "/search?term=", "x": false },
-  "deepLink": { "b": "steam://store" }
+"N": "steam",
+"L": { "b": "store.steampowered.com", "p": "/search?term=", "x": false },
+"DL": { "b": "steam://store" }
 },
 {
-  "name": "epic games store",
-  "link": { "b": "store.epicgames.com", "p": "/en-US/browse?q=", "x": false },
-  "deepLink": { "b": "epicgames://store" }
+"N": "epic games store",
+"L": { "b": "store.epicgames.com", "p": "/en-US/browse?q=", "x": false },
+"DL": { "b": "epicgames://store" }
 },
 {
-  "name": "gog",
-  "link": { "b": "www.gog.com", "p": "//en/games?search=", "x": false },
-  "deepLink": { "b": "gog://", "p": "?search=" }
+"N": "gog",
+"L": { "b": "www.gog.com", "p": "//en/games?search=", "x": false },
+"DL": { "b": "gog://", "p": "?search=" }
 },
 {
-  "name": "xbox store",
-  "link": { "b": "www.xbox.com", "p": "/en-US/search?q=", "x": false },
-  "deepLink": { "b": "xbox://store", "p": "/search?q=" }
+"N": "xbox store",
+"L": { "b": "www.xbox.com", "p": "/en-US/search?q=", "x": false },
+"DL": { "b": "xbox://store", "p": "/search?q=" }
 },
 {
-  "name": "playstation store",
-  "link": { "b": "store.playstation.com", "p": "/en-us/search?query=", "x": false },
-  "deepLink": { "b": "psstore://search", "p": "?query=" }
+"N": "playstation store",
+"L": { "b": "store.playstation.com", "p": "/en-us/search?query=", "x": false },
+"DL": { "b": "psstore://search", "p": "?query=" }
 },
 {
-  "name": "nintendo eshop",
-  "link": { "b": "www.nintendo.com", "p": "/store/search?q=", "x": false },
-  "deepLink": { "b": "eshop://search", "p": "?q=" }
+"N": "nintendo eshop",
+"L": { "b": "www.nintendo.com", "p": "/store/search?q=", "x": false },
+"DL": { "b": "eshop://search", "p": "?q=" }
 }
 
 ]

@@ -181,7 +181,7 @@
 <div class="field prefix border label">
 <i class="front">list</i>
 <select v-model="R.tab" required>
-<option v-for="C in categories.filter(C => C.v)" :key="C.id" v-text="C.name" :value="C.id"></option>
+<option v-for="C in categories.filter(C => C.v)" :key="C.id" v-text="C.n" :value="C.id"></option>
 <option v-if="linksVisibility" value="links">My List</option>
 <option v-if="advancedVisibility" value="advanced">Advanced Search</option>
 </select>

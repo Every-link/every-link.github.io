@@ -1,26 +1,26 @@
 [
     
 {
-    "name": "Facebook",
+    "N": "Facebook",
     "url": "facebook.com"
 },
 {
-    "name": "Instagram",
+    "N": "Instagram",
     "url": "instagram.com",
     "p": "/explore/tags/"
 },
 {
-    "name": "X.com",
+    "N": "X.com",
     "url": "x.com",
     "p": "/search?q="
 },
 {
-    "name": "Reddit",
+    "N": "Reddit",
     "url": "reddit.com",
     "p": "/search/?q="
 },
 {
-    "name": "Tumblr",
+    "N": "Tumblr",
     "url": "www.tumblr.com",
     "p": "/search/"
 }

@@ -3,135 +3,135 @@
 
 
 { 
-"name": "Google",
-"link": {"b": "google.com", "p": "/search?q=", "s": "&hl=ar","x": false},
-"deepLink": {
-    "android": {"b": "google://search","p": "?q="},
-    "ios": {"b": "google://search","p": "?q="}
+"N": "Google",
+"L": {"b": "google.com", "p": "/search?q=", "s": "&hl=ar","x": false},
+"DL": {
+    "a": {"b": "google://search","p": "?q="},
+    "i": {"b": "google://search","p": "?q="}
 },
-"app": {
-    "android": "com.google.android.googlequicksearchbox",
-    "ios": "id284815942"
+"A": {
+    "a": "com.google.android.googlequicksearchbox",
+    "i": "id284815942"
     }
     
 },
 
 
 {
-"name": "Bing",
-"link": {"b": "bing.com", "p": "/search?q=", "x": false}
+"N": "Bing",
+"L": {"b": "bing.com", "p": "/search?q=", "x": false}
 },
 
 {
-"name": "Yandex",
-"link": {"b": "yandex.com", "p": "/search?text=", "x": false}
+"N": "Yandex",
+"L": {"b": "yandex.com", "p": "/search?text=", "x": false}
 },
 
 {
-"name": "Yahoo",
-"link": {"b": "search.yahoo.com", "p": "/search?p=", "x": false}
+"N": "Yahoo",
+"L": {"b": "search.yahoo.com", "p": "/search?p=", "x": false}
 },
 
     
 {
-"name": "Baidu (Chinese)",
-"link": {"b": "baidu.com", "p": "/s?word=", "x": false}
+"N": "Baidu (Chinese)",
+"L": {"b": "baidu.com", "p": "/s?word=", "x": false}
 },
 
 {
-"name": "Naver (Korean)",
-"link": {"b": "search.naver.com", "p": "/search.naver?query=", "x": false}
+"N": "Naver (Korean)",
+"L": {"b": "search.naver.com", "p": "/search.naver?query=", "x": false}
 },
 
 {
-"name": "Startpage",
-"link": {"b": "startpage.com", "p": "/do/search?q=", "x": false}
+"N": "Startpage",
+"L": {"b": "startpage.com", "p": "/do/search?q=", "x": false}
 },
 
 {
-"name": "Qwant",
-"link": {"b": "www.qwant.com", "p": "?q=", "x": false}
+"N": "Qwant",
+"L": {"b": "www.qwant.com", "p": "?q=", "x": false}
 },
 
 {
-"name": "Ecosia",
-"link": {"b": "ecosia.org", "p": "/search?q=", "x": false}
+"N": "Ecosia",
+"L": {"b": "ecosia.org", "p": "/search?q=", "x": false}
 },
 
 {
-"name": "Presearch",
-"link": {"b": "presearch.com", "p": "/search?q=", "x": false}
+"N": "Presearch",
+"L": {"b": "presearch.com", "p": "/search?q=", "x": false}
 },
 
 {
-"name": "Dsearch",
-"link": {"b": "dsearch.com", "p": "/search?q=", "x": false}
+"N": "Dsearch",
+"L": {"b": "dsearch.com", "p": "/search?q=", "x": false}
 },
 
 {
-"name": "Aol",
-"link": {"b": "search.aol.com", "p": "/aol/search/?q=", "x": false}
+"N": "Aol",
+"L": {"b": "search.aol.com", "p": "/aol/search/?q=", "x": false}
 },
 
 {
-"name": "Searchalot",
-"link": {"b": "searchalot.com", "p": "/?q=", "x": false}
+"N": "Searchalot",
+"L": {"b": "searchalot.com", "p": "/?q=", "x": false}
 },
 
 {
-"name": "Ask",
-"link": {"b": "ask.com", "p": "/web?q=", "x": false}
+"N": "Ask",
+"L": {"b": "ask.com", "p": "/web?q=", "x": false}
 },
 
 {
-"name": "Marginalia",
-"link": {"b": "marginalia-search.com", "p": "/search?query=", "x": false}
+"N": "Marginalia",
+"L": {"b": "marginalia-search.com", "p": "/search?query=", "x": false}
 },
 
 {
-"name": "Duckduckgo",
+"N": "Duckduckgo",
 "exEngin": true,
-"link": {"b": "duckduckgo.com", "p": "/?q=", "x": false}
+"L": {"b": "duckduckgo.com", "p": "/?q=", "x": false}
 },
 
 {
-"name": "Brave",
-"link": {"b": "search.brave.com", "p": "/search?q=", "x": false}
+"N": "Brave",
+"L": {"b": "search.brave.com", "p": "/search?q=", "x": false}
 },
 
 {
-"name": "Yep",
-"link": {"b": "yep.com", "p": "/web?q=", "x": false}
+"N": "Yep",
+"L": {"b": "yep.com", "p": "/web?q=", "x": false}
 },
 
 {
-"name": "Mojeek",
-"link": {"b": "www.mojeek.com", "p": "/search?q=", "x": false}
+"N": "Mojeek",
+"L": {"b": "www.mojeek.com", "p": "/search?q=", "x": false}
 },
 
 {
-"name": "Gibiru",
-"link": {"b": "gibiru.com", "p": "/results.html?q=", "x": false}
+"N": "Gibiru",
+"L": {"b": "gibiru.com", "p": "/results.html?q=", "x": false}
 },
 
 {
-"name": "Myallsearch",
-"link": {"b": "www.myallsearch.com", "p": "/search?q=", "x": false}
+"N": "Myallsearch",
+"L": {"b": "www.myallsearch.com", "p": "/search?q=", "x": false}
 },
 
 {
-"name": "Onesearch",
-"link": { "b": "onesearch.com", "p": "/yhs/search?p=", "x": false}
+"N": "Onesearch",
+"L": { "b": "onesearch.com", "p": "/yhs/search?p=", "x": false}
 },
 
 {
-"name": "Internet Archive",
-"link": {"b": "archive.org", "p": "/search?query="}
+"N": "Internet Archive",
+"L": {"b": "archive.org", "p": "/search?query="}
 },
 
 {
-"name": "Wikipedia",
-"link": {"b": "wikipedia.org", "p": "/wiki/"}
+"N": "Wikipedia",
+"L": {"b": "wikipedia.org", "p": "/wiki/"}
 }
 
 

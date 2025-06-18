@@ -2,8 +2,8 @@
 [
 
 {
-  "name": "thepiratebay",
-  "link": {"b": "thepiratebay.org", "p": "/search.php?all=on&q="}
+  "N": "thepiratebay",
+  "L": {"b": "thepiratebay.org", "p": "/search.php?all=on&q="}
 }
 
 

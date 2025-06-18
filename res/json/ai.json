@@ -1,80 +1,65 @@
 [
  
 {
-"name": "ChatGpt",  "icon": "chat.openai.com",
-"link": {"b": "chat.openai.com", "p": "?q=", "x": false},
-"deepLink": {"b": "com.openai.chat://"},
-"app": {
-    "android": "com.openai.chatgpt", 
-    "ios": "id6448311069"
-    }
-},
-
-
-    
-{
-"name": "Grok", "icon": "x.ai",
-"link": {"b": "grok.com", "p": "/?q=", "x": false}
+"N": "ChatGpt",  "icon": "chat.openai.com",
+"L": {"b": "chat.openai.com", "p": "?q=", "x": false},
+"DL": {"b": "com.openai.chat://"},
+"A": { "a": "com.openai.chatgpt", "i": "id6448311069" }
 },
 
 {
-"name": "Micorsoft Copilot",
-"link": {"b": "copilot.microsoft.com", "p": "/search?showconv=1&sendquery=1&q=", "x": false}
+"N": "Grok", "icon": "x.ai", 
+"L": {"b": "grok.com", "p": "/?q=", "x": false}
 },
 
 {
-"name": "Gemini", "icon": "gemini.google.com",
-"link": { "b": "gemini.google.com", "x": false },
-"deepLink": { "b": "com.openai.chat://" },
-"app": { "android": "", "ios": "id6477489729" },
+"N": "Micorsoft Copilot",
+"L": {"b": "copilot.microsoft.com", "p": "/search?showconv=1&sendquery=1&q=", "x": false}
+},
+
+{
+"N": "Gemini", "icon": "gemini.google.com",
+"L": { "b": "gemini.google.com", "x": false },
+"DL": { "b": "com.openai.chat://" },
+"A": { "a": "", "i": "id6477489729" },
 "alt": [
-    {
-    "name": "AI Studio", 
-    "link": { "b": "aistudio.google.com", "x": false }
-    },
-    {
-    "name": "Jules", 
-    "link": { "b": "jules.google.com", "x": false }
-    },
-    {
-    "name": "NotebookLM", 
-    "link": { "b": "notebooklm.google.com", "x": false }
-    }
+    { "N": "AI Studio", "L": { "b": "aistudio.google.com", "x": false } },
+    { "N": "Jules", "L": { "b": "jules.google.com", "x": false } },
+    { "N": "NotebookLM", "L": { "b": "notebooklm.google.com", "x": false } }
     ]
 },
  
 {
-"name": "Perplexity",
-"link": {"b": "www.perplexity.ai", "p": "/search?q=", "x": false}
+"N": "Perplexity", 
+"L": {"b": "www.perplexity.ai", "p": "/search?q=", "x": false}
 },
 
 
 {
-"name": "Claude ai",
-"link": {"b": "claude.ai", "p": "/new?q=", "x": false}
+"N": "Claude ai","L": {"b": "claude.ai", "p": "/new?q=", "x": false}
 },
   
 {
-"name": "Meta ai",
-"link": {"b": "meta.ai", "x": false},
-"app": {"android": "com.facebook.stella", "ios": "id1558240027"}
+"N": "Meta ai",
+"L": {"b": "meta.ai", "x": false},
+"A": {"a": "com.facebook.stella", "i": "id1558240027"}
 },
 
 {
-"name": "Ecosia ai",
-"link": {"b": "ecosia.org", "p": "/chat?q=", "s": "", "x": false}
-},
-
-
-{
-"name": "duckduckgo ai", "icon": "duckduckgo.com",
-"link": {"b": "Duck.ai", "p": "/new?q=", "s": "", "x": false}
+"N": "Ecosia ai", 
+"L": {"b": "ecosia.org", "p": "/chat?q=", "s": "", "x": false}
 },
 
 
 {
-"name": "Yep ai",
-"link": {"b": "yep.com", "p": "/chat/?q=", "s": "", "x": false}
+"N": "duckduckgo ai", "icon": "duckduckgo.com",
+"L": {"b": "Duck.ai", "p": "/new?q=", "s": "", "x": false}
+},
+
+
+{
+"N": "Yep ai",
+"L": {"b": "yep.com", "p": "/chat/?q=", "s": "", "x": false}
 }
 
 
