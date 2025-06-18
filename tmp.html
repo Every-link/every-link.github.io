@@ -152,15 +152,16 @@
   
 <div id="app" v-scope v-cloak v-effect="watch()" @vue:mounted="mounted">
 
-<nav class="top primary" v-scope="$S.navTop(false)"></nav>
-<nav class="left max l scroll" v-scope="$S.navLeft()"></nav>
+<nav class="top primary" v-scope="navTop()"></nav>
+<nav class="left max l scroll green hide" v-scope="navLeft()"></nav>
+<nav class="bottom max s m green hide" v-scope="navBottom()"></nav>
 
 
 
 <main class="responsive">
 
 
-<template v-if="$S.R.query === null"><div class="page left active">
+<template v-if="R.query === null"><div class="page left active">
 
 <div class="padding center-align">
   
@@ -172,8 +173,8 @@
 </div>
 
 
-<form class="" :action="$S.R.path" target="_self" method="GET">
-<input type="hidden" name="tab" :value="$S.R.tab">
+<form class="" :action="R.path" target="_self" method="GET">
+<input type="hidden" name="tab" :value="R.tab">
 
 <div class="padding">
   
@@ -191,10 +192,10 @@
 <div class="s12 m3 l2">
 <div class="field prefix border label">
   <i class="front">list</i>
-  <select v-model="$S.R.tab" required>
-  <option v-for="C in $S.categories.filter(C => C.v)" :key="C.id" v-text="C.name" :value="C.id"></option>
-  <option v-if="$S.cVisibility" value="links">My List</option>
-  <option v-if="$S.exVisibility" value="advanced">Advanced Search</option>
+  <select v-model="R.tab" required>
+  <option v-for="C in categories.filter(C => C.v)" :key="C.id" v-text="C.name" :value="C.id"></option>
+  <option v-if="cVisibility" value="links">My List</option>
+  <option v-if="exVisibility" value="advanced">Advanced Search</option>
   </select>
   <label>Category</label>
 </div>
@@ -226,17 +227,15 @@
 
 </div></template>
 
-<template v-else-if="$S.R.query !== null"><div class="page left active">
+<template v-else-if="R.query !== null"><div class="page left active">
 
 
-
-
-<form class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
-<nav :class="$S.device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
+<form class="middle-align center-align top-margin bottom-margin" :action="R.path" target="_self" method="GET">
+<nav :class="device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
   
 <div class="max field border small-round primary-border">
-  <input type="hidden" name="tab" :value="$S.R.tab">
-  <input type="text" name="q" v-model="$S.R.query">
+  <input type="hidden" name="tab" :value="R.tab">
+  <input type="text" name="q" v-model="R.query">
 </div>
 <button type="submit" class="transparent border primary-border fill small-round large">
   <i>search</i>
@@ -249,17 +248,17 @@
 
 <div class="margin tabs medium-width scroll">
   
-<a v-for="(C, I) in $S.categories.filter(C => C.v || C.id == $S.R.tab )" :key="C.id" :class="[{'active fill' : C.id == $S.R.tab}, `vertical padding small-round`]" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" :data-tab=" C.id">
+<a v-for="(C, I) in categories.filter(C => C.v || C.id == R.tab )" :key="C.id" :class="[{'active fill' : C.id == R.tab}, `vertical padding small-round`]" :href="R.path + '?tab=' + C.id + '&q=' + R.encodedQuery" :data-tab=" C.id">
 <i v-text="C.icon"></i> <span v-text="C.name"></span>
 </a>
 
 
-<a data-ui="#advanced" :class="[{'active fill' : $S.R.tab == 'advanced'}, `vertical padding`]" v-show="$S.exVisibility" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery" data-tab="advanced">
+<a data-ui="#advanced" :class="[{'active fill' : R.tab == 'advanced'}, `vertical padding`]" v-show="exVisibility" :href="R.path + '?tab=advanced&q=' + R.encodedQuery" data-tab="advanced">
   <i>pageview</i> <span>Advanced</span>
 </a>
 
 
-<a data-ui="#links" :class="[{'active fill' : $S.R.tab == 'links'}, `vertical padding ripple`]" v-show="$S.cVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
+<a data-ui="#links" :class="[{'active fill' : R.tab == 'links'}, `vertical padding ripple`]" v-show="cVisibility" :href="R.path + '?tab=links&q=' + R.encodedQuery" data-tab="links">
   <i>forms_add_on</i> <span>My List</span>
 </a>
 
@@ -272,7 +271,7 @@
 
 
 
-<div class="page left active" v-show="$S.R.tab != 'advanced' && $S.R.tab != 'links'">
+<div class="page left active" v-show="R.tab != 'advanced' && R.tab != 'links'">
 
 <div v-if="sites === null" class="middle-align vertical padding">
   <progress class="circle"></progress> <span>Loading</span>
@@ -283,14 +282,14 @@
 <article class="s12 m6 l4 small-round" v-for="(S, I) in sites || []">
 
 <div class="row">
-<a class="row max" :href="'https://' + S.link.b + (S.link.p ? S.link.p + $S.R.encodedQuery : '') + (S.link.s ? S.link.s : '') + (S.link.p || S.link.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
+<a class="row max" :href="'https://' + S.link.b + (S.link.p ? S.link.p + R.encodedQuery : '') + (S.link.s ? S.link.s : '') + (S.link.p || S.link.s ? '&' : '?') + R.ref" rel="nofollow" target="_blank">
   
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.icon ? S.icon : S.link.b)" alt="icon" loading="lazy">
     
 <div class="max">
 <h5 class="small" v-text="S.name"></h5>
 <p class="wrap">
-<span v-text="'https://' + S.link.b + (S.link.p ? S.link.p + $S.R.query : '') + (S.link.s ? S.link.s : '')" class="link"></span>
+<span v-text="'https://' + S.link.b + (S.link.p ? S.link.p + R.query : '') + (S.link.s ? S.link.s : '')" class="link"></span>
 <i v-if="!S.link.p" class="red-text">search_off</i>
 </p>
 
@@ -303,30 +302,30 @@
 <menu :id="'sites-menu-' + I" class="left no-wrap">
 
 <li v-if="S.link.p">
-<a class="row" :href="'https://' + S.link.b + '?' + $S.R.ref" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + S.link.b + '?' + R.ref" rel="nofollow" target="_blank">
   <i class="green-text">home_app_logo</i>
   <span>Homepage</span>
 </a>
 </li>
 <li v-if="S.link.x != false">
-<a class="row" :href="'https://' + $S.engine.url + 'site:' + S.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + engine.url + 'site:' + S.link.b + '+&quot;' + R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
   <i class="blue-text">travel_explore</i>
-  <span v-text="$S.engine.name + ' Search'"></span>
+  <span v-text="engine.name + ' Search'"></span>
 </a>
 </li>
-<li v-if="S.deepLink !== undefined && $S.device.type == 'mobile'">
-  <a class="row" :href="S.deepLink.b + (S.deepLink.p ? S.deepLink.p + $S.R.encodedQuery : '') + (S.deepLink.s ? S.deepLink.s : '')" rel="nofollow">
+<li v-if="S.deepLink !== undefined && device.type == 'mobile'">
+  <a class="row" :href="S.deepLink.b + (S.deepLink.p ? S.deepLink.p + R.encodedQuery : '') + (S.deepLink.s ? S.deepLink.s : '')" rel="nofollow">
     <i>phone_iphone</i>
     <span v-text="S.name + ' App'"></span>
   </a>
 </li>
-<li v-if="S.app !== undefined && $S.device.os == 'android'">
+<li v-if="S.app !== undefined && device.os == 'android'">
 <a class="row" :href="'market://details?id=' + S.app.android" rel="nofollow">
   <i>system_update</i>
   <span>Download App</span>
 </a>
 </li>
-<li v-if="S.app !== undefined && $S.device.os == 'ios'">
+<li v-if="S.app !== undefined && device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + S.app.ios" rel="nofollow">
   <i>system_update</i>
   <span>Download App</span>
@@ -344,29 +343,29 @@
 
 <menu :id="'menu-' + s.link.p" class="left no-wrap">
 <li v-if="s.link.b">
-<a class="row" :href="'https://' + s.link.b + (s.link.p ? s.link.p + $S.R.encodedQuery : '') + (s.link.s ? s.link.s : '') + (s.link.p || s.link.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + s.link.b + (s.link.p ? s.link.p + R.encodedQuery : '') + (s.link.s ? s.link.s : '') + (s.link.p || s.link.s ? '&' : '?') + R.ref" rel="nofollow" target="_blank">
   <i class="green-text" v-text="s.link.p ? 'pageview' : 'home_app_logo'"></i>
   <span v-text="s.name"></span>
 </a>
 </li>
 <li v-if="s.link.x != false">
-<a class="row" :href="'https://' + $S.engine.url + 'site:' + s.link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + engine.url + 'site:' + s.link.b + '+&quot;' + R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
   <i class="blue-text">travel_explore</i>
-  <span v-text="$S.engine.name + ' Search'"></span>
+  <span v-text="engine.name + ' Search'"></span>
 </a>
 </li>
-<li v-if="s.deepLink !== undefined && $S.device.type == 'mobile'">
-<a class="row" :href="s.deepLink.b + (s.deepLink.p ? s.deepLink.p + $S.R.encodedQuery : '') + (s.deepLink.s ? s.deepLink.s : '')" rel="nofollow">
+<li v-if="s.deepLink !== undefined && device.type == 'mobile'">
+<a class="row" :href="s.deepLink.b + (s.deepLink.p ? s.deepLink.p + R.encodedQuery : '') + (s.deepLink.s ? s.deepLink.s : '')" rel="nofollow">
   <i>phone_iphone</i>
   <span v-text="'s.name + ' App'"></span>
 </a>
 </li>
-<li v-if="s.app !== undefined && $S.device.os == 'android'">
+<li v-if="s.app !== undefined && device.os == 'android'">
 <a class="row" :href="'market://details?id=' + s.app.android" rel="nofollow">
   <i>system_update</i><span>Download App</span>
 </a>
 </li>
-<li v-if="s.app !== undefined && $S.device.os == 'ios'">
+<li v-if="s.app !== undefined && device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + s.app.ios" rel="nofollow">
   <i>system_update</i><span>Download App</span>
 </a>
@@ -383,7 +382,7 @@
 
 </div><!-- / main page -->
 
-<div class="page left active large-padding" v-show="$S.R.tab == 'advanced'">
+<div class="page left active large-padding" v-show="R.tab == 'advanced'">
 
 <form class="padding" @submit.prevent="exSearch()">
 
@@ -395,8 +394,8 @@
 </div>
 
 <div class="field label suffix border large s12 m4 l4">
-  <select v-model="$S.engine" @change="$S.select()">
-    <option v-for="e in $S.engines" :key="e.url" :value="e" :selected="$S.engine.url === e.url" v-text="e.name"></option>
+  <select v-model="engine" @change="select()">
+    <option v-for="e in engines" :key="e.url" :value="e" :selected="engine.url === e.url" v-text="e.name"></option>
   </select> 
   
   <label>Select Search Engine</label>
@@ -416,20 +415,20 @@
 
 </div><!-- advanced tab end -->
 
-<div v-show="$S.R.tab == 'links'" v-scope="{edit: false}">
+<div v-show="R.tab == 'links'" v-scope="{edit: false}">
 
 <div class="grid">
   
 <article class="s12 m6 l4 small-round padding" v-for="(link, I) in links">
 
 <div class="row">
-<a class="row max" :href="'https://' + (link.p ? link.b + link.p + $S.R.encodedQuery : $S.engine.url + 'site:' + link.b + '+&quot;' + $S.R.encodedQuery + '&quot;')" rel="nofollow" target="_blank">
+<a class="row max" :href="'https://' + (link.p ? link.b + link.p + R.encodedQuery : engine.url + 'site:' + link.b + '+&quot;' + R.encodedQuery + '&quot;')" rel="nofollow" target="_blank">
 
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + link.b" alt="icon" loading="lazy">
     
 <div class="max">
   <h5 class="small" v-text="link.n"></h5>
-  <p v-text="'https://' + (link.p ? link.b + link.p + $S.R.encodedQuery : $S.engine.url + 'site:' + link.b + '+&quot;' + $S.R.encodedQuery + '&quot;')" class="link wrap"></p>
+  <p v-text="'https://' + (link.p ? link.b + link.p + R.encodedQuery : engine.url + 'site:' + link.b + '+&quot;' + R.encodedQuery + '&quot;')" class="link wrap"></p>
 </div>
 </a>
 
@@ -444,16 +443,16 @@
 <menu :id="'links-menu-' + I" class="left no-wrap">
   
 <li>
-  <a class="row" :href="'https://' + link.b + '?' + $S.R.ref" rel="nofollow" target="_blank">
+  <a class="row" :href="'https://' + link.b + '?' + R.ref" rel="nofollow" target="_blank">
     <i class="green-text">home_app_logo</i>
     <span>Homepage</span>
   </a>
 </li>
 
 <li v-if="link.p">
-  <a class="row" :href="'https://' + $S.engine.url + 'site:' + link.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+  <a class="row" :href="'https://' + engine.url + 'site:' + link.b + '+&quot;' + R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
     <i class="blue-text">travel_explore</i>
-    <span v-text="$S.engine.name + ' Search'"></span>
+    <span v-text="engine.name + ' Search'"></span>
   </a>
 </li>
 
@@ -480,10 +479,8 @@
 <form class="padding" @submit.prevent="addLink()" v-show="edit">
 
 <p class="row no-space">
-<s class="red-text">https://</s>
-<span class="green-text">google.com</span>
-<b class="blue-text">/search?q=</b>
-<s class="red-text">news</s>
+<s class="red-text">https://</s><span class="green-text">google.com</span>
+<b class="blue-text">/search?q=</b><s class="red-text">news</s>
 </p>
 
 
@@ -527,105 +524,34 @@
 </div> <!-- end links tab -->
 
 
-<button class="transparent border primary-border fill small-round margin large fixed bottom right s m" @click="share" v-show="$S.device.type === 'mobile' || $S.device.type === 'tablet'">
+</div></template>
+
+</main>
+
+
+<button class="transparent border primary-border fill small-round margin large fixed bottom right s m" @click="share" v-show="device.type === 'mobile' || device.type === 'tablet'">
 <i>share</i>
 <div class="snackbar error" id="share">Your browser is not supported</div>
 </button>
-  
 
-
-</div></template>
 
 
 
 <div class="overlay small-blur"></div>
-<dialog id="drawer" class="left scroll" v-scope="$S.navDialog()"></dialog>
-
+<dialog id="drawer" class="left scroll" v-scope="navDialog()"></dialog>
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" v-scope="$S.settingsDialog()">
-</dialog>
+<dialog id="settings" class="right scroll" v-scope="settingsDialog"></dialog>
 
 
 <div class="large-space"></div>
-</main>
+
 </div><!-- /app -->
 
 
-<script src="/res/js/store.js"></script>
+<script src="/res/js/script.js"></script>
 
 
-<script>
-const App = PetiteVue.createApp({ 
-/*________________________________________________________________*/
-$delimiters: ['{{', '}}'],
-$S: store,
-/*________________________________________________________________*/
-links: JSON.parse(localStorage.getItem('links')) || [],
-newLink: {n: "", b: "", p: ""},
-saveLinks(){localStorage.setItem('links', JSON.stringify(this.links))},
-removeLink(index) {this.links.splice(index, 1); this.saveLinks()},
-
-addLink() {
-this.links.push({n: this.newLink.n, b: this.newLink.b, p: this.newLink.p});
-this.newLink.n = ''; this.newLink.b = ''; this.newLink.p = '';
-this.saveLinks();
-},
-/*________________________________________________________________*/
-sites: null,
- /*________________________________________________________________*/
-async load(id){
-  try { this.sites ||= await fetch(`/res/json/${id}.json`).then(data => data.json()) } catch (error) { this.sites = null }
-},
- /*________________________________________________________________*/
-site: "",
-exSearch(){ 
-  window.open(`https://${this.$S.engine.url}site:${this.site}+"${this.$S.R.encodedQuery}"`
- , '_blank') 
-},
-/*________________________________________________________________*/
-async share() {
-  if (!navigator.share) { ui("#share") };
-  await navigator.share({ title: document.title, url: window.location.href })
-},
-/*________________________________________________________________*/
-
-
-
-/*________________________________________________________________*/
-watch(){
-
-},
-/*________________________________________________________________*/
-mounted() {
-this.$S.mounted();
-
-//if(!this.$S.R.query){window.location.replace("/")};
-
-
-//if no query
-// if(!this.$S.R.query){this.$S.R.query = "every-link"};
-
-
-
-//load json file
-if (this.$S.R.tab != 'advanced' && this.$S.R.tab != 'links') {
-  this.load(this.$S.R.tab)
-};
-
-
-
-//scroll to tab
-document.querySelector(`[data-tab="${this.$S.R.tab}"]`).scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});
-
-
-
-
-
-},
-/*________________________________________________________________*/
-}).mount("#app")
-</script>
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11/dist/cdn/beer.min.js"></script>
 
