@@ -196,7 +196,7 @@ await navigator.share({ title: document.title, url: window.location.href })
 
 $template: `
 
-<button class="transparent border primary-border fill small-round margin large fixed bottom right s m" @click="share" v-show="$S.Device.type === 'mobile' || $S.Device.type === 'tablet'"><i>share</i> </button>
+<button class="transparent border primary-border fill elevate small-round margin large fixed bottom right s m" @click="share" v-show="$S.Device.type === 'mobile' || $S.Device.type === 'tablet'"><i>share</i> </button>
 
 <div class="snackbar error" id="share"> Your browser is not supported</div>
 

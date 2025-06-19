@@ -118,7 +118,7 @@
 
 <!--[/dns-prefetch]__________________________________________________-->
 
-<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.20/dist/cdn/beer.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.css" rel="stylesheet">
 
 <link href="/res/css/style.css" rel="stylesheet">
 
@@ -141,7 +141,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 
 <!-- form -->
-<div class="bottom-margin">
+<div class="vertical-padding">
 <form v-else-if="$S.R.q" class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
 <nav :class="$S.Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
 
@@ -159,9 +159,8 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </div><!-- form -->
 
 
-
 <!-- tabs -->
-<div class="bottom-margin">
+<div class="bottom-padding">
 <nav class="row horizontal scroll" @vue:mounted="scroll">
 
 
@@ -255,7 +254,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <div v-show="S.alt" class="divider"></div>
 
 <li v-for="(s, i) in S.alt || []" :data-ui="'#menu-' + S.L.p">
-<div class="left-padding right-padding row">
+<div class="horizontal-padding row">
 <img class="tiny square" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.I ? s.I : s.L.b)" alt="icon" loading="lazy">
 <span v-text="s.N"></span>
 <i>arrow_drop_down</i>
@@ -521,7 +520,7 @@ this.$S.mounted();
 }).mount("#app") 
 </script>
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.20/dist/cdn/beer.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.js"></script>
 
 </body>
 
