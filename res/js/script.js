@@ -1,22 +1,8 @@
 const store = PetiteVue.reactive({
 /*________________________________________________________________*/
 
-
-/*________________________________________________________________*/
-
-W: {
-
 title: "Every-Link",
-
-menu: [
-{ N: "Homepage", I: "home", D: "s m l", U: "/index.html", },
-{ N: "search", I: "search", D: "s m l", U: "/search.html", },
-{ N: "tmp", I: "link", D: "s m l", U: "/TMP.html", },
-],
-
-
-}, //W
-
+description: "",
 /*________________________________________________________________*/
 
 R: {
@@ -131,6 +117,13 @@ localGet(name, fall = null){
 if(name) {return JSON.parse(localStorage.getItem(name))} else {return fall}
 },
 
+copy(text) {
+navigator.clipboard.writeText(text)
+.then(() => ui("#copy", 999))
+.catch(err => console.error('Failed to copy text: ', err));
+},
+
+
 /*________________________________________________________________*/
 
 //visibility
@@ -180,7 +173,7 @@ $template: `
 </button>
 
 <div class="max"></div>
-<h5 class="center-align" v-text="$S.W.title"></h5>
+<h5 class="center-align" v-text="$S.title"></h5>
 <div class="max"></div>
 
 <button v-show="settings !== false" class="transparent border square" data-ui="#settings">
@@ -211,6 +204,14 @@ $template: `
 /*________________________________________________________________*/
 drawer() {return {
 
+// name, icon, class
+menu: [
+{ N: "Homepage", I: "home", C: "s m l", U: "/index.html", },
+{ N: "search", I: "search", C: "s m l", U: "/search.html", },
+{ N: "tmp", I: "link", C: "s m l", U: "/TMP.html", },
+],
+
+
 $template: `
 <div class="overlay small-blur"></div>
 
@@ -218,7 +219,7 @@ $template: `
 
 <header class="fixed">
 <nav>
-<h6 class="max lin" v-text="$S.W.title"></h6>
+<h6 class="max" v-text="$S.title"></h6>
 <button class="transparent border link small-round" data-ui="#drawer">
 <span>Close</span> <i>close</i>
 </button>
@@ -229,7 +230,7 @@ $template: `
 
 <ul class="list">
 
-<li v-for="L in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.D, 'wave', 'small-round']">
+<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, 'wave', 'small-round']">
 <a :href="L.U + ( $S.R.query ? '?q=' + $S.R.query : '')">
 <i v-text="L.I"></i>
 <span v-text="L.N"></span>
@@ -246,16 +247,48 @@ $template: `
 settings() {return {
 
 reset(){
-localStorage.clear();
+
+// Clear cookies
+document.cookie.split(";").forEach(cookie => {
+const name = cookie.split("=")[0].trim();
+document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+});
+    
+localStorage.clear(); // Clear localStorage
+sessionStorage.clear(); // Clear sessionStorage
+
+    
+// Clear cache
+if ('caches' in window) {
+  caches.keys().then(cacheNames => {
+    cacheNames.forEach(cacheName => {caches.delete(cacheName)});
+});
+}
+    
+// Clear IndexedDB (modern browsers)
+if (window.indexedDB) {
+  indexedDB.databases().then(dbs => {
+    dbs.forEach(db => {indexedDB.deleteDatabase(db.name)});
+  });
+}
+    
+// Clear Service Worker registrations
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(registrations => {
+    registrations.forEach(registration => {registration.unregister()});
+  });
+}
+
+// road page
 window.location.reload();
 },
 
 $template: `
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" >
+<dialog id="settings" class="right scroll no-padding">
 
-<header class="fixed">
+<header class="fixed padding">
 <nav>
 <h6 class="max">Settings</h6>
 <button class="transparent border link small-round" data-ui="#settings">
@@ -304,6 +337,7 @@ $template: `
 
 </ul>
 
+<div class="margin">
 <div class="field label suffix border">
 <select v-model="$S.engine" @change="$S.localSet('engine', $S.engine)">
 <option v-for="E in $S.Engines" :key="E.U" :value="E" :selected="$S.engine.U === E.U" v-text="E.N"></option>
@@ -311,14 +345,13 @@ $template: `
 <label>Default Search Engine</label>
 <i>arrow_drop_down</i>
 </div>
+</div>
 
 
+<div class="divider"></div>
 
-
-<div class="margin">
-
-<nav class="center-align">
-<button class="error" data-ui="#reset">
+<nav class="right-align padding">
+<button class="error small-round" data-ui="#reset">
 <i>refresh</i>
 <span>reset</span>
 </button>
@@ -333,11 +366,10 @@ $template: `
   <p>this will reset hidden categories , Preferred Search engine, and delete your custom Links as well.</p>
   <nav class="right-align no-space">
     <button class="transparent link" data-ui="#reset">Cancel</button>
-    <button class="transparent link" @click="reset()">Confirm</button>
+    <button class="border error-text error-border small-round" @click="reset()">Confirm</button>
   </nav>
 </dialog>
 
-</div>
 
 
 `}},

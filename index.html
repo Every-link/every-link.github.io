@@ -172,7 +172,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <select v-model="$S.R.tab" required>
 <option v-for="C in $S.Categories.filter(C => C.V)" :key="C.id" v-text="C.N" :value="C.id"></option>
 <option v-if="$S.linksVisibility" value="links">My List</option>
-<option v-="$S.advancedVisibility == true" value="advanced">Advanced Search</option>
+<option v-if="$S.advancedVisibility == true" value="advanced">Advanced Search</option>
 </select>
 <label>Category</label>
 </div>
@@ -190,13 +190,13 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </div>
 </form>
 
-<div v-scope="$S.component.share()" class="large-padding large-margin"></div>
-
-</main>
 
 
 <div v-scope="$S.component.drawer()"></div>
 <div v-scope="$S.component.settings()"></div>
+<div class="snackbar" id="copy"><i>done</i><span>Copied</span></div>
+
+</main>
 
 </div><!-- /app -->
 

@@ -164,6 +164,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <div class="bottom-margin">
 <nav :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'scroll']" @vue:mounted="scroll">
 
+
 <a v-for="(C, I) in $S.Categories.filter(C => C.V || C.id == $S.R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == $S.R.tab}, 'vertical padding small-round']" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" :data-tab="C.id">
   <i v-text="C.I"></i>
   <span v-text="C.N"></span>
@@ -191,7 +192,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 
 <!-- content -->
-<div v-show="$S.R.tab != 'advanced' && $S.R.tab != 'links'" @vue:mounted="load" class="page left active">
+<div v-if="$S.R.tab != 'advanced' && $S.R.tab != 'links'" @vue:mounted="load" class="page left active">
 
 <div v-if="sites === null" class="middle-align vertical padding">
 <progress class="circle"></progress> <span>Loading</span>
@@ -275,8 +276,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </li>
 <li v-if="site.DL !== undefined && $S.Device.type == 'mobile'">
 <a class="row" :href="site.DL.b + (site.DL.p ? site.DL.p + $S.R.encodedQuery : '') + (site.DL.s ? site.DL.s : '')" rel="nofollow">
-<i>phone_iphone</i>
-<span v-text="site.N + ' App'"></span>
+<i>phone_iphone</i><span>Open App</span>
 </a>
 </li>
 <li v-if="site.A !== undefined && $S.Device.os == 'android'">
@@ -303,7 +303,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 
 <!-- advanced -->
-<div v-show="$S.R.tab === 'advanced'" class="page left active">
+<div v-if="$S.R.tab === 'advanced'" class="page left active">
 
 <form class="padding" @submit.prevent="exSearch()">
 
@@ -337,7 +337,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 
 <!-- links -->
-<div v-show="$S.R.tab === 'links'" v-scope="{edit: false}" class="page left active">
+<div v-if="$S.R.tab === 'links'" v-scope="{edit: false}" class="page left active">
 
 <div class="grid">
 
@@ -448,15 +448,12 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 
 
-<div v-scope="$S.component.share()" class="large-padding large-margin"></div>
-
-</main>
-
-
-
-
 <div v-scope="$S.component.drawer()"></div>
 <div v-scope="$S.component.settings()"></div>
+<div v-scope="$S.component.share()" class="large-padding large-margin"></div>
+<div class="snackbar" id="copy"><i>done</i><span>Copied</span></div>
+
+</main>
 
 </div><!-- /app -->
 
@@ -483,9 +480,7 @@ if (this.$S.R.query) { document.querySelector(`[data-tab="${this.$S.R.tab}"]`).s
 sites: null,
 
 async load() {
-if (this.$S.R.tab != 'advanced' && this.$S.R.tab != 'links') {
 try { this.sites ||= await fetch(`/res/json/${this.$S.R.tab}.json`).then(data => data.json()) } catch (error) { this.sites = null }
-}
 },
 /*________________________________________________________________*/
 

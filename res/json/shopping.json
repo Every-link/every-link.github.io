@@ -4,15 +4,27 @@
 
 {
 "N": "Amazon",
-"L": { "b": "amazon.com", "p": "/s?k=", "x": false },
+"L": { "b": "amazon.com", "p": "/s?k=" },
 "DL": { "b": "com.amazon.mobile.shopping.web://amazon.com", "p": "/s?k=" },
-"A": { "a": "com.openai.chatgpt", "i": "id6448311069" },
+"A": { "a": "com.amazon.mShop.android.shopping", "i": "id297606951" },
 "alt": [
 
 {
-"N": "Amazon Egypt",
-"L": { "b": "amazon.eg", "p": "/s?k=", "x": false },
+"N": "Egypt",
+"L": { "b": "amazon.eg", "p": "/s?k=" },
 "DL": { "b": "com.amazon.mobile.shopping.web://amazon.eg", "p": "/s?k=" }
+},
+
+{
+  "N": "Emirates",
+  "L": { "b": "amazon.ae", "p": "/s?k=" },
+  "DL": { "b": "com.amazon.mobile.shopping.web://amazon.ae", "p": "/s?k=" }
+},
+
+{
+  "N": "Saudi",
+  "L": { "b": "amazon.sa", "p": "/s?k=" },
+  "DL": { "b": "com.amazon.mobile.shopping.web://amazon.sa", "p": "/s?k=" }
 }
 
 ]
@@ -24,12 +36,10 @@
 
 {
 "N": "Facebook Marketplace",
-"L": { "b": "facebook.com/marketplace/", "p": "search/?query=", "x": false },
-"DL": { "b": "com.openai.chat://" },
-"A": { "a": "com.openai.chatgpt", "i": "id6448311069" }
+"L": { "b": "facebook.com/marketplace", "p": "/search/?query=", "x": false },
+"DL": { "b": "fb://marketplace" },
+"A": { "a": "com.facebook.katana", "i": "id284882215" }
 }
-
-
 
 ]
 
