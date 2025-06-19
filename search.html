@@ -118,7 +118,7 @@
 
 <!--[/dns-prefetch]__________________________________________________-->
 
-<link href="https://cdn.jsdelivr.net/npm/beercss@3.11/dist/cdn/beer.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.20/dist/cdn/beer.min.css" rel="stylesheet">
 
 <link href="/res/css/style.css" rel="stylesheet">
 
@@ -162,7 +162,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <!-- tabs -->
 <div class="bottom-margin">
-<nav :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'scroll']" @vue:mounted="scroll">
+<nav class="row horizontal scroll" @vue:mounted="scroll">
 
 
 <a v-for="(C, I) in $S.Categories.filter(C => C.V || C.id == $S.R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == $S.R.tab}, 'vertical padding small-round']" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" :data-tab="C.id">
@@ -521,7 +521,7 @@ this.$S.mounted();
 }).mount("#app") 
 </script>
 
-<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11/dist/cdn/beer.min.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.20/dist/cdn/beer.min.js"></script>
 
 </body>
 
