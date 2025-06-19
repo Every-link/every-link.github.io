@@ -199,18 +199,18 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </div>
 
 <div class="grid">
-<article class="s12 m6 l4 small-round" v-for="(Site, I) in sites || []">
+<article class="s12 m6 l4 small-round" v-for="(S, I) in sites || []">
 
 <div class="row">
-<a class="row max" :href="'https://' + Site.L.b + (Site.L.p ? Site.L.p + $S.R.encodedQuery : '') + (Site.L.s ? Site.L.s : '') + (Site.L.p || Site.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
+<a class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') + (S.L.p || S.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
 
-<img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (Site.I ? Site.I : Site.L.b)" alt="icon" loading="lazy">
+<img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
 
 <div class="max">
-<h5 v-text="Site.N"></h5>
+<h5 v-text="S.N"></h5>
 <p class="wrap" style="word-break: break-all">
-<span v-text="'https://' + Site.L.b + (Site.L.p ? Site.L.p + $S.R.query : '') + (Site.L.s ? Site.L.s : '')" class="link"></span>
-<i v-if="!Site.L.p" class="red-text">search_off</i>
+<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
+<i v-if="!S.L.p" class="red-text">search_off</i>
 </p>
 
 </div>
@@ -221,71 +221,71 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <menu :id="'sites-menu-' + I" class="left no-wrap">
 
-<li v-if="Site.L.p">
-<a class="row" :href="'https://' + Site.L.b + '?' + $S.R.ref" rel="nofollow" target="_blank">
+<li v-if="S.L.p">
+<a class="row" :href="'https://' + S.L.b + '?' + $S.R.ref" rel="nofollow" target="_blank">
 <i class="green-text">home_app_logo</i>
 <span>Homepage</span>
 </a>
 </li>
-<li v-if="Site.L.x != false">
-<a class="row" :href="'https://' + $S.engine.U + 'site:' + Site.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<li v-if="S.L.x != false">
+<a class="row" :href="'https://' + $S.engine.U + 'site:' + S.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
 <span v-text="$S.engine.N + ' Search'"></span>
 </a>
 </li>
-<li v-if="Site.DL !== undefined && $S.Device.type == 'mobile'">
-<a class="row" :href="Site.DL.b + (Site.DL.p ? Site.DL.p + $S.R.encodedQuery : '') + (Site.DL.s ? Site.DL.s : '')" rel="nofollow">
+<li v-if="S.DL !== undefined && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
+<a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + $S.R.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i>
-<span v-text="Site.N + ' App'"></span>
+<span v-text="S.N + ' App'"></span>
 </a>
 </li>
-<li v-if="Site.A !== undefined && $S.Device.os == 'android'">
-<a class="row" :href="'market://details?id=' + Site.A.a" rel="nofollow">
+<li v-if="S.A !== undefined && $S.Device.os == 'android'">
+<a class="row" :href="'market://details?id=' + S.A.a" rel="nofollow">
 <i>system_update</i>
 <span>Download App</span>
 </a>
 </li>
-<li v-if="Site.A !== undefined && $S.Device.os == 'ios'">
-<a class="row" :href="'itms-apps://itunes.apple.com/app/' + Site.A.i" rel="nofollow">
+<li v-if="S.A !== undefined && $S.Device.os == 'ios'">
+<a class="row" :href="'itms-apps://itunes.apple.com/app/' + S.A.i" rel="nofollow">
 <i>system_update</i>
 <span>Download App</span>
 </a>
 </li>
 
-<div v-show="Site.alt" class="divider"></div>
+<div v-show="S.alt" class="divider"></div>
 
-<li v-for="(site, i) in Site.alt || []" :data-ui="'#menu-' + site.L.p">
+<li v-for="(s, i) in S.alt || []" :data-ui="'#menu-' + S.L.p">
 <div class="left-padding right-padding row">
-<img class="tiny square" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (site.I ? site.I : site.L.b)" alt="icon" loading="lazy">
-<span v-text="site.N"></span>
+<img class="tiny square" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.I ? s.I : s.L.b)" alt="icon" loading="lazy">
+<span v-text="s.N"></span>
 <i>arrow_drop_down</i>
 </div>
 
-<menu :id="'menu-' + site.L.p" class="left no-wrap">
-<li v-if="site.L.b">
-<a class="row" :href="'https://' + site.L.b + (site.L.p ? site.L.p + $S.R.encodedQuery : '') + (site.L.s ? site.L.s : '') + (site.L.p || site.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
-<i class="green-text" v-text="site.L.p ? 'pageview' : 'home_app_logo'"></i>
-<span v-text="site.N"></span>
+<menu :id="'menu-' + s.L.p" class="left no-wrap">
+<li v-if="s.L.b">
+<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') + (s.L.p || s.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
+<i class="green-text" v-text="s.L.p ? 'pageview' : 'home_app_logo'"></i>
+<span v-text="s.N"></span>
 </a>
 </li>
-<li v-if="site.L.x != false">
-<a class="row" :href="'https://' + $S.engine.U + 'site:' + site.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<li v-if="s.L.x != false">
+<a class="row" :href="'https://' + $S.engine.U + 'site:' + s.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
 <span v-text="$S.engine.N + ' Search'"></span>
 </a>
 </li>
-<li v-if="site.DL !== undefined && $S.Device.type == 'mobile'">
-<a class="row" :href="site.DL.b + (site.DL.p ? site.DL.p + $S.R.encodedQuery : '') + (site.DL.s ? site.DL.s : '')" rel="nofollow">
+<li v-if="s.DL !== undefined && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
+<a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + $S.R.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i><span>Open App</span>
 </a>
 </li>
-<li v-if="site.A !== undefined && $S.Device.os == 'android'">
-<a class="row" :href="'market://details?id=' + site.A.a" rel="nofollow">
+<li v-if="s.A !== undefined && $S.Device.os == 'android'">
+<a class="row" :href="'market://details?id=' + s.A.a" rel="nofollow">
 <i>system_update</i><span>Download App</span>
 </a>
 </li>
-<li v-if="site.A !== undefined && $S.Device.os == 'ios'">
-<a class="row" :href="'itms-apps://itunes.apple.com/app/' + site.A.i" rel="nofollow">
+<li v-if="s.A !== undefined && $S.Device.os == 'ios'">
+<a class="row" :href="'itms-apps://itunes.apple.com/app/' + s.A.i" rel="nofollow">
 <i>system_update</i><span>Download App</span>
 </a>
 </li>
