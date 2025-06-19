@@ -212,6 +212,9 @@ $template: `
 drawer() {return {
 
 $template: `
+<div class="overlay small-blur"></div>
+
+<dialog id="drawer" class="left scroll">
 
 <header class="fixed">
 <nav>
@@ -235,6 +238,7 @@ $template: `
 
 
 </ul>
+</dialog>
 
 
 `}},
@@ -326,7 +330,7 @@ $template: `
 <div class="overlay small-blur"></div>
 <dialog id="reset">
   <h5 class="small">Reset your preferences </h5>
-  <p>this will reset heddin categories , Preferred Search engine, and delete your custom Links as well.</p>
+  <p>this will reset hidden categories , Preferred Search engine, and delete your custom Links as well.</p>
   <nav class="right-align no-space">
     <button class="transparent link" data-ui="#reset">Cancel</button>
     <button class="transparent link" @click="reset()">Confirm</button>

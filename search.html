@@ -123,8 +123,8 @@
 <link href="/res/css/style.css" rel="stylesheet">
 
 <!--
-<script src="https://cdn.jsdelivr.net/npm/petite-vue/dist/petite-vue.iife.js"></script>
-
+https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js
+https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 -->
 
 <script src="/res/js/petite-vue.js"></script>
@@ -449,16 +449,14 @@
 
 
 <div v-scope="$S.component.share()" class="large-padding large-margin"></div>
+
 </main>
 
 
-<div class="overlay small-blur"></div>
-<dialog id="drawer" class="left scroll" v-scope="$S.component.drawer()">
-</dialog>
 
-<div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" v-scope="$S.component.settings()">
-</dialog>
+
+<div v-scope="$S.component.drawer()"></div>
+<div v-scope="$S.component.settings()"></div>
 
 </div><!-- /app -->
 
