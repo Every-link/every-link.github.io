@@ -1,8 +1,0 @@
-const store = PetiteVue.reactive({
-
-
-
-
-
-
-});

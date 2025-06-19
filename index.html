@@ -119,26 +119,14 @@
 <!--[/dns-prefetch]__________________________________________________-->
 
 <link href="https://cdn.jsdelivr.net/npm/beercss@3.11/dist/cdn/beer.min.css" rel="stylesheet">
+
 <link href="/res/css/style.css" rel="stylesheet">
 
 <!--
 <script src="https://cdn.jsdelivr.net/npm/petite-vue/dist/petite-vue.iife.js"></script>
-
-<script src="/res/js/script.js"></script>
-
 -->
 
 <script src="/res/js/petite-vue.js"></script>
-
-<script type="application/ld+json">
-{
-"@context": "https://schema.org",
-"@type": "WebPage",
-"name": "Google Search Tool",
-"description": "Search inside websites using Google with our tool",
-"keywords": ["Google search", "website search", "search engine tool"]
-}
-</script>
 
 </head>
 
@@ -147,9 +135,9 @@
 
 <body class="dark">
 
-<div id="app" v-scope v-cloak v-effect="watch()" @vue:mounted="mounted">
+<div id="app" v-scope v-cloak @vue:mounted="mounted">
 
-<nav class="top primary" v-scope="component.navTop()"></nav>
+<nav class="top primary" v-scope="$S.component.navTop()"></nav>
 
 <main class="responsive">
 
@@ -165,7 +153,7 @@
 <form action="/search.html" target="_self" method="GET">
 <div class="padding">
 
-<input type="hidden" name="tab" :value="R.tab">
+<input type="hidden" name="tab" :value="$S.R.tab">
 
 <div class="grid">
 
@@ -180,10 +168,10 @@
 <div class="s12 m3 l2">
 <div class="field prefix border label">
 <i class="front">list</i>
-<select v-model="R.tab" required>
-<option v-for="C in categories.filter(C => C.v)" :key="C.id" v-text="C.n" :value="C.id"></option>
-<option v-if="linksVisibility" value="links">My List</option>
-<option v-if="advancedVisibility" value="advanced">Advanced Search</option>
+<select v-model="$S.R.tab" required>
+<option v-for="C in $S.Categories.filter(C => C.V)" :key="C.id" v-text="C.N" :value="C.id"></option>
+<option v-show="$S.linksVisibility" value="links">My List</option>
+<option v-show="$S.advancedVisibility" value="advanced">Advanced Search</option>
 </select>
 <label>Category</label>
 </div>
@@ -204,17 +192,49 @@
 </main>
 
 <div class="overlay small-blur"></div>
-<dialog id="drawer" class="left scroll" v-scope="component.drawer()"></dialog>
+<dialog id="drawer" class="left scroll" v-scope="$S.component.drawer()"></dialog>
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" v-scope="component.settings()"></dialog>
+<dialog id="settings" class="right scroll" v-scope="$S.component.settings()"></dialog>
 
- <div v-scope="component.share()"></div>
+ <div v-scope="$S.component.share()"></div>
  
 <div class="large-space"></div>
 </div><!-- /app -->
 
+
+
+
+
 <script src="/res/js/script.js"></script>
+<script>
+const App = PetiteVue.createApp({
+/*________________________________________________________________*/
+
+$delimiters: ['{{', '}}'],
+$S : store,
+
+/*________________________________________________________________*/
+
+
+
+
+
+
+
+
+
+/*________________________________________________________________*/
+
+mounted() {
+this.$S.mounted();
+
+
+
+},
+/*________________________________________________________________*/
+}).mount("#app") 
+</script>
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11/dist/cdn/beer.min.js"></script>
 

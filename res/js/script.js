@@ -1,8 +1,6 @@
-const App = PetiteVue.createApp({
+const store = PetiteVue.reactive({
 /*________________________________________________________________*/
 
-$delimiters: ['{{', '}}'],
-// S : store,
 /*________________________________________________________________*/
 
 W: {
@@ -10,9 +8,9 @@ W: {
 title: "Every-Link",
 
 menu: [
-{ name: "Homepage", icon: "home", device: "s m l", url: "/index.html", },
-{ name: "search", icon: "search", device: "s m l", url: "/search.html", },
-{ name: "tmp", icon: "link", device: "s m l", url: "/TMP.html", },
+{ N: "Homepage", I: "home", D: "s m l", U: "/index.html", },
+{ N: "search", I: "search", D: "s m l", U: "/search.html", },
+{ N: "tmp", I: "link", D: "s m l", U: "/TMP.html", },
 ],
 
 
@@ -44,9 +42,10 @@ get encodedQuery() { return encodeURIComponent(this.query) },
 
 
 }, //router
+
 /*________________________________________________________________*/
 
-device: {
+Device: {
 
 get display() {
 if (window.innerWidth < 601) { return "s" }
@@ -94,91 +93,60 @@ else { return "unknown" }
 
 }, //device
 
-
 /*________________________________________________________________*/
-categories: JSON.parse(localStorage.getItem('categories')) || [
-{ n: "Web", id: "web", i: "globe", v: true },
-{ n: "AI", id: "ai", i: "robot_2", v: true },
-{ n: "Information", id: "information", i: "description", v: false },
-{ n: "News", id: "news", i: "newspaper", v: false },
-{ n: "Maps", id: "maps", i: "location_on", v: false },
-{ n: "Translation", id: "translation", i: "translate", v: false },
-{ n: "Sports", id: "sports", i: "sports_soccer", v: false },
-{ n: "Social Media", id: "socialMedia", i: "groups", v: false },
-{ n: "Jobs", id: "jobs", i: "badge", v: false },
-{ n: "Images", id: "images", i: "image", v: false },
-{ n: "Videos", id: "videos", i: "smart_display", v: false },
-{ n: "Music", id: "music", i: "library_music", v: false },
-{ n: "Movies & Shows", id: "moviesShows", i: "movie", v: false },
-{ n: "Books", id: "books", i: "menu_book", v: false },
-{ n: "Shopping", id: "shopping", i: "shopping_cart", v: false },
-{ n: "Hotels", id: "hotels", i: "apartment", v: false },
-{ n: "Flights", id: "flights", i: "flight", v: false },
-{ n: "Education", id: "education", i: "school", v: false },
-{ n: "Contacts", id: "contacts", i: "contacts", v: false },
-{ n: "Apps", id: "apps", i: "apps", v: false },
-{ n: "Developers", id: "developers", i: "terminal", v: false },
-{ n: "torrent", id: "torrent", i: "dns", v: false },
-{ n: "Others", id: "others", i: "more_horiz", v: false },
+
+Categories: JSON.parse(localStorage.getItem('categories')) || [
+{ N: "Web", id: "web", I: "globe", V: true },
+{ N: "AI", id: "ai", I: "robot_2", V: true },
+{ N: "Information", id: "information", I: "description", V: false },
+{ N: "News", id: "news", I: "newspaper", V: false },
+{ N: "Maps", id: "maps", I: "location_on", V: false },
+{ N: "Translation", id: "translation", I: "translate", V: false },
+{ N: "Sports", id: "sports", I: "sports_soccer", V: false },
+{ N: "Social Media", id: "socialMedia", I: "groups", V: false },
+{ N: "Jobs", id: "jobs", I: "badge", V: false },
+{ N: "Images", id: "images", I: "image", V: false },
+{ N: "Videos", id: "videos", I: "smart_display", V: false },
+{ N: "Music", id: "music", I: "library_music", V: false },
+{ N: "Movies & Shows", id: "moviesShows", I: "movie", V: false },
+{ N: "Books", id: "books", I: "menu_book", V: false },
+{ N: "Shopping", id: "shopping", I: "shopping_cart", V: false },
+{ N: "Hotels", id: "hotels", I: "apartment", V: false },
+{ N: "Flights", id: "flights", I: "flight", V: false },
+{ N: "Education", id: "education", I: "school", V: false },
+{ N: "Contacts", id: "contacts", I: "contacts", V: false },
+{ N: "Apps", id: "apps", I: "apps", V: false },
+{ N: "Developers", id: "developers", I: "terminal", V: false },
+{ N: "torrent", id: "torrent", I: "dns", V: false },
+{ N: "Others", id: "others", I: "more_horiz", V: false },
 ],
-/*________________________________________________________________*/
-
-//tabs
-
-scroll() {
-if (this.R.query) { document.querySelector(`[data-tab="${this.R.tab}"]`).scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' }); }
-},
 
 /*________________________________________________________________*/
 
-//content
-sites: null,
-
-async load() {
-if (this.R.tab != 'advanced' && this.R.tab != 'links') {
-try { this.sites ||= await fetch(`/res/json/${this.R.tab}.json`).then(data => data.json()) } catch (error) { this.sites = null }
-}
-},
-/*________________________________________________________________*/
-//advanced
-
+//visibility
 advancedVisibility: JSON.parse(localStorage.getItem("advanced") || "false"),
 
-engines: [
-{ n: "Google", u: "google.com/search?q=" },
-{ n: "Bing", u: "bing.com/search?q=" },
-{ n: "Yandex", u: "yandex.com/search?text=" },
+linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
+/*________________________________________________________________*/
+
+//advanced
+Engines: [
+{ N: "Google", U: "google.com/search?q=" },
+{ N: "Bing", U: "bing.com/search?q=" },
+{ N: "Yandex", U: "yandex.com/search?text=" },
 ],
-engine: JSON.parse(localStorage.getItem("engine")) || { n: "Google", u: "google.com/search?q=" },
+
+engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", U: "google.com/search?q=" },
+
 select() { localStorage.setItem('engine', JSON.stringify(this.engine)) },
 
-site: "",
-exSearch() {
-window.open(`https://${this.engine.url}site:${this.site}+"${this.R.encodedQuery}"`, '_blank')
-},
 
 /*________________________________________________________________*/
-//links
-
-linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
 
 
-links: JSON.parse(localStorage.getItem('links')) || [],
-newLink: { n: "", b: "", p: "" },
-saveLinks() { localStorage.setItem('links', JSON.stringify(this.links)) },
-removeLink(index) { this.links.splice(index, 1);
-this.saveLinks() },
 
-addLink() {
-this.links.push({ n: this.newLink.n, b: this.newLink.b, p: this.newLink.p });
-this.newLink.n = '';
-this.newLink.b = '';
-this.newLink.p = '';
-this.saveLinks();
-},
+
 /*________________________________________________________________*/
-
-
 
 component: {
 
@@ -203,7 +171,7 @@ $template: `
 </button>
 
 <div class="max"></div>
-<h5 class="center-align" v-text="W.title"></h5>
+<h5 class="center-align" v-text="$S.W.title"></h5>
 <div class="max"></div>
 
 <button v-show="settings !== false" class="transparent border square" data-ui="#settings">
@@ -226,7 +194,7 @@ await navigator.share({ title: document.title, url: window.location.href })
 
 $template: `
 
-<button class="transparent border primary-border fill small-round margin large fixed bottom right s m" @click="share" v-show="device.type === 'mobile' || device.type === 'tablet'"><i>share</i> </button>
+<button class="transparent border primary-border fill small-round margin large fixed bottom right s m" @click="share" v-show="$S.Device.type === 'mobile' || $S.Device.type === 'tablet'"><i>share</i> </button>
 
 <div class="snackbar error" id="share"> Your browser is not supported</div>
 
@@ -238,7 +206,7 @@ $template: `
 
 <header class="fixed">
 <nav>
-<h6 class="max lin" v-text="W.title"></h6>
+<h6 class="max lin" v-text="$S.W.title"></h6>
 <button class="transparent border link small-round" data-ui="#drawer">
 <span>Close</span> <i>close</i>
 </button>
@@ -249,10 +217,10 @@ $template: `
 
 <ul class="list">
 
-<li v-for="link in W.menu" :class="[{'fill border primary-border': R.path === link.url}, link.device, 'wave', 'small-round']">
-<a :href="link.url + ( R.query ? '?q=' + R.query : '')">
-<i v-text="link.icon"></i>
-<span v-text="link.name"></span>
+<li v-for="L in $S.W.menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.D, 'wave', 'small-round']">
+<a :href="L.U + ( $S.R.query ? '?q=' + $S.R.query : '')">
+<i v-text="L.I"></i>
+<span v-text="L.N"></span>
 </a>
 </li>
 
@@ -262,13 +230,12 @@ $template: `
 
 `}},
 /*________________________________________________________________*/
-
 settings() {return {
 
 visibility(name, status) { localStorage.setItem(name, JSON.stringify(status)) },
 
 categoriesVisibility() {
-localStorage.setItem('categories', JSON.stringify(this.categories))
+localStorage.setItem('categories', JSON.stringify(this.Categories))
 },
 
 $template: `
@@ -284,11 +251,11 @@ $template: `
 
 <ul class="list border">
 
-<li v-for="(cat, i) in categories" :key="cat.id">
-<i v-text="cat.i"></i>
-<h6 class="small max" v-text="cat.n"></h6>
+<li v-for="(C, I) in $S.Categories" :key="C.id">
+<i v-text="C.I"></i>
+<h6 class="small max" v-text="C.N"></h6>
 <label class="switch icon">
-<input v-model="cat.v" type="checkbox" @change="categoriesVisibility()" :disabled="i === 0">
+<input v-model="C.V" type="checkbox" @change="categoriesVisibility()" :disabled="I === 0">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -300,7 +267,7 @@ $template: `
 <div class="wrap">Add more websites</div>
 </div>
 <label class="switch icon">
-<input v-model="linksVisibility" type="checkbox" @change="visibility('linksVisibility', linksVisibility)">
+<input v-model="$S.linksVisibility" type="checkbox" @change="visibility('linksVisibility', $S.linksVisibility)">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -313,7 +280,7 @@ $template: `
 <div class="wrap">Use search engines</div>
 </div>
 <label class="switch icon">
-<input v-model="advancedVisibility" type="checkbox" @change="visibility('advanced', advancedVisibility)">
+<input v-model="$S.advancedVisibility" type="checkbox" @change="visibility('advanced', $S.advancedVisibility)">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -321,8 +288,8 @@ $template: `
 </ul>
 
 <div class="field label suffix border">
-<select v-model="engine" @change="select()">
-<option v-for="e in engines" :key="e.u" :value="e" :selected="engine.u === e.u" v-text="e.n"></option>
+<select v-model="$S.engine" @change="$S.select()">
+<option v-for="E in $S.Engines" :key="E.U" :value="E" :selected="$S.engine.U === E.U" v-text="E.N"></option>
 </select>
 <label>Default Search Engine</label>
 <i>arrow_drop_down</i>
@@ -334,17 +301,21 @@ $template: `
 
 },
 
-
-
-/*________________________________________________________________*/
-watch() {},
 /*________________________________________________________________*/
 mounted() {
+
 
 const theme = JSON.parse(localStorage.getItem('theme')) || "auto";
 if (theme !== "auto") {document.body.className = theme};
 
 
+
+  
 },
+
 /*________________________________________________________________*/
-}).mount("#app")
+
+});
+
+// v-effect="watch()"
+// @vue:mounted="mounted()"
