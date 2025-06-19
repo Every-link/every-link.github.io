@@ -149,6 +149,8 @@
 <p>Never miss a Link Search anything anywhere anytime</p>
 </div>
 
+{{$S.linksVisibility}}
+
 <form action="/search.html" target="_self" method="GET">
 <div class="padding">
 
@@ -169,8 +171,8 @@
 <i class="front">list</i>
 <select v-model="$S.R.tab" required>
 <option v-for="C in $S.Categories.filter(C => C.V)" :key="C.id" v-text="C.N" :value="C.id"></option>
-<option v-show="$S.linksVisibility" value="links">My List</option>
-<option v-show="$S.advancedVisibility" value="advanced">Advanced Search</option>
+<option v-if="$S.linksVisibility" value="links">My List</option>
+<option v-="$S.advancedVisibility == true" value="advanced">Advanced Search</option>
 </select>
 <label>Category</label>
 </div>
@@ -195,9 +197,8 @@
 <dialog id="drawer" class="left scroll" v-scope="$S.component.drawer()">
 </dialog>
 
-<div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" v-scope="$S.component.settings()">
-</dialog>
+
+<div v-scope="$S.component.settings()"></div>
 
 </div><!-- /app -->
 

@@ -170,13 +170,13 @@
 </a>
 
 
-<a data-ui="#advanced" :class="[{'border primary-border fill' : $S.R.tab == 'advanced'}, 'vertical padding small-round']" v-show="$S.advancedVisibility" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery" data-tab="advanced">
+<a data-ui="#advanced" :class="[{'border primary-border fill' : $S.R.tab == 'advanced'}, 'vertical padding small-round']" v-show="$S.advancedVisibility || $S.R.tab == 'advanced'" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery" data-tab="advanced">
 <i>pageview</i>
 <span>Advanced</span>
 </a>
 
 
-<a data-ui="#links" :class="[{'border primary-border fill' : $S.R.tab == 'links'}, 'vertical padding small-round']" v-show="$S.linksVisibility" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
+<a data-ui="#links" :class="[{'border primary-border fill' : $S.R.tab == 'links'}, 'vertical padding small-round']" v-show="$S.linksVisibility || $S.R.tab == 'links'" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
 <i>forms_add_on</i>
 <span>My List</span>
 </a>

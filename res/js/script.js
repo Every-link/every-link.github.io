@@ -127,7 +127,6 @@ Categories: JSON.parse(localStorage.getItem('categories')) || [
 //general
 
 localSet(name, value) {localStorage.setItem(name, JSON.stringify(value))},
-
 localGet(name, fall = null){
 if(name) {return JSON.parse(localStorage.getItem(name))} else {return fall}
 },
@@ -242,7 +241,15 @@ $template: `
 /*________________________________________________________________*/
 settings() {return {
 
+reset(){
+localStorage.clear();
+window.location.reload();
+},
+
 $template: `
+
+<div class="overlay small-blur"></div>
+<dialog id="settings" class="right scroll" >
 
 <header class="fixed">
 <nav>
@@ -257,12 +264,14 @@ $template: `
 
 <li v-for="(C, I) in $S.Categories" :key="C.id">
 <i v-text="C.I"></i>
-<h6 class="small max" v-text="C.N"></h6>
+<h6 class="small" v-text="C.N"></h6>
+<div class="max"></div>
 <label class="switch icon">
 <input v-model="C.V" type="checkbox" @change="$S.localSet('categories', $S.Categories)" :disabled="I === 0">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
+
 
 <li>
 <i>forms_add_on</i>
@@ -297,6 +306,33 @@ $template: `
 </select>
 <label>Default Search Engine</label>
 <i>arrow_drop_down</i>
+</div>
+
+
+
+
+<div class="margin">
+
+<nav class="center-align">
+<button class="error" data-ui="#reset">
+<i>refresh</i>
+<span>reset</span>
+</button>
+</nav>
+
+</dialog>
+
+
+<div class="overlay small-blur"></div>
+<dialog id="reset">
+  <h5 class="small">Reset your preferences </h5>
+  <p>this will reset heddin categories , Preferred Search engine, and delete your custom Links as well.</p>
+  <nav class="right-align no-space">
+    <button class="transparent link" data-ui="#reset">Cancel</button>
+    <button class="transparent link" @click="reset()">Confirm</button>
+  </nav>
+</dialog>
+
 </div>
 
 
