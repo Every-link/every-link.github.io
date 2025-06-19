@@ -134,8 +134,7 @@
 
 
 <body class="dark">
-
-<div id="app" v-scope v-cloak @vue:mounted="mounted">
+<div id="app" v-scope v-cloak @vue:mounted="mounted" class="bottom-padding">
 
 <nav class="top primary" v-scope="$S.component.navTop()"></nav>
 
@@ -189,17 +188,17 @@
 </div>
 </form>
 
+<div v-scope="$S.component.share()" class="large-padding large-margin"></div>
 </main>
 
 <div class="overlay small-blur"></div>
-<dialog id="drawer" class="left scroll" v-scope="$S.component.drawer()"></dialog>
+<dialog id="drawer" class="left scroll" v-scope="$S.component.drawer()">
+</dialog>
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" v-scope="$S.component.settings()"></dialog>
+<dialog id="settings" class="right scroll" v-scope="$S.component.settings()">
+</dialog>
 
- <div v-scope="$S.component.share()"></div>
- 
-<div class="large-space"></div>
 </div><!-- /app -->
 
 
@@ -239,5 +238,4 @@ this.$S.mounted();
 <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11/dist/cdn/beer.min.js"></script>
 
 </body>
-
 </html>

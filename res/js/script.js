@@ -1,6 +1,7 @@
 const store = PetiteVue.reactive({
 /*________________________________________________________________*/
 
+
 /*________________________________________________________________*/
 
 W: {
@@ -123,6 +124,16 @@ Categories: JSON.parse(localStorage.getItem('categories')) || [
 
 /*________________________________________________________________*/
 
+//general
+
+localSet(name, value) {localStorage.setItem(name, JSON.stringify(value))},
+
+localGet(name, fall = null){
+if(name) {return JSON.parse(localStorage.getItem(name))} else {return fall}
+},
+
+/*________________________________________________________________*/
+
 //visibility
 advancedVisibility: JSON.parse(localStorage.getItem("advanced") || "false"),
 
@@ -138,8 +149,6 @@ Engines: [
 
 engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", U: "google.com/search?q=" },
 
-select() { localStorage.setItem('engine', JSON.stringify(this.engine)) },
-
 
 /*________________________________________________________________*/
 
@@ -147,6 +156,7 @@ select() { localStorage.setItem('engine', JSON.stringify(this.engine)) },
 
 
 /*________________________________________________________________*/
+
 
 component: {
 
@@ -158,7 +168,7 @@ changeTheme() {
 if (this.theme == "auto") { this.theme = "dark" }
 else if (this.theme === "dark") { this.theme = "light" }
 else if (this.theme === "light") { this.theme = "dark" };
-localStorage.setItem('theme', JSON.stringify(this.theme))
+this.$S.localSet("theme", this.theme);
 if (this.theme != "auto") { document.body.className = this.theme }
 },
 
@@ -232,12 +242,6 @@ $template: `
 /*________________________________________________________________*/
 settings() {return {
 
-visibility(name, status) { localStorage.setItem(name, JSON.stringify(status)) },
-
-categoriesVisibility() {
-localStorage.setItem('categories', JSON.stringify(this.Categories))
-},
-
 $template: `
 
 <header class="fixed">
@@ -255,7 +259,7 @@ $template: `
 <i v-text="C.I"></i>
 <h6 class="small max" v-text="C.N"></h6>
 <label class="switch icon">
-<input v-model="C.V" type="checkbox" @change="categoriesVisibility()" :disabled="I === 0">
+<input v-model="C.V" type="checkbox" @change="$S.localSet('categories', $S.Categories)" :disabled="I === 0">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -267,7 +271,7 @@ $template: `
 <div class="wrap">Add more websites</div>
 </div>
 <label class="switch icon">
-<input v-model="$S.linksVisibility" type="checkbox" @change="visibility('linksVisibility', $S.linksVisibility)">
+<input v-model="$S.linksVisibility" type="checkbox" @change="$S.localSet('linksVisibility', $S.linksVisibility)">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -280,7 +284,7 @@ $template: `
 <div class="wrap">Use search engines</div>
 </div>
 <label class="switch icon">
-<input v-model="$S.advancedVisibility" type="checkbox" @change="visibility('advanced', $S.advancedVisibility)">
+<input v-model="$S.advancedVisibility" type="checkbox" @change="$S.localSet('advanced', $S.advancedVisibility)">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -288,7 +292,7 @@ $template: `
 </ul>
 
 <div class="field label suffix border">
-<select v-model="$S.engine" @change="$S.select()">
+<select v-model="$S.engine" @change="$S.localSet('engine', $S.engine)">
 <option v-for="E in $S.Engines" :key="E.U" :value="E" :selected="$S.engine.U === E.U" v-text="E.N"></option>
 </select>
 <label>Default Search Engine</label>

@@ -132,12 +132,7 @@
 </head>
 
 
-
-
-
 <body class="dark">
-
-
 <div id="app" v-scope v-cloak @vue:mounted="mounted">
 
 <nav class="top primary" v-scope="$S.component.navTop()"></nav>
@@ -146,7 +141,7 @@
 
 
 <!-- form -->
-<div>
+<div class="bottom-margin">
 <form v-else-if="$S.R.q" class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
 <nav :class="$S.Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
 
@@ -166,7 +161,7 @@
 
 
 <!-- tabs -->
-<div>
+<div class="bottom-margin">
 <nav :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'scroll']" @vue:mounted="scroll">
 
 <a v-for="(C, I) in $S.Categories.filter(C => C.V || C.id == $S.R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == $S.R.tab}, 'vertical padding small-round']" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" :data-tab="C.id">
@@ -320,7 +315,7 @@
 </div>
 
 <div class="field label suffix border large s12 m4 l4">
-<select v-model="$S.engine" @change="$S.select()">
+<select v-model="$S.engine" @change="$S.localSet('engine', $S.engine)">
 <option v-for="E in $S.Engines" :key="E.U" :value="E" :selected="$S.engine.U === E.U" v-text="E.N"></option>
 </select>
 
@@ -451,18 +446,19 @@
 
 </div><!-- links -->
 
+
+
+<div v-scope="$S.component.share()" class="large-padding large-margin"></div>
 </main>
 
 
 <div class="overlay small-blur"></div>
-<dialog id="drawer" class="left scroll" v-scope="$S.component.drawer()"></dialog>
+<dialog id="drawer" class="left scroll" v-scope="$S.component.drawer()">
+</dialog>
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll" v-scope="$S.component.settings()"></dialog>
-
-<div v-scope="$S.component.share()"></div>
-
-<div class="large-space"></div>
+<dialog id="settings" class="right scroll" v-scope="$S.component.settings()">
+</dialog>
 
 </div><!-- /app -->
 
@@ -506,7 +502,7 @@ window.open(`https://${this.$S.engine.U}site:${this.site}+"${this.$S.R.encodedQu
 //links
 links: JSON.parse(localStorage.getItem('links')) || [],
 newLink: { N: "", B: "", P: "" },
-saveLinks() { localStorage.setItem('links', JSON.stringify(this.links)) },
+saveLinks() { this.$S.localSet("links", this.links) },
 removeLink(index) { this.links.splice(index, 1); this.saveLinks() },
 addLink() {
 this.links.push({ N: this.newLink.N, B: this.newLink.B, P: this.newLink.P });
