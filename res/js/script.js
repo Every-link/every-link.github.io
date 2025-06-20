@@ -162,13 +162,12 @@ component: {
 /*________________________________________________________________*/
 navTop(s) {return {
 
-theme: JSON.parse(localStorage.getItem('theme')) || "auto",
+theme: JSON.parse(localStorage.getItem('theme')) || "light",
 changeTheme() {
-if (this.theme == "auto") { this.theme = "dark" }
-else if (this.theme === "dark") { this.theme = "light" }
-else if (this.theme === "light") { this.theme = "dark" };
+if (this.theme === "light") {this.theme = "dark"}
+else if (this.theme === "dark") {this.theme = "light"}
+document.body.className = this.theme; 
 this.$S.localSet("theme", this.theme);
-if (this.theme != "auto") { document.body.className = this.theme }
 },
 
 settings: s,
@@ -189,7 +188,7 @@ $template: `
 
 
 <button class="transparent border square" @click="changeTheme()">
-<i v-text="theme === 'auto' ? 'night_sight_auto' : theme + '_mode'"></i>
+<i v-text="theme + '_mode'"></i>
 </button>
 
 `}},
@@ -388,9 +387,8 @@ $template: `
 /*________________________________________________________________*/
 mounted() {
 
-
-const theme = JSON.parse(localStorage.getItem('theme')) || "auto";
-if (theme !== "auto") {document.body.className = theme};
+const theme = JSON.parse(localStorage.getItem('theme')) || "light";
+document.body.className = theme;
 
 
 
