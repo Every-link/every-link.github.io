@@ -386,8 +386,8 @@ $template: `
 /*________________________________________________________________*/
 mounted() {
 
-const theme = JSON.parse(localStorage.getItem('theme')) || "light";
-document.body.className = theme;
+const theme = JSON.parse(localStorage.getItem('theme')) || null;
+if (theme) {document.body.className = theme};
 
 
 
