@@ -308,12 +308,12 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <div v-if="$S.R.tab === 'advanced'" class="page left active">
 
 <form class="padding" method="GET" :action="'https://' + $S.X.engine.B" target="_blank">
-<input type="text" :name="$S.X.engine.P" :value="'site:' + $S.X.site + ' &quot;' + $S.R.q + '&quot;'" hidden>
+<input type="text" :name="$S.X.engine.P" :value="'site:' + site + ' &quot;' + $S.R.q + '&quot;'" hidden>
 
 <div class="grid">
 
 <div class="field label suffix border large s12 m8 l8">
-<input type="text" v-model="$S.X.site" required>
+<input type="text" v-model="site" required>
 <label>website.com</label>
 <i>link</i>
 </div>
@@ -348,13 +348,13 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <article class="s12 m6 l4 small-round padding" v-for="(L, I) in links">
 
 <div class="row">
-<a class="row max" :href="'https://' + (L.p ? L.b + L.p + $S.R.encodedQuery : $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;')" rel="nofollow" target="_blank">
+<a class="row max" :href="'https://' + (L.P ? L.B + L.P + $S.R.encodedQuery : L.B )" rel="nofollow" target="_blank">
 
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + L.B" alt="icon" loading="lazy">
 
 <div class="max">
 <h5 class="small" v-text="L.N"></h5>
-<p v-text="'https://' + (L.B ? L.B + L.P + $S.R.encodedQuery : $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;')" class="link wrap" style="word-break: break-all"></p>
+<p v-text="'https://' + (L.P ? L.B + L.P + $S.R.encodedQuery : L.B)" class="link wrap" style="word-break: break-all"></p>
 </div>
 </a>
 
@@ -368,14 +368,14 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <menu :id="'links-menu-' + I" class="left no-wrap">
 
-<li>
+<li v-if="L.P">
 <a class="row" :href="'https://' + L.B + '?' + $S.R.ref" rel="nofollow" target="_blank">
 <i class="green-text">home_app_logo</i>
 <span>Homepage</span>
 </a>
 </li>
 
-<li v-if="L.p">
+<li>
 <a class="row" :href="'https://' + $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
 <span v-text="$S.X.engine.N + ' Search'"></span>
@@ -489,6 +489,11 @@ try { this.sites ||= await fetch(`/res/json/${this.$S.R.tab}.json`).then(data =>
 
 /*________________________________________________________________*/
 
+//advanced
+site: null,
+
+/*________________________________________________________________*/
+
 //links
 links: JSON.parse(localStorage.getItem('links')) || [],
 newLink: { N: "", B: "", P: "" },
@@ -496,7 +501,9 @@ saveLinks() { this.$S.localSet("links", this.links) },
 removeLink(index) { this.links.splice(index, 1); this.saveLinks() },
 addLink() {
 this.links.push({ N: this.newLink.N, B: this.newLink.B, P: this.newLink.P });
-this.newLink.N = ''; this.newLink.B = ''; this.newLink.P = '';
+this.newLink.N = ''; 
+this.newLink.B = ''; 
+this.newLink.P = '';
 this.saveLinks();
 },
 

@@ -145,7 +145,6 @@ engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", B: "google.
 
 get url(){ return `${this.engine.B}?${this.engine.P}=` },
 
-site: null,
 
 },
 
@@ -214,7 +213,7 @@ drawer() {return {
 menu: [
 { N: "Homepage", I: "home", C: "s m l", U: "/index.html", },
 { N: "search", I: "search", C: "s m l", U: "/search.html", },
-{ N: "tmp", I: "link", C: "s m l", U: "/page.html", },
+{ N: "page", I: "link", C: "s m l", U: "/page.html", },
 { N: "tmp", I: "link", C: "s m l", U: "/TMP.html", },
 ],
 
