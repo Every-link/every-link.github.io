@@ -3,6 +3,7 @@ const store = PetiteVue.reactive({
 
 title: "Every-Link",
 description: "",
+
 /*________________________________________________________________*/
 
 R: {
@@ -14,6 +15,7 @@ path: window.location.pathname,
 url: window.location.origin + window.location.pathname, // nor params
 currentUrl: window.location.href,
 //url
+
 /*________________________*/
 get separator() { return this.currentUrl.includes('?') ? '&' : '?' },
 get ref() { return "ref=" + this.name },
@@ -128,19 +130,24 @@ navigator.clipboard.writeText(text)
 
 //visibility
 advancedVisibility: JSON.parse(localStorage.getItem("advanced") || "false"),
-
 linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
 /*________________________________________________________________*/
 
-//advanced
+X: {
+
 Engines: [
-{ N: "Google", U: "google.com/search?q=" },
-{ N: "Bing", U: "bing.com/search?q=" },
-{ N: "Yandex", U: "yandex.com/search?text=" },
+  { N: "Google", B: "google.com/search", P: "q" },
+  { N: "Bing", B: "bing.com/search", P: "q" },
+  { N: "Yandex", B: "yandex.com/search/", P: "text" },
 ],
 
-engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", U: "google.com/search?q=" },
+engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", B: "google.com/search", P: "q" },
 
+get url(){ return `${this.engine.B}?${this.engine.P}=` },
+
+site: null,
+
+},
 
 /*________________________________________________________________*/
 
@@ -208,6 +215,7 @@ drawer() {return {
 menu: [
 { N: "Homepage", I: "home", C: "s m l", U: "/index.html", },
 { N: "search", I: "search", C: "s m l", U: "/search.html", },
+{ N: "tmp", I: "link", C: "s m l", U: "/page.html", },
 { N: "tmp", I: "link", C: "s m l", U: "/TMP.html", },
 ],
 
@@ -339,8 +347,8 @@ $template: `
 
 <div class="margin">
 <div class="field label suffix border">
-<select v-model="$S.engine" @change="$S.localSet('engine', $S.engine)">
-<option v-for="E in $S.Engines" :key="E.U" :value="E" :selected="$S.engine.U === E.U" v-text="E.N"></option>
+<select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
+<option v-for="(E, I) in $S.X.Engines" :key="E.B" :value="E" :selected="$S.X.engine.B === E.B" v-text="E.N"></option>
 </select>
 <label>Default Search Engine</label>
 <i>arrow_drop_down</i>

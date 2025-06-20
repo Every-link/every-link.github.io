@@ -142,6 +142,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <!-- form -->
 <div class="vertical-padding">
+  
 <form v-else-if="$S.R.q" class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
 <nav :class="$S.Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
 
@@ -156,6 +157,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 </nav>
 </form>
+
 </div><!-- form -->
 
 
@@ -227,9 +229,9 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </a>
 </li>
 <li v-if="S.L.x != false">
-<a class="row" :href="'https://' + $S.engine.U + 'site:' + S.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + $S.X.url + 'site:' + S.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
-<span v-text="$S.engine.N + ' Search'"></span>
+<span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
 <li v-if="S.DL !== undefined && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
@@ -268,9 +270,9 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </a>
 </li>
 <li v-if="s.L.x != false">
-<a class="row" :href="'https://' + $S.engine.U + 'site:' + s.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + $S.X.url + 'site:' + s.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
-<span v-text="$S.engine.N + ' Search'"></span>
+<span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
 <li v-if="s.DL !== undefined && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
@@ -304,18 +306,20 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <!-- advanced -->
 <div v-if="$S.R.tab === 'advanced'" class="page left active">
 
-<form class="padding" @submit.prevent="exSearch()">
+<form class="padding" method="GET" :action="'https://' + $S.X.engine.B" target="_blank">
+<input type="text" :name="$S.X.engine.P" :value="'site:' + $S.X.site + ' &quot;' + $S.R.q + '&quot;'" hidden>
 
 <div class="grid">
 
 <div class="field label suffix border large s12 m8 l8">
-<input type="text" v-model="site" required>
-<label>website.com</label> <i>link</i>
+<input type="text" v-model="$S.X.site" required>
+<label>website.com</label>
+<i>link</i>
 </div>
 
 <div class="field label suffix border large s12 m4 l4">
-<select v-model="$S.engine" @change="$S.localSet('engine', $S.engine)">
-<option v-for="E in $S.Engines" :key="E.U" :value="E" :selected="$S.engine.U === E.U" v-text="E.N"></option>
+<select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
+<option v-for="E in $S.X.Engines" :key="E.B" :value="E" v-text="E.N"></option>
 </select>
 
 <label>Select Search Engine</label>
@@ -343,13 +347,13 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <article class="s12 m6 l4 small-round padding" v-for="(L, I) in links">
 
 <div class="row">
-<a class="row max" :href="'https://' + (L.p ? L.b + L.p + $S.R.encodedQuery : $S.engine.U + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;')" rel="nofollow" target="_blank">
+<a class="row max" :href="'https://' + (L.p ? L.b + L.p + $S.R.encodedQuery : $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;')" rel="nofollow" target="_blank">
 
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + L.B" alt="icon" loading="lazy">
 
 <div class="max">
 <h5 class="small" v-text="L.N"></h5>
-<p v-text="'https://' + (L.B ? L.B + L.P + $S.R.encodedQuery : $S.engine.U + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;')" class="link wrap" style="word-break: break-all"></p>
+<p v-text="'https://' + (L.B ? L.B + L.P + $S.R.encodedQuery : $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;')" class="link wrap" style="word-break: break-all"></p>
 </div>
 </a>
 
@@ -371,9 +375,9 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </li>
 
 <li v-if="L.p">
-<a class="row" :href="'https://' + $S.engine.U + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
-<span v-text="$S.engine.N + ' Search'"></span>
+<span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
 
@@ -480,13 +484,6 @@ sites: null,
 
 async load() {
 try { this.sites ||= await fetch(`/res/json/${this.$S.R.tab}.json`).then(data => data.json()) } catch (error) { this.sites = null }
-},
-/*________________________________________________________________*/
-
-//advanced
-site: "",
-exSearch() {
-window.open(`https://${this.$S.engine.U}site:${this.site}+"${this.$S.R.encodedQuery}"`, '_blank')
 },
 
 /*________________________________________________________________*/
