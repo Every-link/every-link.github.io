@@ -354,7 +354,10 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <div class="max">
 <h5 class="small" v-text="L.N"></h5>
-<p v-text="'https://' + (L.P ? L.B + L.P + $S.R.encodedQuery : L.B)" class="link wrap" style="word-break: break-all"></p>
+<p class="wrap" style="word-break: break-all">
+<span v-text="'https://' + (L.P ? L.B + L.P + $S.R.encodedQuery : L.B)" class="link"></span>
+<i v-if="!L.P" class="red-text">search_off</i>
+</p>
 </div>
 </a>
 
