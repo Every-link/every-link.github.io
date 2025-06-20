@@ -1,14 +1,16 @@
 [
  
 {
-"N": "ChatGpt",  "icon": "chat.openai.com",
+"N": "ChatGpt",  
+"I": "chat.openai.com",
+"C": "s m l",
 "L": {"b": "chat.openai.com", "p": "?q=", "x": false},
 "DL": {"b": "com.openai.chat://"},
 "A": { "a": "com.openai.chatgpt", "i": "id6448311069" }
 },
 
 {
-"N": "Grok", "icon": "x.ai", 
+"N": "Grok", "I": "x.ai", 
 "L": {"b": "grok.com", "p": "/?q=", "x": false}
 },
 
@@ -18,7 +20,7 @@
 },
 
 {
-"N": "Gemini", "icon": "gemini.google.com",
+"N": "Gemini", "I": "gemini.google.com",
 "L": { "b": "gemini.google.com", "x": false },
 "DL": { "b": "com.openai.chat://" },
 "A": { "a": "", "i": "id6477489729" },
@@ -52,7 +54,7 @@
 
 
 {
-"N": "duckduckgo ai", "icon": "duckduckgo.com",
+"N": "duckduckgo ai", "I": "duckduckgo.com",
 "L": {"b": "Duck.ai", "p": "/new?q=", "s": "", "x": false}
 },
 

@@ -201,7 +201,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </div>
 
 <div class="grid">
-<article class="s12 m6 l4 small-round" v-for="(S, I) in sites || []">
+<article v-for="(S, I) in sites || []" :class="[S.C, 's12 m6 l4 small-round']">
 
 <div class="row">
 <a class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') + (S.L.p || S.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
@@ -256,7 +256,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <div v-show="S.alt" class="divider"></div>
 
-<li v-for="(s, i) in S.alt || []" :data-ui="'#menu-' + S.L.p">
+<li v-for="(s, i) in S.alt || []" :data-ui="'#menu-' + S.L.p" :class="s.C">
 <div class="horizontal-padding row">
 <img class="tiny square" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.I ? s.I : s.L.b)" alt="icon" loading="lazy">
 <span v-text="s.N"></span>

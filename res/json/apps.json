@@ -6,12 +6,12 @@
 "DL": { "b": "itms-apps://itunes.apple.com", "p": "/search?term=" }
 },
 {
-"N": "google play",
+"N": "google play", 
 "L": { "b": "play.google.com", "p": "/store/search?q=", "x": false },
 "DL": { "b": "market://search", "p": "?q=" }
 },
 {
-"N": "huawei appgallery", "icon": "huawei.com",
+"N": "huawei appgallery", "I": "huawei.com",
 "L": { "b": "appgallery.huawei.com", "x": false },
 "DL": { "b": "appmarket://details", "p": "?id=" }
 },
@@ -21,14 +21,14 @@
 "DL": { "b": "samsungapps://", "p": "ProductDetail/" }
 },
 {
-"N": "apkmirror",
-"L": { "b": "apkmirror.com", "p": "/?s=", "x": false },
-"DL": { "b": "apkmirror://search", "p": "?s=" }
-},
-{
 "N": "amazon appstore",
 "L": { "b": "www.amazon.com", "p": "/s?k=", "x": false },
 "DL": { "b": "amzn://apps", "p": "/a?k=" }
+},
+{
+"N": "apkmirror",
+"L": { "b": "apkmirror.com", "p": "/?s=", "x": false },
+"DL": { "b": "apkmirror://search", "p": "?s=" }
 },
 {
 "N": "apkpure",
