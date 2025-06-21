@@ -226,7 +226,8 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <button :data-ui="'#sites-menu-' + I" class="small-round transparent border">
   <i>more_vert</i><span v-if="!S.L">menu</span>
 
-<menu :id="'sites-menu-' + I" :class="[I <= 2 ? 'bottom left' : 'top left', 'no-wrap no-padding']">
+
+<menu :id="'sites-menu-' + I" :class="[I == 0 && $S.Device.display == 's' ? 'bottom' : I <= 1 && $S.Device.display == 'm' ? 'bottom' : I <= 2 && $S.Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
 
 <li v-if="S.L && S.L.p">
 <a class="row" :href="'https://' + S.L.b" rel="nofollow" target="_blank">
@@ -396,7 +397,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <button v-show="!edit" :data-ui="'#links-menu-' + I" class="transparent small-round">
 <i>more_vert</i>
 
-<menu :id="'links-menu-' + I" :class="[I <= 2 ? 'bottom left' : 'top left', 'no-wrap no-padding']">
+<menu :id="'links-menu-' + I" :class="[I == 0 && $S.Device.display == 's' ? 'bottom' : I <= 1 && $S.Device.display == 'm' ? 'bottom' : I <= 2 && $S.Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
 
 <li v-if="L.P">
 <a class="row" :href="'https://' + L.B" rel="nofollow" target="_blank">
