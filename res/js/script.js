@@ -119,12 +119,14 @@ if(name) {return JSON.parse(localStorage.getItem(name))} else {return fall}
 },
 
 async copy(text) {
-  await navigator.clipboard.writeText(text).then(() => ui("#copy", 999));
+try { await navigator.clipboard.writeText(text); ui("#copy", 999);} 
+catch (error) { console.warn("Copy failed:", error) }
 },
 
 async share(name, text) {
-  await navigator.share({ title: name, url: text });
-  if (!navigator.share) { ui("#share") };
+if (!navigator.share) {ui("#share"); return;};
+try { await navigator.share({ title: name, url: text }) } 
+catch (error) { console.warn("Share canceled:", error) }
 },
 
 /*________________________________________________________________*/
