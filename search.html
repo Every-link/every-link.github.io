@@ -204,7 +204,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <div class="row">
 
-<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') + (S.L.p || S.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
+<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '')" rel="nofollow" target="_blank">
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
 <div class="max">
 <h5 v-text="S.N"></h5>
@@ -229,7 +229,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <menu :id="'sites-menu-' + I" :class="[I <= 2 ? 'bottom left' : 'top left', 'no-wrap no-padding']">
 
 <li v-if="S.L && S.L.p">
-<a class="row" :href="'https://' + S.L.b + '?' + $S.R.ref" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + S.L.b" rel="nofollow" target="_blank">
 <i class="green-text">home_app_logo</i>
 <span>Homepage</span>
 </a>
@@ -265,7 +265,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
   <i>content_copy</i><span>Copy link</span>
 </li>
 
-<li v-if="S.L" @click="$S.share(S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+<li v-if="S.L" @click="$S.share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
   <i>share</i><span>Share link</span>
 </li>
 
@@ -278,9 +278,9 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <i>arrow_drop_down</i>
 </div>
 
-<menu :id="'sites-menu-sub-' + i" class="top left no-wrap">
+<menu :id="'sites-menu-sub-' + i" class="top left no-wrap no-padding">
 <li v-if="s.L">
-<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') + (s.L.p || s.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
 <i class="green-text" v-text="s.L.p ? 'pageview' : 'home_app_logo'"></i>
 <span v-text="s.N"></span>
 </a>
@@ -396,10 +396,10 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <button v-show="!edit" :data-ui="'#links-menu-' + I" class="transparent small-round">
 <i>more_vert</i>
 
-<menu :id="'links-menu-' + I" class="left no-wrap">
+<menu :id="'links-menu-' + I" :class="[I <= 2 ? 'bottom left' : 'top left', 'no-wrap no-padding']">
 
 <li v-if="L.P">
-<a class="row" :href="'https://' + L.B + '?' + $S.R.ref" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + L.B" rel="nofollow" target="_blank">
 <i class="green-text">home_app_logo</i>
 <span>Homepage</span>
 </a>

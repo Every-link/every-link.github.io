@@ -18,7 +18,6 @@ currentUrl: window.location.href,
 
 /*________________________*/
 get separator() { return this.currentUrl.includes('?') ? '&' : '?' },
-get ref() { return "ref=" + this.name },
 /*________________________*/
 
 query: new URLSearchParams(window.location.search).get('q') || 'search',

@@ -26,14 +26,13 @@
 "L": {"b": "search.yahoo.com", "p": "/search?p=", "x": false}
 },
 
-    
 {
-"N": "Baidu (Chinese)",
+"N": "Baidu",
 "L": {"b": "baidu.com", "p": "/s?word=", "x": false}
 },
 
 {
-"N": "Naver (Korean)",
+"N": "Naver",
 "L": {"b": "search.naver.com", "p": "/search.naver?query=", "x": false}
 },
 
