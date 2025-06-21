@@ -3,9 +3,7 @@
 
 
 {
-"N": "Amazon",
-"L": { "b": "amazon.com", "p": "/s?k=" },
-"DL": { "b": "com.amazon.mobile.shopping.web://amazon.com", "p": "/s?k=" },
+"N": "Amazon", "I": "amazon.com",
 "A": { "a": "com.amazon.mShop.android.shopping", "i": "id297606951" },
 "alt": [
 

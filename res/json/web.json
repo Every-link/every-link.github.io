@@ -2,18 +2,12 @@
 
 
 
+
 { 
 "N": "Google",
-"L": {"b": "google.com", "p": "/search?q=", "s": "&hl=ar","x": false},
-"DL": {
-    "a": {"b": "google://search","p": "?q="},
-    "i": {"b": "google://search","p": "?q="}
-},
-"A": {
-    "a": "com.google.android.googlequicksearchbox",
-    "i": "id284815942"
-    }
-    
+"L": {"b": "google.com", "p": "/search?q=", "s": "&hl=ar", "x": false},
+"DL": { "b": "google://search", "p": "?q="},
+"A": {"a": "com.google.android.googlequicksearchbox", "i": "id284815942"}
 },
 
 
@@ -90,7 +84,6 @@
 
 {
 "N": "Duckduckgo",
-"exEngin": true,
 "L": {"b": "duckduckgo.com", "p": "/?q=", "x": false}
 },
 

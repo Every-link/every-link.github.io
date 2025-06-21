@@ -192,7 +192,6 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </div><!-- tabs -->
 
 
-
 <!-- content -->
 <div v-if="$S.R.tab != 'advanced' && $S.R.tab != 'links'" @vue:mounted="load" class="page left active">
 
@@ -204,93 +203,120 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <article v-for="(S, I) in sites || []" :class="[S.C, 's12 m6 l4 small-round']">
 
 <div class="row">
-<a class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') + (S.L.p || S.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
 
+<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') + (S.L.p || S.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
-
 <div class="max">
 <h5 v-text="S.N"></h5>
-<p class="wrap" style="word-break: break-all">
+<p class="row" style="word-break: break-all; overflow: hidden;">
 <span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
 <i v-if="!S.L.p" class="red-text">search_off</i>
 </p>
-
 </div>
 </a>
 
-<button :data-ui="'#sites-menu-' + I" class="transparent small-round">
-<i>more_vert</i>
 
-<menu :id="'sites-menu-' + I" class="left no-wrap">
+<div v-if="!S.L" class="row max">
+<img v-if="S.I" class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + S.I" alt="icon" loading="lazy">
+<i v-if="S.I === undefined">link</i>
+<h5 class="max" v-text="S.N"></h5>
+</div>
 
-<li v-if="S.L.p">
+
+<button :data-ui="'#sites-menu-' + I" class="small-round transparent border">
+  <i>more_vert</i><span v-if="!S.L">menu</span>
+
+<menu :id="'sites-menu-' + I" :class="[I <= 2 ? 'bottom left' : 'top left', 'no-wrap no-padding']">
+
+<li v-if="S.L && S.L.p">
 <a class="row" :href="'https://' + S.L.b + '?' + $S.R.ref" rel="nofollow" target="_blank">
 <i class="green-text">home_app_logo</i>
 <span>Homepage</span>
 </a>
 </li>
-<li v-if="S.L.x != false">
+<li v-if="S.L && S.L.x !== false">
 <a class="row" :href="'https://' + $S.X.url + 'site:' + S.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
 <span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
-<li v-if="S.DL !== undefined && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
+<li v-if="S.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
 <a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + $S.R.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i>
 <span>Open App</span>
 </a>
 </li>
-<li v-if="S.A !== undefined && $S.Device.os == 'android'">
+<li v-if="S.A && $S.Device.os == 'android'">
 <a class="row" :href="'market://details?id=' + S.A.a" rel="nofollow">
 <i>system_update</i>
 <span>Download App</span>
 </a>
 </li>
-<li v-if="S.A !== undefined && $S.Device.os == 'ios'">
+<li v-if="S.A && $S.Device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + S.A.i" rel="nofollow">
 <i>system_update</i>
 <span>Download App</span>
 </a>
 </li>
 
+<div class="divider"></div>
+
+<li v-if="S.L" @click="$S.copy( 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+  <i>content_copy</i><span>Copy link</span>
+</li>
+
+<li v-if="S.L" @click="$S.share(S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+  <i>share</i><span>Share link</span>
+</li>
+
 <div v-show="S.alt" class="divider"></div>
 
-<li v-for="(s, i) in S.alt || []" :data-ui="'#menu-' + S.L.p" :class="s.C">
+<li v-for="(s, i) in S.alt || []" :data-ui="'#sites-menu-sub-' + i" :class="s.C">
 <div class="horizontal-padding row">
 <img class="tiny square" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.I ? s.I : s.L.b)" alt="icon" loading="lazy">
 <span v-text="s.N"></span>
 <i>arrow_drop_down</i>
 </div>
 
-<menu :id="'menu-' + s.L.p" class="left no-wrap">
-<li v-if="s.L.b">
+<menu :id="'sites-menu-sub-' + i" class="top left no-wrap">
+<li v-if="s.L">
 <a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') + (s.L.p || s.L.s ? '&' : '?') + $S.R.ref" rel="nofollow" target="_blank">
 <i class="green-text" v-text="s.L.p ? 'pageview' : 'home_app_logo'"></i>
 <span v-text="s.N"></span>
 </a>
 </li>
-<li v-if="s.L.x != false">
+<li v-if="s.L && s.L.x !== false">
 <a class="row" :href="'https://' + $S.X.url + 'site:' + s.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i>
 <span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
-<li v-if="s.DL !== undefined && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
+<li v-if="s.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
 <a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + $S.R.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i><span>Open App</span>
 </a>
 </li>
-<li v-if="s.A !== undefined && $S.Device.os == 'android'">
+<li v-if="s.A && $S.Device.os == 'android'">
 <a class="row" :href="'market://details?id=' + s.A.a" rel="nofollow">
 <i>system_update</i><span>Download App</span>
 </a>
 </li>
-<li v-if="s.A !== undefined && $S.Device.os == 'ios'">
+<li v-if="s.A && $S.Device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + s.A.i" rel="nofollow">
 <i>system_update</i><span>Download App</span>
 </a>
 </li>
+
+<div class="divider"></div>
+
+<li v-if="s.L" @click="$S.copy( 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<i>content_copy</i><span>Copy link</span>
+</li>
+
+<li v-if="s.L" @click="$S.share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<i>share</i><span>Share link</span>
+</li>
+
 </menu>
 </li>
 
@@ -354,8 +380,9 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <div class="max">
 <h5 class="small" v-text="L.N"></h5>
-<p class="wrap" style="word-break: break-all">
-<span v-text="'https://' + (L.P ? L.B + L.P + $S.R.encodedQuery : L.B)" class="link"></span>
+<p class="row" style="word-break: break-all; overflow: hidden;">
+
+<span v-text="'https://' + (L.P ? L.B + L.P + $S.R.query : L.B)" class="link"></span>
 <i v-if="!L.P" class="red-text">search_off</i>
 </p>
 </div>
@@ -384,6 +411,24 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
+
+<div class="divider"></div>
+
+<li v-if="L.B !== undefined" @click="$S.copy( 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
+  <i>content_copy</i><span>Copy link</span>
+</li>
+
+<li v-if="L.B !== undefined" @click="$S.share(L.N, 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
+  <i>share</i><span>Share link</span>
+</li>
+
+<!--
+<div class="divider"></div>
+
+<li @click="removeLink(I)" :data-ui="'#links-menu-' + I">
+  <i>delete</i><span>Delete link</span>
+</li>
+-->
 
 </menu>
 </button>

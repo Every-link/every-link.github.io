@@ -119,12 +119,14 @@ localGet(name, fall = null){
 if(name) {return JSON.parse(localStorage.getItem(name))} else {return fall}
 },
 
-copy(text) {
-navigator.clipboard.writeText(text)
-.then(() => ui("#copy", 999))
-.catch(err => console.error('Failed to copy text: ', err));
+async copy(text) {
+  await navigator.clipboard.writeText(text).then(() => ui("#copy", 999));
 },
 
+async share(name, text) {
+  await navigator.share({ title: name, url: text });
+  if (!navigator.share) { ui("#share") };
+},
 
 /*________________________________________________________________*/
 
@@ -194,14 +196,13 @@ $template: `
 /*________________________________________________________________*/
 share() {return {
 
-async share() {
-if (!navigator.share) { ui("#share") };
-await navigator.share({ title: document.title, url: window.location.href })
-},
+title: document.title, 
+url: window.location.href,
+
 
 $template: `
 
-<button class="transparent border primary-border fill elevate small-round margin large fixed bottom right s m" @click="share" v-show="$S.Device.type === 'mobile' || $S.Device.type === 'tablet'"><i>share</i> </button>
+<button class="transparent border primary-border fill elevate small-round margin large fixed bottom right s m" @click="$S.share(title, url)" v-show="$S.Device.type === 'mobile' || $S.Device.type === 'tablet'"><i>share</i> </button>
 
 <div class="snackbar error" id="share"> Your browser is not supported</div>
 
