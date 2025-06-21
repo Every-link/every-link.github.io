@@ -4,6 +4,7 @@
 
 {
 "N": "Amazon", "I": "amazon.com",
+"L": { "b": "amazon.com", "p": "/s?k=", "x": false },
 "A": { "a": "com.amazon.mShop.android.shopping", "i": "id297606951" },
 "alt": [
 

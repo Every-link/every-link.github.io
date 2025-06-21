@@ -344,10 +344,12 @@ $template: `
 </ul>
 
 <div class="margin">
-<div class="field label suffix border">
+<div class="field label prefix suffix border">
+<i>search</i>
 <select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
 <option v-for="(E, I) in $S.X.Engines" :key="E.B" :value="E" :selected="$S.X.engine.B === E.B" v-text="E.N"></option>
 </select>
+
 <label>Default Search Engine</label>
 <i>arrow_drop_down</i>
 </div>
