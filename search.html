@@ -166,27 +166,22 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <div class="bottom-padding">
 <nav class="row horizontal scroll" @vue:mounted="scroll">
 
-
 <a v-for="(C, I) in $S.Categories.filter(C => C.V || C.id == $S.R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == $S.R.tab}, 'vertical padding small-round']" :href="$S.R.path + '?tab=' + C.id + '&q=' + $S.R.encodedQuery" :data-tab="C.id">
-  <i v-text="C.I"></i>
-  <span v-text="C.N"></span>
+  <i v-text="C.I"></i> <span v-text="C.N"></span>
 </a>
 
 
 <a data-ui="#advanced" :class="[{'border primary-border fill' : $S.R.tab == 'advanced'}, 'vertical padding small-round']" v-show="$S.advancedVisibility || $S.R.tab == 'advanced'" :href="$S.R.path + '?tab=advanced&q=' + $S.R.encodedQuery" data-tab="advanced">
-<i>pageview</i>
-<span>Advanced</span>
+<i>pageview</i> <span>Advanced</span>
 </a>
 
 
 <a data-ui="#links" :class="[{'border primary-border fill' : $S.R.tab == 'links'}, 'vertical padding small-round']" v-show="$S.linksVisibility || $S.R.tab == 'links'" :href="$S.R.path + '?tab=links&q=' + $S.R.encodedQuery" data-tab="links">
-<i>forms_add_on</i>
-<span>My List</span>
+<i>forms_add_on</i> <span>My List</span>
 </a>
 
 <a data-ui="#settings" class="vertical padding small-round">
-<i>edit_note</i>
-<span>Edit</span>
+<i>edit_note</i> <span>Edit</span>
 </a>
 </nav>
 </div><!-- tabs -->
@@ -334,18 +329,18 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <!-- advanced -->
 <div v-if="$S.R.tab === 'advanced'" class="page left active">
 
-<form class="padding" method="GET" :action="'https://' + $S.X.engine.B" target="_blank">
+<form class="middle-align center-align" method="GET" :action="'https://' + $S.X.engine.B" target="_blank">
 <input type="text" :name="$S.X.engine.P" :value="'site:' + site + ' &quot;' + $S.R.q + '&quot;'" hidden>
 
-<div class="grid">
+<div :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
 
-<div class="field label suffix border large s12 m8 l8">
+<div class="field label suffix border large s12 m8 l7">
 <input type="text" v-model="site" required>
 <label>website.com</label>
 <i>link</i>
 </div>
 
-<div class="field label suffix border large s12 m4 l4">
+<div class="field label suffix border large s12 m4 l5">
 <select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
 <option v-for="E in $S.X.Engines" :key="E.B" :value="E" v-text="E.N"></option>
 </select>
@@ -354,13 +349,14 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <i>arrow_drop_down</i>
 </div>
 
-</div>
-
-<nav class="center-align">
+<nav class="center-align s12 m12 l12">
 <button class="transparent border primary-border fill large small-round" type="submit">
 <span>search</span><i>search</i>
 </button>
 </nav>
+
+</div>
+
 
 </form>
 
@@ -451,38 +447,33 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </nav>
 
 
-<form class="padding" @submit.prevent="addLink()" v-show="edit">
+<form class="middle-align center-align" @submit.prevent="addLink()" v-show="edit">
 
-<p class="row no-space">
+<div :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
+
+<p class="row no-space s12 m12 l12">
 <s class="red-text">https://</s><span class="green-text">google.com</span>
 <b class="blue-text">/search?q=</b><s class="red-text">news</s>
 </p>
-
-
-<div class="grid">
 
 <div class="field label border large s12 m12 l12">
 <input type="text" v-model="newLink.N" required>
 <label><b class="red-text">*</b>website name</label>
 </div>
 
-<div class="field label border large s12 m8 l8">
+<div class="field label border large s12 m8 l7">
 <input type="text" v-model="newLink.B" required>
 <label>
 <b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
 </label>
 </div>
 
-<div class="max field label border large s12 m4 l4">
+<div class="max field label border large s12 m4 l5">
 <input type="text" v-model="newLink.P">
 <label> ex:<b class="blue-text">/search?q=</b></label>
 </div>
 
-</div>
-
-
-<nav class="center-align">
-
+<nav class="center-align s12 m12 l12">
 
 <button class="small-round border large" @click="edit = false">
 <i>close</i>
@@ -493,9 +484,10 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </button>
 </nav>
 
+</div>
+
+
 </form>
-
-
 
 </div><!-- links -->
 

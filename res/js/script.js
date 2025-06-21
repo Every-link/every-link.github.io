@@ -104,6 +104,8 @@ Categories: JSON.parse(localStorage.getItem('categories')) || [
 { N: "Education", id: "education", I: "school", V: false },
 { N: "Contacts", id: "contacts", I: "contacts", V: false },
 { N: "Apps", id: "apps", I: "apps", V: false },
+{ N: "SEO", id: "seo", I: "web_traffic", V: false },
+{ N: "Marketing", id: "marketing", I: "bar_chart", V: false },
 { N: "Developers", id: "developers", I: "terminal", V: false },
 { N: "torrent", id: "torrent", I: "dns", V: false },
 { N: "Others", id: "others", I: "more_horiz", V: false },
@@ -176,20 +178,20 @@ settings: s,
 
 $template: `
 
-<button class="transparent border small-round" data-ui="#drawer">
-<i>menu</i><span>Menu</span>
+<button :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border extra']" data-ui="#drawer">
+<i>menu</i><span v-if="$S.Device.display != 's'">Menu</span>
 </button>
 
 <div class="max"></div>
 <h5 class="center-align" v-text="$S.title"></h5>
 <div class="max"></div>
 
-<button v-show="settings !== false" class="transparent border square" data-ui="#settings">
-<i>edit_note</i><span class="l m">Edit</span>
+<button v-show="settings !== false" :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border']" data-ui="#settings">
+<i>edit_note</i><span v-if="$S.Device.display != 's'">Edit</span>
 </button>
 
 
-<button class="transparent border square" @click="changeTheme()">
+<button :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border']" @click="changeTheme()">
 <i v-text="theme + '_mode'"></i>
 </button>
 
