@@ -261,7 +261,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
   <i>content_copy</i><span>Copy link</span>
 </li>
 
-<li v-if="S.L" @click="$S.share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+<li v-if="S.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
   <i>share</i><span>Share link</span>
 </li>
 
@@ -309,7 +309,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <i>content_copy</i><span>Copy link</span>
 </li>
 
-<li v-if="s.L" @click="$S.share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<li v-if="s.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
 <i>share</i><span>Share link</span>
 </li>
 
@@ -415,7 +415,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
   <i>content_copy</i><span>Copy link</span>
 </li>
 
-<li v-if="L.B !== undefined" @click="$S.share(L.N, 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
+<li v-if="L.B && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(L.N, 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
   <i>share</i><span>Share link</span>
 </li>
 
@@ -495,7 +495,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <div v-scope="$S.component.drawer()"></div>
 <div v-scope="$S.component.settings()"></div>
-<div v-scope="$S.component.share()" class="large-padding large-margin"></div>
+<div b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()" class="large-padding large-margin"></div>
 <div class="snackbar" id="copy"><i>done</i><span>Copied</span></div>
 
 </main>
