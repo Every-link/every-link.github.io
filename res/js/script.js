@@ -273,24 +273,25 @@ if ('caches' in window) {
   caches.keys().then(cacheNames => {
     cacheNames.forEach(cacheName => {caches.delete(cacheName)});
 });
-}
+};
     
 // Clear IndexedDB (modern browsers)
 if (window.indexedDB) {
   indexedDB.databases().then(dbs => {
     dbs.forEach(db => {indexedDB.deleteDatabase(db.name)});
   });
-}
+};
     
 // Clear Service Worker registrations
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations().then(registrations => {
     registrations.forEach(registration => {registration.unregister()});
   });
-}
+};
 
 // road page
 window.location.reload();
+
 },
 
 $template: `
@@ -391,6 +392,15 @@ $template: `
 
 /*________________________________________________________________*/
 mounted() {
+
+//serviceWorker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+;}
+
+
 
 const theme = JSON.parse(localStorage.getItem('theme')) || null;
 if (theme) {document.body.className = theme};

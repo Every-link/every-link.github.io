@@ -1,5 +1,6 @@
 {
-"name": "EveryLink", "short_name": "EveryLink",
+"name": "EveryLink", 
+"short_name": "EveryLink",
 "start_url": "/?utm=pwa",
 "display": "standalone",
 "background_color": "#fffbff",
