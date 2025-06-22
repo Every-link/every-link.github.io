@@ -60,7 +60,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <body class="light">
 <div id="app" v-scope v-cloak @vue:mounted="mounted" class="bottom-padding">
 
-<nav class="top primary" v-scope="$S.component.navTop()"></nav>
+<nav class="top primary" v-scope="$S.component.navTop(false)"></nav>
 
 
 <main class="responsive">
@@ -82,7 +82,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <div class="grid">
 
-<div class="s12 m9 l0">
+<div class="s12 m6 l6">
 <div class="field prefix label border">
 <i class="front">search</i>
 <input type="text" name="q" required>
@@ -90,7 +90,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </div>
 </div>
 
-<div class="s12 m3 l2">
+<div class="s8 m4 l4">
 <div class="field prefix border label">
 <i class="front">list</i>
 <select v-model="$S.R.tab" required>
@@ -101,6 +101,10 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <label>Category</label>
 </div>
 </div>
+
+<button type="button" class="transparent border large small-round s4 m2 l2" data-ui="#settings">
+<i>forms_add_on</i> <span>More</span>
+</button>
 
 </div>
 
@@ -164,3 +168,4 @@ this.$S.mounted();
 
 </body>
 </html>
+

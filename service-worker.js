@@ -2,12 +2,12 @@ const CACHE_NAME = 'petite-vue-cache-v1';
 
 
 const urlsToCache = [
+
 '/',
 '/index.html',
 '/search.html',
 '/offline.html',
 '/404.html',
-
 
 '/manifest.json',
 
@@ -18,6 +18,12 @@ const urlsToCache = [
 '/res/css/style.css',
 '/res/js/petite-vue.js',
 '/res/js/script.js',
+
+//cdn
+'https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.js',
+'https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.css',
+
+
 
 
 '/res/json/web.json',
