@@ -74,8 +74,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <input type="text" name="q" v-model="$S.R.query">
 </div>
 <button type="submit" class="transparent border primary-border fill small-round large">
-<i>search</i>
-<span class="m l">Search</span>
+<i>search</i> <span class="m l">Search</span>
 </button>
 
 </nav>
@@ -102,10 +101,10 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <i>edit_note</i> <span>My List</span>
 </a>
 
-<a data-ui="#settings" class="vertical padding small-round">
+<button data-ui="#moreMenu" class="transparent vertical padding small-round">
 <i>forms_add_on</i> <span>More</span>
+</button>
 
-</a>
 </nav>
 </div><!-- tabs -->
 
@@ -149,43 +148,38 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <li v-if="S.L && S.L.p">
 <a class="row" :href="'https://' + S.L.b" rel="nofollow" target="_blank">
-<i class="green-text">home_app_logo</i>
-<span>Homepage</span>
+<i class="green-text">home_app_logo</i> <span>Homepage</span>
 </a>
 </li>
 <li v-if="S.L && S.L.x !== false">
 <a class="row" :href="'https://' + $S.X.url + 'site:' + S.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
-<i class="blue-text">travel_explore</i>
-<span v-text="$S.X.engine.N + ' Search'"></span>
+<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
 <li v-if="S.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
 <a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + $S.R.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
-<i>phone_iphone</i>
-<span>Open App</span>
+<i>phone_iphone</i> <span>Open App</span>
 </a>
 </li>
 <li v-if="S.A && $S.Device.os == 'android'">
 <a class="row" :href="'market://details?id=' + S.A.a" rel="nofollow">
-<i>system_update</i>
-<span>Download App</span>
+<i>system_update</i> <span>Download App</span>
 </a>
 </li>
 <li v-if="S.A && $S.Device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + S.A.i" rel="nofollow">
-<i>system_update</i>
-<span>Download App</span>
+<i>system_update</i> <span>Download App</span>
 </a>
 </li>
 
 <div class="divider"></div>
 
 <li v-if="S.L" @click="$S.copy( 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
-  <i>content_copy</i><span>Copy link</span>
+  <i>content_copy</i> <span>Copy link</span>
 </li>
 
 <li v-if="S.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
-  <i>share</i><span>Share link</span>
+  <i>share</i> <span>Share link</span>
 </li>
 
 <div v-show="S.alt" class="divider"></div>
@@ -193,47 +187,44 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <li v-for="(s, i) in S.alt || []" :data-ui="'#sites-menu-sub-' + i" :class="s.C">
 <div class="horizontal-padding row">
 <img class="tiny square" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.I ? s.I : s.L.b)" alt="icon" loading="lazy">
-<span v-text="s.N"></span>
-<i>arrow_drop_down</i>
+<span v-text="s.N"></span> <i>arrow_drop_down</i>
 </div>
 
 <menu :id="'sites-menu-sub-' + i" class="top left no-wrap no-padding">
 <li v-if="s.L">
 <a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
-<i class="green-text" v-text="s.L.p ? 'pageview' : 'home_app_logo'"></i>
-<span v-text="s.N"></span>
+<i class="green-text" v-text="s.L.p ? 'pageview' : 'home_app_logo'"></i> <span v-text="s.L.p ? 'Search' : 'Homepage'"></span>
 </a>
 </li>
 <li v-if="s.L && s.L.x !== false">
 <a class="row" :href="'https://' + $S.X.url + 'site:' + s.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
-<i class="blue-text">travel_explore</i>
-<span v-text="$S.X.engine.N + ' Search'"></span>
+<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
 <li v-if="s.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
 <a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + $S.R.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
-<i>phone_iphone</i><span>Open App</span>
+<i>phone_iphone</i> <span>Open App</span>
 </a>
 </li>
 <li v-if="s.A && $S.Device.os == 'android'">
 <a class="row" :href="'market://details?id=' + s.A.a" rel="nofollow">
-<i>system_update</i><span>Download App</span>
+<i>system_update</i> <span>Download App</span>
 </a>
 </li>
 <li v-if="s.A && $S.Device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + s.A.i" rel="nofollow">
-<i>system_update</i><span>Download App</span>
+<i>system_update</i> <span>Download App</span>
 </a>
 </li>
 
 <div class="divider"></div>
 
 <li v-if="s.L" @click="$S.copy( 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
-<i>content_copy</i><span>Copy link</span>
+<i>content_copy</i> <span>Copy link</span>
 </li>
 
 <li v-if="s.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
-<i>share</i><span>Share link</span>
+<i>share</i> <span>Share link</span>
 </li>
 
 </menu>
@@ -274,7 +265,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <nav class="center-align s12 m12 l12">
 <button class="transparent border primary-border fill large small-round" type="submit">
-<span>search</span><i>search</i>
+<span>search</span> <i>search</i>
 </button>
 </nav>
 
@@ -320,33 +311,31 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 <li v-if="L.P">
 <a class="row" :href="'https://' + L.B" rel="nofollow" target="_blank">
-<i class="green-text">home_app_logo</i>
-<span>Homepage</span>
+<i class="green-text">home_app_logo</i> <span>Homepage</span>
 </a>
 </li>
 
 <li>
 <a class="row" :href="'https://' + $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
-<i class="blue-text">travel_explore</i>
-<span v-text="$S.X.engine.N + ' Search'"></span>
+<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
 </a>
 </li>
 
 <div class="divider"></div>
 
 <li v-if="L.B !== undefined" @click="$S.copy( 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
-  <i>content_copy</i><span>Copy link</span>
+  <i>content_copy</i> <span>Copy link</span>
 </li>
 
 <li v-if="L.B && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(L.N, 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
-  <i>share</i><span>Share link</span>
+  <i>share</i> <span>Share link</span>
 </li>
 
 <!--
 <div class="divider"></div>
 
 <li @click="removeLink(I)" :data-ui="'#links-menu-' + I">
-  <i>delete</i><span>Delete link</span>
+  <i>delete</i> <span>Delete link</span>
 </li>
 -->
 
@@ -403,7 +392,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </button>
 
 <button class="transparent fill border border-primary small-round large" type="submit">
-<span>add</span><i>add</i>
+<span>add</span> <i>add</i>
 </button>
 </nav>
 
@@ -417,9 +406,9 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 
 <div v-scope="$S.component.drawer()"></div>
-<div v-scope="$S.component.settings()"></div>
+<div v-scope="$S.component.moreMenu()"></div>
 <div b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()" class="large-padding large-margin"></div>
-<div class="snackbar" id="copy"><i>done</i><span>Copied</span></div>
+<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
 
 </main>
 

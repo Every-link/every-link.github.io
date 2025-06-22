@@ -164,7 +164,7 @@ get url(){ return `${this.engine.B}?${this.engine.P}=` },
 component: {
 
 /*________________________________________________________________*/
-navTop(s) {return {
+navTop(m) {return {
 
 theme: JSON.parse(localStorage.getItem('theme')) || "light",
 changeTheme() {
@@ -174,7 +174,7 @@ document.body.className = this.theme;
 this.$S.localSet("theme", this.theme);
 },
 
-settings: s,
+moreMenu: m,
 
 $template: `
 
@@ -186,7 +186,7 @@ $template: `
 <h5 class="center-align" v-text="$S.title"></h5>
 <div class="max"></div>
 
-<button v-show="settings !== false" :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border']" data-ui="#settings">
+<button v-show="moreMenu !== false" :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border']" data-ui="#moreMenu">
 <i>edit_note</i><span v-if="$S.Device.display != 's'">Edit</span>
 </button>
 
@@ -229,7 +229,7 @@ $template: `
 
 <header class="fixed">
 <nav>
-<h6 class="max" v-text="$S.title"></h6>
+<h6 class="max large">Menu</h6>
 <button class="transparent border link small-round" data-ui="#drawer">
 <span>Close</span> <i>close</i>
 </button>
@@ -254,7 +254,7 @@ $template: `
 
 `}},
 /*________________________________________________________________*/
-settings() {return {
+moreMenu() {return {
 
 reset(){
 
@@ -297,12 +297,12 @@ window.location.reload();
 $template: `
 
 <div class="overlay small-blur"></div>
-<dialog id="settings" class="right scroll no-padding">
+<dialog id="moreMenu" class="right scroll no-padding">
 
 <header class="fixed padding">
 <nav>
-<h6 class="max">Settings</h6>
-<button class="transparent border link small-round" data-ui="#settings">
+<h6 class="max">Categories</h6>
+<button class="transparent border link small-round" data-ui="#moreMenu">
 <span>Close</span><i>close</i>
 </button>
 </nav>
