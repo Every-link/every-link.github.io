@@ -403,9 +403,15 @@
 </div><!-- links -->
 
 <!-- comments -->
-<div v-if="$S.R.tab !== 'advanced' && $S.R.tab !== 'links'" class="padding" v-scope="{comments:false}">
-<button class="transparent border small-round" v-if="!comments" @click="comments = true">request a website</button>
-<div v-if="comments" class="large-space"></div>
+<div v-if="$S.R.tab !== 'advanced' && $S.R.tab !== 'links'" v-scope="{comments:false}">
+<div class="large-space"></div>
+
+<div class="padding">
+<h5>Feedback</h5>
+<p>request a website or report a problem in this Category.</p>
+<button v-if="!comments" class="transparent border small-round link" @click="comments = true">add a comment</button>
+</div>
+
 <div v-if="comments" v-scope="$S.component.comments($S.R.tab)"></div>
 </div>
 
