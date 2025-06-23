@@ -423,7 +423,12 @@ document.body.appendChild(script);
 },
 
 $template: `
-<div id="disqus_thread" @vue:mounted="comments"></div>
+<div id="disqus_thread" @vue:mounted="comments">
+<div class="middle-align vertical padding">
+<progress class="circle"></progress> 
+<span>Loading</span>
+</div>
+</div>
 `}},
 /*________________________________________________________________*/
 

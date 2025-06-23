@@ -402,6 +402,15 @@
 
 </div><!-- links -->
 
+<!-- comments -->
+<div v-if="$S.R.tab !== 'advanced' && $S.R.tab !== 'links'" class="padding" v-scope="{comments:false}">
+<button class="transparent border small-round" v-if="!comments" @click="comments = true">request a website</button>
+<div v-if="comments" class="large-space"></div>
+<div v-if="comments" v-scope="$S.component.comments($S.R.tab)"></div>
+</div>
+
+
+
 
 
 <div v-scope="$S.component.drawer()"></div>
