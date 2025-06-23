@@ -45,13 +45,6 @@
 <link href="/res/css/style.css" rel="stylesheet">
 <script src="/res/js/petite-vue.js"></script>
 
-<!--
-https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js
-https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
--->
-
-
-
 </head>
 
 
@@ -122,6 +115,7 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 
 
 
+
 <div v-scope="$S.component.drawer()"></div>
 <div v-scope="$S.component.moreMenu()"></div>
 <div class="snackbar" id="copy"><i>done</i><span>Copied</span></div>
@@ -154,9 +148,7 @@ $S : store,
 
 /*________________________________________________________________*/
 
-mounted() {
-this.$S.mounted();
-
+mounted() { this.$S.mounted();
 
 
 },

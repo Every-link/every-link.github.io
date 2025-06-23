@@ -1,0 +1,79 @@
+[
+
+{
+"N": "Speed Test",
+"I": "developers.google.com",
+"L": {"b": "googlechrome.github.io/lighthouse/viewer/", "p": "?psiurl=", "x": false},
+"alt": [
+
+{
+"N": "Speed Insights",
+"L": { "b": "pagespeed.web.dev", "p": "/analysis?url=", "x": false }
+},
+
+{
+"N": "gtmetrix.com",
+"L": { "b": "gtmetrix.com", "x": false }
+},
+
+{
+"N": "pingdom.com",
+"L": { "b": "tools.pingdom.com", "x": false }
+}
+
+
+  ]
+},
+
+{
+"N": "Responsinator",
+"L": { "b": "www.responsinator.com/", "p": "?url=", "x": false },
+"alt": [
+{
+"N": "mobile friendly test",
+"L": { "b": "https://search.google.com/test/mobile-friendly", "p": "?url", "x": false }
+}
+]
+},
+
+{
+"N": "Google Webmaster",
+"L": { "b": "search.google.com/search-console", "p": "?resource_id=", "x": false },
+"alt": [
+{
+"N": "Bing Webmaster",
+"L": { "b": "www.bing.com/webmasters/", "p": "?siteUrl=", "x": false }
+},
+
+{
+"N": "Yandex Webmaster",
+
+"L": { "b": "webmaster.yandex.com", "p": "/site/", "s": "/:443/dashboard/", "x": false }
+},
+
+{
+"N": "News Webmaster",
+
+"L": { "b": "publishercenter.google.com/publications/", "x": false }
+}
+]
+},
+
+
+{
+"N": "DMCA.com",
+"L": { "b": "www.dmca.com", "x": false },
+"alt": [
+{
+"N": "Google search report",
+"L": { "b": "google.com/webmasters/tools/dmca-notice/", "x": false }
+}
+]
+}
+
+
+]
+
+
+
+

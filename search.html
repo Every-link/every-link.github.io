@@ -45,12 +45,6 @@
 <script src="/res/js/petite-vue.js"></script>
 
 
-<!--
-https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js
-https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
--->
-
-
 </head>
 
 
@@ -191,9 +185,15 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 </div>
 
 <menu :id="'sites-menu-sub-' + i" class="top left no-wrap no-padding">
+
 <li v-if="s.L">
 <a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
-<i class="green-text" v-text="s.L.p ? 'pageview' : 'home_app_logo'"></i> <span v-text="s.L.p ? 'Search' : 'Homepage'"></span>
+<i :class="s.L.p ? 'green-text' : 'red-text'" v-text="s.L.p ? 'pageview' : 'search_off'"></i> <span v-text="s.L.p ? 'open' : 'Homepage'"></span>
+</a>
+</li>
+<li v-if="s.L.p">
+<a class="row" :href="'https://' + s.L.b" rel="nofollow" target="_blank">
+<i class="green-text">home_app_logo</i> <span>Homepage</span>
 </a>
 </li>
 <li v-if="s.L && s.L.x !== false">
@@ -222,7 +222,6 @@ https://unpkg.com/petite-vue@0.4.1/dist/petite-vue.iife.js
 <li v-if="s.L" @click="$S.copy( 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
 <i>content_copy</i> <span>Copy link</span>
 </li>
-
 <li v-if="s.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
 <i>share</i> <span>Share link</span>
 </li>
@@ -468,8 +467,7 @@ this.saveLinks();
 
 
 /*________________________________________________________________*/
-mounted() {
-this.$S.mounted();
+mounted() { this.$S.mounted();
 
 
 

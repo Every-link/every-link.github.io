@@ -8,6 +8,21 @@ description: "",
 
 R: {
 
+/*
+// router
+
+v-if="currentPath === '/'"
+*/
+
+
+currentPath: window.location.hash,
+
+hashUpdate(){
+window.addEventListener('hashchange', () => { this.currentPath = window.location.hash })
+},
+
+
+
 //url 
 name: window.location.hostname,
 root: window.location.origin,
@@ -387,6 +402,31 @@ $template: `
 
 `}},
 /*________________________________________________________________*/
+comments(i) {return {
+
+identifier: i,
+
+comments(){
+
+if (this.identifier) {
+var disqus_config = function () {
+this.page.url = window.location.origin;
+this.page.identifier = this.identifier;
+};
+}
+
+const script = document.createElement('script');
+script.src = 'https://every-link.disqus.com/embed.js';
+script.async = true;
+script.setAttribute('data-timestamp', Date.now());
+document.body.appendChild(script);
+},
+
+$template: `
+<div id="disqus_thread" @vue:mounted="comments"></div>
+`}},
+/*________________________________________________________________*/
+
 
 },
 
