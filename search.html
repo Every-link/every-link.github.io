@@ -412,7 +412,7 @@
 <button v-if="!comments" class="transparent border small-round link" @click="comments = true">Show Comments</button>
 </div>
 
-<div v-if="comments" v-scope="$S.component.comments($S.R.tab)"></div>
+<div class="padding" v-if="comments" v-scope="$S.component.comments($S.R.tab)"></div>
 </div>
 
 
