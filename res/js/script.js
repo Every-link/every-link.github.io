@@ -410,7 +410,7 @@ comments(){
 
 if (this.identifier) {
 var disqus_config = function () {
-this.page.url = window.location.origin;
+this.page.url = window.location.origin + window.location.pathname;
 this.page.identifier = this.identifier;
 };
 }
