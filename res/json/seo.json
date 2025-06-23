@@ -2,10 +2,14 @@
 
 {
 "N": "Speed Test",
-"I": "developers.google.com",
-"L": {"b": "googlechrome.github.io/lighthouse/viewer/", "p": "?psiurl=", "x": false},
+"I": "network_check",
+"D": "website speed test",
 "alt": [
-
+{
+"N": "Lighthouse",
+"I": "developers.google.com",
+"L": {"b": "googlechrome.github.io/lighthouse/viewer/", "p": "?psiurl=", "x": false}
+},
 {
 "N": "Speed Insights",
 "L": { "b": "pagespeed.web.dev", "p": "/analysis?url=", "x": false }
@@ -26,9 +30,14 @@
 },
 
 {
-"N": "Responsinator",
-"L": { "b": "www.responsinator.com/", "p": "?url=", "x": false },
+"N": "responsive",
+"I": "responsive_layout",
+"D": "test responsive design",
 "alt": [
+{
+"N": "Responsinator",
+"L": { "b": "www.responsinator.com/", "p": "?url=", "x": false }
+},
 {
 "N": "mobile friendly test",
 "L": { "b": "https://search.google.com/test/mobile-friendly", "p": "?url", "x": false }
@@ -37,9 +46,14 @@
 },
 
 {
-"N": "Google Webmaster",
-"L": { "b": "search.google.com/search-console", "p": "?resource_id=", "x": false },
+"N": "Webmasters",
+"I": "screen_search_desktop",
+"D": "Search Webmasters",
 "alt": [
+{
+  "N": "Google Webmaster",
+  "L": { "b": "search.google.com/search-console", "p": "?resource_id=", "x": false }
+},
 {
 "N": "Bing Webmaster",
 "L": { "b": "www.bing.com/webmasters/", "p": "?siteUrl=", "x": false }
@@ -59,11 +73,15 @@
 ]
 },
 
-
+{
+"N": "Copyright",
+"I": "release_alert",
+"D": "Copyright report",
+"alt": [
 {
 "N": "DMCA.com",
-"L": { "b": "www.dmca.com", "x": false },
-"alt": [
+"L": { "b": "www.dmca.com", "x": false }
+},
 {
 "N": "Google search report",
 "L": { "b": "google.com/webmasters/tools/dmca-notice/", "x": false }

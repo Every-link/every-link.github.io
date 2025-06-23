@@ -7,6 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta charset="UTF-8">
 
+<!-- notranslate -->
+<meta name="google" content="notranslate">
+
 <!-- SEO & Social Sharing -->
 <title>Petite Vue</title>
 <meta name="description" content="Short description of your app or website.">
@@ -118,7 +121,7 @@
 <a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '')" rel="nofollow" target="_blank">
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
 <div class="max">
-<h5 v-text="S.N"></h5>
+<h5 class="small" v-text="S.N"></h5>
 <p class="row" style="word-break: break-all; overflow: hidden;">
 <span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
 <i v-if="!S.L.p" class="red-text">search_off</i>
@@ -127,10 +130,13 @@
 </a>
 
 
-<div v-if="!S.L" class="row max">
-<img v-if="S.I" class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + S.I" alt="icon" loading="lazy">
-<i v-if="S.I === undefined">link</i>
-<h5 class="max" v-text="S.N"></h5>
+<div v-if="S.alt && !S.L" class="row max">
+<button v-if="S.I" class="transparent fill square extra"><i class="extra" v-text="S.I"></i></button>
+<button v-if="S.I === undefined" class="transparent fill square extra"><i class="extra">data_table</i></button>
+<div class="max">
+<h5 class="small" v-text="S.N"></h5>
+<p class="row link" v-if="S.D" v-text="S.D" style="word-break: break-all; overflow: hidden;"></p>
+</div>
 </div>
 
 
@@ -403,7 +409,7 @@
 </div><!-- links -->
 
 <!-- comments -->
-<div v-if="$S.R.tab !== 'advanced' && $S.R.tab !== 'links'" v-scope="{comments:false}">
+<div class="padding" v-if="$S.R.tab !== 'advanced' && $S.R.tab !== 'links'" v-scope="{comments:false}">
 <div class="large-space"></div>
 
 <div>
@@ -412,10 +418,8 @@
 <button v-if="!comments" class="transparent border small-round link" @click="comments = true">Show Comments</button>
 </div>
 
-<div class="padding" v-if="comments" v-scope="$S.component.comments($S.R.tab)"></div>
-</div>
-
-
+<div v-if="comments" v-scope="$S.component.comments($S.R.tab)"></div>
+</div><!-- comments -->
 
 
 
