@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Offline Page</title>
+<style>
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+background: #f4f4f4;
+color: #333;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+text-align: center;
+}
+h1 { font-size: 2em; color: #ff6347; }
+p { font-size: 1.2em; margin: 10px 0; }
+.icon { font-size: 4em; margin-bottom: 20px; }
+.retry-btn {
+margin-top: 20px;
+padding: 10px 20px;
+font-size: 1em;
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+.retry-btn:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+  
+<div class="icon">📡</div>
+<h1>You are offline</h1>
+<p>This page is not available right now.</p>
+<p>Please check your internet connection.</p>
+<button class="retry-btn" onclick="retryConnection()">Try Again</button>
+
+<script>
+function retryConnection() {
+if (navigator.onLine) { location.reload() } else { alert("Still offline. Please try again later.") }
+}
+
+window.addEventListener('online', () => { location.reload() });
+</script>
+</body>
+</html>
