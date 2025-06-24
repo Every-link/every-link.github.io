@@ -1,80 +1,91 @@
-const CACHE_NAME = 'petite-vue-cache-v1';
+const CACHE_NAME = 'petite-vue-cache-v2';
 
 
+// ✅ Only pre-cache static assets, NOT HTML pages
 const urlsToCache = [
-
-'/',
-'/index.html',
-'/search.html',
-'/offline.html',
-'/404.html',
-
-'/manifest.json',
-
-'/icons/icon-192.png',
-'/icons/icon-512.png',
-'/icons/icon-180.png',
-
-'/res/css/style.css',
-'/res/js/petite-vue.js',
-'/res/js/script.js',
-
-//cdn
-'https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.js',
-'https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.css',
-
-
-
-
-'/res/json/web.json',
-'/res/json/ai.json'
-
-
+  '/offline.html',
+  
+  '/manifest.json',
+  
+  // Icons
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-180.png',
+  
+  // CSS & JS
+  '/res/css/style.css',
+  '/res/js/petite-vue.js',
+  '/res/js/script.js',
+  
+  // JSON
+  '/res/json/web.json',
+  '/res/json/ai.json',
+  
+  // External CDN files (will fail silently if offline on install)
+  'https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.js',
+  'https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.css',
 ];
 
 
-
-
-// Install: Cache essential files
+// ✅ Install: Cache static assets
 self.addEventListener('install', event => {
-  console.log('[Service Worker] Installing...');
+  console.log('[SW] Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      console.log('[Service Worker] Caching assets');
+      console.log('[SW] Pre-caching assets...');
       return cache.addAll(urlsToCache);
     })
   );
-  self.skipWaiting(); // Activate worker immediately
+  self.skipWaiting(); // Activate immediately
 });
 
-// Activate: Clean up old caches
+
+// ✅ Activate: Remove old caches
 self.addEventListener('activate', event => {
-  console.log('[Service Worker] Activating...');
+  console.log('[SW] Activating...');
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
         keys.map(key => {
           if (key !== CACHE_NAME) {
-            console.log('[Service Worker] Deleting old cache:', key);
+            console.log('[SW] Removing old cache:', key);
             return caches.delete(key);
           }
         })
       )
     )
   );
-  self.clients.claim(); // Take control immediately
+  self.clients.claim();
 });
 
-// Fetch: Serve cached files when offline
+
+// ✅ Fetch: 
+// - Navigations (HTML pages): try network first, fallback to offline.html
+// - Assets: try cache first, fallback to network
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return (
-        response ||
-        fetch(event.request).catch(() =>
-          caches.match('/offline.html') // Optional: fallback offline page
-        )
-      );
-    })
-  );
+  if (event.request.mode === 'navigate') {
+    // 🧠 For page navigations
+    event.respondWith(
+      fetch(event.request)
+      .then(response => {
+        // (Optional) Cache updated version
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, copy);
+        });
+        return response;
+      })
+      .catch(() => {
+        console.warn('[SW] Offline - showing fallback page');
+        return caches.match('/offline.html');
+      })
+    );
+  } else {
+    // 🎨 For static files: CSS, JS, images, etc.
+    event.respondWith(
+      caches.match(event.request).then(response => {
+        return response || fetch(event.request);
+      })
+    );
+  }
 });
