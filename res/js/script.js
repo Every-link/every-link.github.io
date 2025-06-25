@@ -126,6 +126,10 @@ Categories: JSON.parse(localStorage.getItem('categories')) || [
 { N: "Others", id: "others", I: "more_horiz", V: false },
 ],
 
+
+
+
+
 /*________________________________________________________________*/
 
 //general
@@ -255,15 +259,15 @@ $template: `
 
 <ul class="list">
 
-<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, 'wave', 'small-round']">
-<a :href="L.U + ( $S.R.query ? '?q=' + $S.R.query : '')">
-<i v-text="L.I"></i>
-<span v-text="L.N"></span>
-</a>
+<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, 'ripple', 'small-round']">
+<a :href="L.U"><i v-text="L.I"></i> <span v-text="L.N"></span></a>
 </li>
 
-
 </ul>
+
+
+
+
 </dialog>
 
 

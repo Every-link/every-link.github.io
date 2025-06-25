@@ -3,95 +3,157 @@
 
 <head>
   
-  <meta content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" name="viewport">
-
+  <!-- Viewport & Charset -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <meta charset="UTF-8">
   
+  <!-- Performance -->
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   
-  <link href="https://cdn.jsdelivr.net/npm/beercss@3/dist/cdn/beer.min.css" rel="stylesheet">
-  
+  <!--  res -->
+  <link href="https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.css" rel="stylesheet">
+  <link href="/res/css/style.css" rel="stylesheet">
+  <script src="/res/js/petite-vue.js"></script>
   
 </head>
 
+
+
+
 <body class="light">
-  
+  <div id="app" v-scope v-cloak @vue:mounted="mounted" class="bottom-padding">
     
-<nav class="top fill">
-  <button>menu</button>
-  <div class="max"></div>
-  <button>link</button>
-</nav>
+    <nav class="top primary" v-scope="$S.component.navTop(false)"></nav>
     
     
-    
-<main class="responsive">
+    <main class="responsive">
       
 
-<button data-ui="#menu">
-<span>button</span>
+      
 
 
-<menu id="menu" class="no-wrap right">
-  <li>test</li>
-  <li>test</li>
-</menu>
-</button>
+
+
+
+
+<ul class="list">
+  <li class="wave round">
+    <a href="/">item</a>
+  </li>
+</ul>
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<ul class="list border">
+
+<li v-for="(C, I) in $S.Categories" :key="C.id">
+<i v-text="C.I"></i>
+<h6 class="small" v-text="C.N"></h6>
+<div class="max"></div>
+<label class="switch icon">
+<input v-model="C.V" type="checkbox" @change="$S.localSet(Cats, $S.Cats)" :disabled="I === 0">
+<span> <i>visibility_off</i> <i>visibility</i> </span>
+</label>
+</li>
+
+
+<li>
+<i>forms_add_on</i>
+<div class="max">
+<h6 class="small">My Links</h6>
+<div class="wrap">Add more websites</div>
+</div>
+<label class="switch icon">
+<input v-model="$S.linksVisibility" type="checkbox" @change="$S.localSet('linksVisibility', $S.linksVisibility)">
+<span> <i>visibility_off</i> <i>visibility</i> </span>
+</label>
+</li>
+
+
+<li>
+<i>pageview</i>
+<div class="max">
+<h6 class="small">Advanced Search</h6>
+<div class="wrap">Use search engines</div>
+</div>
+<label class="switch icon">
+<input v-model="$S.advancedVisibility" type="checkbox" @change="$S.localSet('advanced', $S.advancedVisibility)">
+<span> <i>visibility_off</i> <i>visibility</i> </span>
+</label>
+</li>
+
+</ul>
+
+
+
+
+
+
+
+
       
       
       
-      <div class="tabs scroll">
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-        <a>Tab</a>
-      </div>
       
-  
+      <div v-scope="$S.component.drawer()"></div>
+      <div v-scope="$S.component.moreMenu()"></div>
+      <div class="snackbar" id="copy"><i>done</i><span>Copied</span></div>
+      
     </main>
     
+  </div><!-- /app -->
   
   
   
   
   
+  <script src="/res/js/script.js"></script>
+  <script>
+    const App = PetiteVue.createApp({
+      /*________________________________________________________________*/
+      
+      $delimiters: ['{{', '}}'],
+      $S: store,
+      
+      /*________________________________________________________________*/
+      
+      
+   menu: [
+{ N: "Homepage", I: "home", C: "s m l", U: "/index.html", },
+{ N: "search", I: "search", C: "s m l", U: "/search.html", },
+{ N: "page", I: "link", C: "s m l", U: "/page.html", },
+{ N: "tmp", I: "link", C: "s m l", U: "/TMP.html", },
+],
+   
+      
+      
+      
+      
+      
+      
+      /*________________________________________________________________*/
+      
+      mounted() {
+        this.$S.mounted();
+        
+        
+      },
+      /*________________________________________________________________*/
+    }).mount("#app")
+  </script>
   
-  <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3/dist/cdn/beer.min.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.11/dist/cdn/beer.min.js"></script>
   
 </body>
 
