@@ -122,9 +122,9 @@
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
 <div class="max">
 <h5 class="small" v-text="S.N"></h5>
-<p class="row" style="word-break: break-all; overflow: hidden;">
-<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
+<p class="row no-space" style="word-break: break-all; overflow: hidden;">
 <i v-if="!S.L.p" class="red-text">search_off</i>
+<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
 </p>
 </div>
 </a>
@@ -296,10 +296,9 @@
 
 <div class="max">
 <h5 class="small" v-text="L.N"></h5>
-<p class="row" style="word-break: break-all; overflow: hidden;">
-
-<span v-text="'https://' + (L.P ? L.B + L.P + $S.R.query : L.B)" class="link"></span>
+<p class="row no-space" style="word-break: break-all; overflow: hidden;">
 <i v-if="!L.P" class="red-text">search_off</i>
+<span v-text="'https://' + (L.P ? L.B + L.P + $S.R.query : L.B)" class="link"></span>
 </p>
 </div>
 </a>

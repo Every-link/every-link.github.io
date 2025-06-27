@@ -42,7 +42,7 @@
 },
 {
 "N": "microsoft store",
-"L": { "b": "apps.microsoft.com", "p": "/store/search?q=", "x": false },
+"L": { "b": "apps.microsoft.com", "p": "/search?query=", "x": false },
 "DL": { "b": "ms-windows-store://search", "p": "?query=" }
 },
 {
@@ -82,7 +82,7 @@
 },
 {
 "N": "nintendo eshop",
-"L": { "b": "www.nintendo.com", "p": "/store/search?q=", "x": false },
+"L": { "b": "www.nintendo.com", "p": "/search?q=", "x": false },
 "DL": { "b": "eshop://search", "p": "?q=" }
 }
 

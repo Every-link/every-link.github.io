@@ -259,14 +259,11 @@ $template: `
 
 <ul class="list">
 
-<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, 'ripple', 'small-round']">
+<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, '', 'small-round']">
 <a :href="L.U"><i v-text="L.I"></i> <span v-text="L.N"></span></a>
 </li>
 
 </ul>
-
-
-
 
 </dialog>
 
