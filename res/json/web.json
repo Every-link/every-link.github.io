@@ -52,6 +52,11 @@
 },
 
 {
+"N": "Entireweb",
+"L": {"b": "entireweb.com", "p": "/search.php?q=", "x": false}
+},
+
+{
 "N": "Presearch",
 "L": {"b": "presearch.com", "p": "/search?q=", "x": false}
 },
