@@ -7,20 +7,19 @@ description: "",
 /*________________________________________________________________*/
 
 R: {
-
-/*
 // router
 
-v-if="currentPath === '/'"
-*/
 
 
-currentPath: window.location.hash,
+
+
+// v-if="hash === '/'"
+
+hash: window.location.hash || "#/",
 
 hashUpdate(){
-window.addEventListener('hashchange', () => { this.currentPath = window.location.hash })
+window.addEventListener('hashchange', () => {this.hash = window.location.hash})
 },
-
 
 
 //url 
@@ -32,16 +31,12 @@ currentUrl: window.location.href,
 //url
 
 /*________________________*/
-get separator() { return this.currentUrl.includes('?') ? '&' : '?' },
-/*________________________*/
 
 query: new URLSearchParams(window.location.search).get('q') || 'search',
-tab: new URLSearchParams(window.location.search).get('tab') || "web",
+get encodedQuery() { return encodeURIComponent(this.query) },
 
 q: new URLSearchParams(window.location.search).get('q'),
-p: new URLSearchParams(window.location.search).get('page'),
 
-get encodedQuery() { return encodeURIComponent(this.query) },
 
 
 }, //router
@@ -432,6 +427,200 @@ $template: `
 </div>
 `}},
 /*________________________________________________________________*/
+form() {return {
+
+
+$template: `
+
+<form v-else-if="$S.R.q" class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
+<nav :class="$S.Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
+
+<div class="max field border small-round primary-border">
+<input type="text" name="q" v-model="$S.R.query">
+</div>
+<button type="submit" class="transparent border primary-border fill small-round large">
+<i>search</i> <span class="m l">Search</span>
+</button>
+
+</nav>
+</form>
+
+`}},
+/*________________________________________________________________*/
+tabs(t) {return {
+
+tab: t,
+
+scroll() {
+document.querySelector(`[data-tab=${this.tab}]`).scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
+},
+
+
+$template: `
+
+<nav class="row scroll" @vue:mounted="scroll">
+
+<a v-for="(C, I) in $S.Categories.filter(C => C.V || C.id == tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == tab}, 'vertical padding small-round']" :href="'/search/' + C.id + '.html' + '?q=' + $S.R.encodedQuery" :data-tab="C.id">
+  <i v-text="C.I"></i> <span v-text="C.N"></span>
+</a>
+
+
+<a data-ui="#advanced" :class="[{'border primary-border fill' : tab == 'advanced'}, 'vertical padding small-round']" v-show="$S.advancedVisibility || tab == 'advanced'" :href="'/search/advanced.html' + '?q=' + $S.R.encodedQuery" data-tab="advanced">
+<i>pageview</i> <span>Advanced</span>
+</a>
+
+
+<a data-ui="#links" :class="[{'border primary-border fill' : tab == 'my-links'}, 'vertical padding small-round']" v-show="$S.linksVisibility || tab == 'my-links'" :href="'/search/my-links.html' + '?q=' + $S.R.encodedQuery" data-tab="my-links">
+<i>edit_note</i> <span>My List</span>
+</a>
+
+<button data-ui="#moreMenu" class="transparent vertical padding small-round">
+<i>forms_add_on</i> <span>More</span>
+</button>
+
+</nav>
+
+`}},
+/*________________________________________________________________*/
+content(s) {return {
+
+sites: s,
+
+$template: `
+
+<div class="grid">
+<article v-for="(S, I) in sites || []" :class="[S.C, 's12 m6 l4 small-round']">
+
+<div class="row">
+
+<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '')" rel="nofollow" target="_blank">
+<img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
+<div class="max">
+<h5 class="small" v-text="S.N"></h5>
+<p class="row no-space" style="word-break: break-all; overflow: hidden;">
+<i v-if="!S.L.p" class="red-text">search_off</i>
+<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
+</p>
+</div>
+</a>
+
+
+<div v-if="S.alt && !S.L" class="row max">
+<button v-if="S.I" class="transparent fill square extra"><i class="extra" v-text="S.I"></i></button>
+<button v-if="S.I === undefined" class="transparent fill square extra"><i class="extra">data_table</i></button>
+<div class="max">
+<h5 class="small" v-text="S.N"></h5>
+<p class="row link" v-if="S.D" v-text="S.D" style="word-break: break-all; overflow: hidden;"></p>
+</div>
+</div>
+
+
+<button :data-ui="'#sites-menu-' + I" class="small-round transparent border">
+  <i>more_vert</i><span v-if="!S.L">menu</span>
+
+
+<menu :id="'sites-menu-' + I" :class="[I == 0 && $S.Device.display == 's' ? 'bottom' : I <= 1 && $S.Device.display == 'm' ? 'bottom' : I <= 2 && $S.Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
+
+<li v-if="S.L && S.L.p">
+<a class="row" :href="'https://' + S.L.b" rel="nofollow" target="_blank">
+<i class="green-text">home_app_logo</i> <span>Homepage</span>
+</a>
+</li>
+<li v-if="S.L && S.L.x !== false">
+<a class="row" :href="'https://' + $S.X.url + 'site:' + S.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
+</a>
+</li>
+<li v-if="S.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
+<a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + $S.R.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
+<i>phone_iphone</i> <span>Open App</span>
+</a>
+</li>
+<li v-if="S.A && $S.Device.os == 'android'">
+<a class="row" :href="'market://details?id=' + S.A.a" rel="nofollow">
+<i>system_update</i> <span>Download App</span>
+</a>
+</li>
+<li v-if="S.A && $S.Device.os == 'ios'">
+<a class="row" :href="'itms-apps://itunes.apple.com/app/' + S.A.i" rel="nofollow">
+<i>system_update</i> <span>Download App</span>
+</a>
+</li>
+
+<div class="divider"></div>
+
+<li v-if="S.L" @click="$S.copy( 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+  <i>content_copy</i> <span>Copy link</span>
+</li>
+
+<li v-if="S.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+  <i>share</i> <span>Share link</span>
+</li>
+
+<div v-show="S.alt" class="divider"></div>
+
+<li v-for="(s, i) in S.alt || []" :data-ui="'#sites-menu-sub-' + i" :class="s.C">
+<div class="horizontal-padding row">
+<img class="tiny square" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (s.I ? s.I : s.L.b)" alt="icon" loading="lazy">
+<span v-text="s.N"></span> <i>arrow_drop_down</i>
+</div>
+
+<menu :id="'sites-menu-sub-' + i" class="top left no-wrap no-padding">
+
+<li v-if="s.L">
+<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
+<i :class="s.L.p ? 'green-text' : 'red-text'" v-text="s.L.p ? 'pageview' : 'search_off'"></i> <span v-text="s.L.p ? 'open' : 'Homepage'"></span>
+</a>
+</li>
+<li v-if="s.L.p">
+<a class="row" :href="'https://' + s.L.b" rel="nofollow" target="_blank">
+<i class="green-text">home_app_logo</i> <span>Homepage</span>
+</a>
+</li>
+<li v-if="s.L && s.L.x !== false">
+<a class="row" :href="'https://' + $S.X.url + 'site:' + s.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
+</a>
+</li>
+<li v-if="s.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
+<a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + $S.R.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
+<i>phone_iphone</i> <span>Open App</span>
+</a>
+</li>
+<li v-if="s.A && $S.Device.os == 'android'">
+<a class="row" :href="'market://details?id=' + s.A.a" rel="nofollow">
+<i>system_update</i> <span>Download App</span>
+</a>
+</li>
+<li v-if="s.A && $S.Device.os == 'ios'">
+<a class="row" :href="'itms-apps://itunes.apple.com/app/' + s.A.i" rel="nofollow">
+<i>system_update</i> <span>Download App</span>
+</a>
+</li>
+
+<div class="divider"></div>
+
+<li v-if="s.L" @click="$S.copy( 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<i>content_copy</i> <span>Copy link</span>
+</li>
+<li v-if="s.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<i>share</i> <span>Share link</span>
+</li>
+
+</menu>
+</li>
+
+</menu>
+</button>
+
+</div>
+</article>
+</div>
+
+
+
+`}},
+
 
 
 },
@@ -445,6 +634,10 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   });
 ;}
+
+
+//router
+this.R.hashUpdate();
 
 
 

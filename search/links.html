@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+<!-- Viewport & Charset -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta charset="UTF-8">
+
+<!-- notranslate -->
+<meta name="google" content="notranslate">
+
+<!-- SEO & Social Sharing -->
+<title>Petite Vue</title>
+<meta name="description" content="Short description of your app or website.">
+<meta property="og:title" content="Petite Vue">
+<meta property="og:description" content="Short description of your app or website.">
+<meta property="og:url" content="https://example.com">
+<meta property="og:image" content="https://example.com/icons/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Petite Vue">
+<meta name="twitter:description" content="Short description of your app or website.">
+<meta name="twitter:image" content="https://example.com/icons/og-image.jpg">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://example.com">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+
+<!-- PWA Support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#5f52a7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Petite Vue">
+
+<!-- Performance -->
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+
+
+<!--  res -->
+<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.22/dist/cdn/beer.min.css" rel="stylesheet">
+<link href="/res/css/style.css" rel="stylesheet">
+<script src="/res/js/petite-vue.js"></script>
+
+
+</head>
+
+
+<body class="light">
+
+<div id="app" v-scope v-cloak @vue:mounted="mounted">
+
+<nav class="top primary" v-scope="$S.component.navTop(false)"></nav>
+
+<main class="responsive">
+
+<div class="vertical-padding" v-scope="$S.component.form()"></div>
+<div class="bottom-padding" v-scope="$S.component.tabs('my-links')"></div>
+
+
+
+
+<div v-if="$S.R.tab === 'links'" v-scope="{edit: false}" class="page left active">
+
+<div class="grid">
+
+<article class="s12 m6 l4 small-round padding" v-for="(L, I) in links">
+
+<div class="row">
+<a class="row max" :href="'https://' + (L.P ? L.B + L.P + $S.R.encodedQuery : L.B )" rel="nofollow" target="_blank">
+
+<img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + L.B" alt="icon" loading="lazy">
+
+<div class="max">
+<h5 class="small" v-text="L.N"></h5>
+<p class="row no-space" style="word-break: break-all; overflow: hidden;">
+<i v-if="!L.P" class="red-text">search_off</i>
+<span v-text="'https://' + (L.P ? L.B + L.P + $S.R.query : L.B)" class="link"></span>
+</p>
+</div>
+</a>
+
+
+<button v-show="edit" class="small-round border" @click="removeLink(I)">
+<i class="red-text">delete</i>
+</button>
+
+<button v-show="!edit" :data-ui="'#links-menu-' + I" class="transparent small-round">
+<i>more_vert</i>
+
+<menu :id="'links-menu-' + I" :class="[I == 0 && $S.Device.display == 's' ? 'bottom' : I <= 1 && $S.Device.display == 'm' ? 'bottom' : I <= 2 && $S.Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
+
+<li v-if="L.P">
+<a class="row" :href="'https://' + L.B" rel="nofollow" target="_blank">
+<i class="green-text">home_app_logo</i> <span>Homepage</span>
+</a>
+</li>
+
+<li>
+<a class="row" :href="'https://' + $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
+</a>
+</li>
+
+<div class="divider"></div>
+
+<li v-if="L.B !== undefined" @click="$S.copy( 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
+  <i>content_copy</i> <span>Copy link</span>
+</li>
+
+<li v-if="L.B && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(L.N, 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
+  <i>share</i> <span>Share link</span>
+</li>
+
+<!--
+<div class="divider"></div>
+
+<li @click="removeLink(I)" :data-ui="'#links-menu-' + I">
+  <i>delete</i> <span>Delete link</span>
+</li>
+-->
+
+</menu>
+</button>
+
+</div>
+
+
+
+</article>
+
+</div>
+
+
+
+<nav class="right-align" v-show="!edit">
+<button class="fill border primary-border small-round large" @click="edit = !edit">
+<i>forms_add_on</i>
+</button>
+</nav>
+
+
+<form class="middle-align center-align" @submit.prevent="addLink()" v-show="edit">
+
+<div :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
+
+<p class="row no-space s12 m12 l12">
+<s class="red-text">https://</s><span class="green-text">google.com</span>
+<b class="blue-text">/search?q=</b><s class="red-text">news</s>
+</p>
+
+<div class="field label border large s12 m12 l12">
+<input type="text" v-model="newLink.N" required>
+<label><b class="red-text">*</b>website name</label>
+</div>
+
+<div class="field label border large s12 m8 l7">
+<input type="text" v-model="newLink.B" required>
+<label>
+<b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
+</label>
+</div>
+
+<div class="max field label border large s12 m4 l5">
+<input type="text" v-model="newLink.P">
+<label> ex:<b class="blue-text">/search?q=</b></label>
+</div>
+
+<nav class="center-align s12 m12 l12">
+
+<button class="small-round border large" @click="edit = false">
+<i>close</i>
+</button>
+
+<button class="transparent fill border border-primary small-round large" type="submit">
+<span>add</span> <i>add</i>
+</button>
+</nav>
+
+</div>
+
+
+</form>
+
+</div>
+
+
+
+
+
+
+<div v-scope="$S.component.drawer()"></div>
+<div v-scope="$S.component.moreMenu()"></div>
+<div class="large-padding large-margin" b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()"></div>
+<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
+
+</main>
+
+</div><!-- /app -->
+
+
+
+<script src="/res/js/script.js"></script>
+
+<script>
+const App = PetiteVue.createApp({
+/*________________________________________________________________*/
+
+$delimiters: ['{{', '}}'],
+$S : store,
+/*________________________________________________________________*/
+
+  links: JSON.parse(localStorage.getItem('links')) || [],
+  newLink: { N: "", B: "", P: "" },
+  saveLinks() { this.$S.localSet("links", this.links) },
+  removeLink(index) { this.links.splice(index, 1);
+    this.saveLinks() },
+  addLink() {
+    this.links.push({ N: this.newLink.N, B: this.newLink.B, P: this.newLink.P });
+    this.newLink.N = '';
+    this.newLink.B = '';
+    this.newLink.P = '';
+    this.saveLinks();
+  },
+
+/*________________________________________________________________*/
+
+/*________________________________________________________________*/
+
+
+
+
+/*________________________________________________________________*/
+
+
+
+
+
+/*________________________________________________________________*/
+mounted() { this.$S.mounted();
+
+
+},
+/*________________________________________________________________*/
+}).mount("#app") 
+</script>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.22/dist/cdn/beer.min.js"></script>
+
+</body>
+
+</html>

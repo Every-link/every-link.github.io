@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+<!-- Viewport & Charset -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta charset="UTF-8">
+
+<!-- notranslate -->
+<meta name="google" content="notranslate">
+
+<!-- SEO & Social Sharing -->
+<title>Petite Vue</title>
+<meta name="description" content="Short description of your app or website.">
+<meta property="og:title" content="Petite Vue">
+<meta property="og:description" content="Short description of your app or website.">
+<meta property="og:url" content="https://example.com">
+<meta property="og:image" content="https://example.com/icons/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Petite Vue">
+<meta name="twitter:description" content="Short description of your app or website.">
+<meta name="twitter:image" content="https://example.com/icons/og-image.jpg">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://example.com">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+
+<!-- PWA Support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#5f52a7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Petite Vue">
+
+<!-- Performance -->
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+
+
+<!--  res -->
+<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.22/dist/cdn/beer.min.css" rel="stylesheet">
+<link href="/res/css/style.css" rel="stylesheet">
+<script src="/res/js/petite-vue.js"></script>
+
+
+</head>
+
+
+<body class="light">
+
+<div id="app" v-scope v-cloak @vue:mounted="mounted">
+
+<nav class="top primary" v-scope="$S.component.navTop(false)"></nav>
+
+<main class="responsive">
+
+<div class="vertical-padding" v-scope="$S.component.form()"></div>
+<div class="bottom-padding" v-scope="$S.component.tabs('web')"></div>
+<div class="page left active" v-scope="$S.component.content(sites)"></div>
+
+<div class="padding" v-scope="{comments:false}">
+<div class="large-space"></div>
+
+<div>
+<h5>Feedback</h5>
+<p>request a website or report a problem in this Category.</p>
+<button v-if="!comments" class="transparent border small-round link" @click="comments = true">Show Comments</button>
+</div>
+
+<div v-if="comments" v-scope="$S.component.comments('web')"></div>
+</div>
+
+
+<div v-scope="$S.component.drawer()"></div>
+<div v-scope="$S.component.moreMenu()"></div>
+<div class="large-padding large-margin" b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()"></div>
+<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
+
+</main>
+
+</div><!-- /app -->
+
+
+
+<script src="/res/js/script.js"></script>
+
+<script>
+const App = PetiteVue.createApp({
+/*________________________________________________________________*/
+
+$delimiters: ['{{', '}}'],
+$S : store,
+/*________________________________________________________________*/
+
+//tabs
+
+
+/*________________________________________________________________*/
+
+sites: [
+
+
+{ 
+N: "Google",
+L: {b: "google.com", p: "/search?q=", s: "&hl=ar", x: false},
+DL: { b: "google://search", p: "?q="},
+A: {a: "com.google.android.googlequicksearchbox", i: "id284815942"}
+},
+
+
+{
+N: "Bing",
+L: {b: "bing.com", p: "/search?q=", x: false}
+},
+
+{
+N: "Yandex",
+L: {b: "yandex.com", p: "/search?text=", x: false}
+},
+
+{
+N: "Yahoo",
+L: {b: "search.yahoo.com", p: "/search?p=", x: false}
+},
+
+{
+N: "Baidu",
+L: {b: "baidu.com", p: "/s?word=", x: false}
+},
+
+{
+N: "Naver",
+L: {b: "search.naver.com", p: "/search.naver?query=", x: false}
+},
+
+{
+N: "Startpage",
+L: {b: "startpage.com", p: "/do/search?q=", x: false}
+},
+
+{
+N: "Qwant",
+L: {b: "www.qwant.com", p: "?q=", x: false}
+},
+
+{
+N: "Ecosia",
+L: {b: "ecosia.org", p: "/search?q=", x: false}
+},
+
+{
+N: "Entireweb",
+L: {b: "entireweb.com", p: "/search.php?q=", x: false}
+},
+
+{
+N: "Presearch",
+L: {b: "presearch.com", p: "/search?q=", x: false}
+},
+
+{
+N: "Dsearch",
+L: {b: "dsearch.com", p: "/search?q=", x: false}
+},
+
+{
+N: "Aol",
+L: {b: "search.aol.com", p: "/aol/search/?q=", x: false}
+},
+
+{
+N: "Searchalot",
+L: {b: "searchalot.com", p: "/?q=", x: false}
+},
+
+{
+N: "Ask",
+L: {b: "ask.com", p: "/web?q=", x: false}
+},
+
+{
+N: "Marginalia",
+L: {b: "marginalia-search.com", p: "/search?query=", x: false}
+},
+
+{
+N: "Duckduckgo",
+L: {b: "duckduckgo.com", p: "/?q=", x: false}
+},
+
+{
+N: "Brave",
+L: {b: "search.brave.com", p: "/search?q=", x: false}
+},
+
+{
+N: "Yep",
+L: {b: "yep.com", p: "/web?q=", x: false}
+},
+
+{
+N: "Mojeek",
+L: {b: "www.mojeek.com", p: "/search?q=", x: false}
+},
+
+{
+N: "Gibiru",
+L: {b: "gibiru.com", p: "/results.html?q=", x: false}
+},
+
+{
+N: "Myallsearch",
+L: {b: "www.myallsearch.com", p: "/search?q=", x: false}
+},
+
+{
+N: "Onesearch",
+L: { b: "onesearch.com", p: "/yhs/search?p=", x: false}
+},
+
+{
+N: "Internet Archive",
+L: {b: "archive.org", p: "/search?query="}
+},
+
+{
+N: "Wikipedia",
+L: {b: "wikipedia.org", p: "/wiki/"}
+}
+
+
+
+
+],
+
+
+
+/*________________________________________________________________*/
+
+
+
+
+
+/*________________________________________________________________*/
+mounted() { this.$S.mounted();
+
+
+},
+/*________________________________________________________________*/
+}).mount("#app") 
+</script>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.22/dist/cdn/beer.min.js"></script>
+
+</body>
+
+</html>

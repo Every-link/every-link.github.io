@@ -28,10 +28,78 @@
     
     <main class="responsive">
       
+<h1 v-text="$S.R.hash"></h1>
 
-      
 
 
+
+
+
+
+<form action="#test" target="_self" method="GET">
+<div class="padding">
+
+<div class="grid">
+
+<div class="s12 m6 l6">
+<div class="field prefix label border">
+<i class="front">search</i>
+<input type="text" name="q" required>
+<label>search</label>
+</div>
+</div>
+
+<div class="s8 m4 l4">
+<div class="field prefix border label">
+<i class="front">list</i>
+<select v-model="$S.R.tab" required>
+<option v-for="C in $S.Categories.filter(C => C.V)" :key="C.id" v-text="C.N" :value="C.id"></option>
+<option v-if="$S.linksVisibility" value="links">My List</option>
+<option v-if="$S.advancedVisibility == true" value="advanced">Advanced Search</option>
+</select>
+<label>Category</label>
+</div>
+</div>
+
+<button type="button" class="transparent border large small-round s4 m2 l2" data-ui="#moreMenu">
+<i>forms_add_on</i> <span>More</span>
+</button>
+
+</div>
+
+
+
+<nav class="center-align padding">
+<button type="submit" class="transparent border primary-border fill large small-round ">
+  <span>Search</span><i>search</i>
+</button>
+</nav>
+
+
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a v-for="C in $S.Categories" :href="'#/cat/' + C.id" v-text="C.N" class="button"></a>
+
+<div v-for="C in $S.Categories.filter(C => $S.R.hash == '#/cat/' + C.id )" v-text="C.N" class="green"></div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 
@@ -149,7 +217,9 @@
    
       
       
-      
+
+
+, 
       
       
       
