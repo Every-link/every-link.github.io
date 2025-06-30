@@ -88,7 +88,7 @@
 <i class="front">list</i>
 <select v-model="tab" required>
 <option v-for="C in $S.Categories.filter(C => C.V)" :key="C.id" v-text="C.N" :value="C.id"></option>
-<option v-if="$S.linksVisibility" value="links">My List</option>
+<option v-if="$S.linksVisibility" value="my-links">My List</option>
 <option v-if="$S.advancedVisibility == true" value="advanced">Advanced Search</option>
 </select>
 <label>Category</label>

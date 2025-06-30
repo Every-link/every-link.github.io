@@ -482,9 +482,10 @@ $template: `
 
 `}},
 /*________________________________________________________________*/
-content(s) {return {
+content(s,m) {return {
 
 sites: s,
+myLinks: m || {},
 
 $template: `
 
@@ -515,9 +516,12 @@ $template: `
 </div>
 
 
+<button class="small-round transparent border" v-if="myLinks.edit !== undefined && myLinks.edit === true" @click="myLinks.removeLink(I)">
+  <i class="red-text">delete</i>
+</button>
+
 <button :data-ui="'#sites-menu-' + I" class="small-round transparent border">
   <i>more_vert</i><span v-if="!S.L">menu</span>
-
 
 <menu :id="'sites-menu-' + I" :class="[I == 0 && $S.Device.display == 's' ? 'bottom' : I <= 1 && $S.Device.display == 'm' ? 'bottom' : I <= 2 && $S.Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
 
@@ -556,6 +560,7 @@ $template: `
 <li v-if="S.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
   <i>share</i> <span>Share link</span>
 </li>
+
 
 <div v-show="S.alt" class="divider"></div>
 
@@ -620,6 +625,7 @@ $template: `
 
 
 `}},
+/*________________________________________________________________*/
 
 
 

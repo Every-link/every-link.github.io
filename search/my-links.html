@@ -63,89 +63,21 @@
 <div class="bottom-padding" v-scope="$S.component.tabs('my-links')"></div>
 
 
+<div class="page left active">
 
-
-<div v-if="$S.R.tab === 'links'" v-scope="{edit: false}" class="page left active">
-
-<div class="grid">
-
-<article class="s12 m6 l4 small-round padding" v-for="(L, I) in links">
-
-<div class="row">
-<a class="row max" :href="'https://' + (L.P ? L.B + L.P + $S.R.encodedQuery : L.B )" rel="nofollow" target="_blank">
-
-<img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + L.B" alt="icon" loading="lazy">
-
-<div class="max">
-<h5 class="small" v-text="L.N"></h5>
-<p class="row no-space" style="word-break: break-all; overflow: hidden;">
-<i v-if="!L.P" class="red-text">search_off</i>
-<span v-text="'https://' + (L.P ? L.B + L.P + $S.R.query : L.B)" class="link"></span>
-</p>
-</div>
-</a>
-
-
-<button v-show="edit" class="small-round border" @click="removeLink(I)">
-<i class="red-text">delete</i>
-</button>
-
-<button v-show="!edit" :data-ui="'#links-menu-' + I" class="transparent small-round">
-<i>more_vert</i>
-
-<menu :id="'links-menu-' + I" :class="[I == 0 && $S.Device.display == 's' ? 'bottom' : I <= 1 && $S.Device.display == 'm' ? 'bottom' : I <= 2 && $S.Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
-
-<li v-if="L.P">
-<a class="row" :href="'https://' + L.B" rel="nofollow" target="_blank">
-<i class="green-text">home_app_logo</i> <span>Homepage</span>
-</a>
-</li>
-
-<li>
-<a class="row" :href="'https://' + $S.X.url + 'site:' + L.B + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
-<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
-</a>
-</li>
-
-<div class="divider"></div>
-
-<li v-if="L.B !== undefined" @click="$S.copy( 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
-  <i>content_copy</i> <span>Copy link</span>
-</li>
-
-<li v-if="L.B && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(L.N, 'https://' + L.B + (L.P ? L.P + $S.R.encodedQuery : '') )">
-  <i>share</i> <span>Share link</span>
-</li>
-
-<!--
-<div class="divider"></div>
-
-<li @click="removeLink(I)" :data-ui="'#links-menu-' + I">
-  <i>delete</i> <span>Delete link</span>
-</li>
--->
-
-</menu>
-</button>
-
-</div>
+<div v-scope="$S.component.content(myLinks.links, myLinks)"></div>
 
 
 
-</article>
 
-</div>
-
-
-
-<nav class="right-align" v-show="!edit">
-<button class="fill border primary-border small-round large" @click="edit = !edit">
+<nav class="right-align" v-show="!myLinks.edit">
+<button class="fill border primary-border small-round large" @click="myLinks.edit = !myLinks.edit">
 <i>forms_add_on</i>
 </button>
 </nav>
 
 
-<form class="middle-align center-align" @submit.prevent="addLink()" v-show="edit">
+<form class="middle-align center-align" @submit.prevent="myLinks.addLink()" v-show="myLinks.edit">
 
 <div :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
 
@@ -155,25 +87,25 @@
 </p>
 
 <div class="field label border large s12 m12 l12">
-<input type="text" v-model="newLink.N" required>
+<input type="text" v-model="myLinks.newLink.N" required>
 <label><b class="red-text">*</b>website name</label>
 </div>
 
 <div class="field label border large s12 m8 l7">
-<input type="text" v-model="newLink.B" required>
+<input type="text" v-model="myLinks.newLink.L.b" required>
 <label>
 <b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
 </label>
 </div>
 
 <div class="max field label border large s12 m4 l5">
-<input type="text" v-model="newLink.P">
+<input type="text" v-model="myLinks.newLink.L.p">
 <label> ex:<b class="blue-text">/search?q=</b></label>
 </div>
 
 <nav class="center-align s12 m12 l12">
 
-<button class="small-round border large" @click="edit = false">
+<button class="small-round border large" @click="myLinks.edit = false">
 <i>close</i>
 </button>
 
@@ -215,19 +147,21 @@ $delimiters: ['{{', '}}'],
 $S : store,
 /*________________________________________________________________*/
 
+myLinks: {
+  
+  edit: false,
   links: JSON.parse(localStorage.getItem('links')) || [],
-  newLink: { N: "", B: "", P: "" },
-  saveLinks() { this.$S.localSet("links", this.links) },
-  removeLink(index) { this.links.splice(index, 1);
-    this.saveLinks() },
-  addLink() {
-    this.links.push({ N: this.newLink.N, B: this.newLink.B, P: this.newLink.P });
-    this.newLink.N = '';
-    this.newLink.B = '';
-    this.newLink.P = '';
-    this.saveLinks();
-  },
+  newLink: { N: "", L: {b: "", p: "" }},
+  saveLinks() { localStorage.setItem("links", JSON.stringify(this.links)) },
+  removeLink(index) { this.links.splice(index, 1); this.saveLinks() },
+  
+  addLink() { 
+  this.links.push({ N: this.newLink.N, L: { b: this.newLink.L.b,  p: this.newLink.L.p }});
+  this.newLink.N = '';  this.newLink.L.b = '';  this.newLink.L.p = '';
+  this.saveLinks();
+},
 
+},
 /*________________________________________________________________*/
 
 /*________________________________________________________________*/
