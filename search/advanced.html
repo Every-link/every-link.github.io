@@ -67,8 +67,8 @@
 
 <div class="page left active">
 
-<form class="middle-align center-align" method="GET" :action="'https://' + $S.X.engine.B" target="_blank">
-<input type="text" :name="$S.X.engine.P" :value="'site:' + site + ' &quot;' + $S.R.q + '&quot;'" hidden>
+<form class="middle-align center-align" method="GET" :action="'https://' + $S.X.engine.L.b" target="_blank">
+<input type="text" :name="$S.X.engine.L.p" :value="'site:' + site + ' &quot;' + $S.R.query + '&quot;'" hidden>
 
 <div :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
 
@@ -80,7 +80,7 @@
 
 <div class="field label suffix border large s12 m4 l5">
 <select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
-<option v-for="E in $S.X.Engines" :key="E.B" :value="E" v-text="E.N"></option>
+<option v-for="E in $S.X.Engines" :key="E.L.b" :value="E" v-text="E.N"></option>
 </select>
 
 <label>Select Search Engine</label>
@@ -101,10 +101,12 @@
 </div>
 
 
+
+
 <div v-scope="$S.component.drawer()"></div>
 <div v-scope="$S.component.moreMenu()"></div>
+
 <div class="large-padding large-margin" b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()"></div>
-<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
 
 </main>
 

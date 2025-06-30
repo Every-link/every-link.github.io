@@ -155,14 +155,27 @@ linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
 X: {
 
 Engines: [
-  { N: "Google", B: "google.com/search", P: "q" },
-  { N: "Bing", B: "bing.com/search", P: "q" },
-  { N: "Yandex", B: "yandex.com/search/", P: "text" },
+  { N: "Google", L: {b: "google.com/search", p: "q"} },
+  { N: "Bing", L: {b: "bing.com/search", p: "q"} },
+  { N: "Yandex", L: {b: "yandex.com/search/", p: "text"} },
+  { N: "Yahoo", L: {b: "search.yahoo.com/search", p: "p"} },
+  { N: "Startpage", L: {b: "startpage.com/do/search", p: "q"} },
+  { N: "Qwant", L: {b: "www.qwant.com", p: "q"} },
+  { N: "Ecosia", L: {b: "ecosia.org/search", p: "q"} },
+  { N: "Entireweb", L: {b: "entireweb.com/search.php", p: "q"} },
+  { N: "Aol", L: {b: "search.aol.com/aol/search/", p: "q"} },
+  { N: "Searchalot", L: {b: "searchalot.com", p: "q"} },
+  { N: "Marginalia", L: {b: "marginalia-search.com/search", p: "query"} },
+  { N: "Duckduckgo", L: {b: "duckduckgo.com", p: "q"} },
+  { N: "Brave", L: {b: "search.brave.com/search", p: "q"} },
+  { N: "Yep", L: {b: "yep.com/web", p: "q"} },
+  { N: "Gibiru", L: {b: "gibiru.com/results.html", p: "q"} },
+  { N: "Myallsearch", L: {b: "www.myallsearch.com/search", p: "q"} },
 ],
 
-engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", B: "google.com/search", P: "q" },
+engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", L: {b: "google.com/search", p: "q"} },
 
-get url(){ return `${this.engine.B}?${this.engine.P}=` },
+get url(){ return `${this.engine.L.b}?${this.engine.L.p}=` },
 
 
 },
@@ -363,7 +376,7 @@ $template: `
 <div class="field label prefix suffix border">
 <i>search</i>
 <select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
-<option v-for="(E, I) in $S.X.Engines" :key="E.B" :value="E" :selected="$S.X.engine.B === E.B" v-text="E.N"></option>
+<option v-for="(E, I) in $S.X.Engines" :key="E.L.b" :value="E" :selected="$S.X.engine.L.b === E.L.b" v-text="E.N"></option>
 </select>
 
 <label>Default Search Engine</label>
@@ -432,7 +445,7 @@ form() {return {
 
 $template: `
 
-<form v-else-if="$S.R.q" class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
+<form class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
 <nav :class="$S.Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
 
 <div class="max field border small-round primary-border">
@@ -465,14 +478,15 @@ $template: `
 </a>
 
 
+<a data-ui="#links" :class="[{'border primary-border fill' : tab == 'my-links'}, 'vertical padding small-round']" v-show="$S.linksVisibility || tab == 'my-links'" :href="'/search/my-links.html' + '?q=' + $S.R.encodedQuery" data-tab="my-links">
+<i>edit_note</i> <span>My List</span>
+</a>
+
+
 <a data-ui="#advanced" :class="[{'border primary-border fill' : tab == 'advanced'}, 'vertical padding small-round']" v-show="$S.advancedVisibility || tab == 'advanced'" :href="'/search/advanced.html' + '?q=' + $S.R.encodedQuery" data-tab="advanced">
 <i>pageview</i> <span>Advanced</span>
 </a>
 
-
-<a data-ui="#links" :class="[{'border primary-border fill' : tab == 'my-links'}, 'vertical padding small-round']" v-show="$S.linksVisibility || tab == 'my-links'" :href="'/search/my-links.html' + '?q=' + $S.R.encodedQuery" data-tab="my-links">
-<i>edit_note</i> <span>My List</span>
-</a>
 
 <button data-ui="#moreMenu" class="transparent vertical padding small-round">
 <i>forms_add_on</i> <span>More</span>
