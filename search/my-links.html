@@ -150,27 +150,33 @@ $S : store,
 myLinks: {
   
   edit: false,
+  
   links: JSON.parse(localStorage.getItem('links')) || [],
   newLink: { N: "", L: {b: "", p: "" }},
+  
   saveLinks() { localStorage.setItem("links", JSON.stringify(this.links)) },
-  removeLink(index) { this.links.splice(index, 1); this.saveLinks() },
+  
+  removeLink(index) {
+    this.links.splice(index, 1); 
+    this.saveLinks() 
+  },
   
   addLink() { 
   this.links.push({ N: this.newLink.N, L: { b: this.newLink.L.b,  p: this.newLink.L.p }});
-  this.newLink.N = '';  this.newLink.L.b = '';  this.newLink.L.p = '';
   this.saveLinks();
   this.edit = false;
+  this.newLink.N = '';
+  this.newLink.L.b = '';
+  this.newLink.L.p = '';
 },
 
 },
-/*________________________________________________________________*/
 
 /*________________________________________________________________*/
 
 
 
 
-/*________________________________________________________________*/
 
 
 
