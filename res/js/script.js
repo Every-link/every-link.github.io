@@ -243,8 +243,8 @@ drawer() {return {
 // name, icon, class
 menu: [
 { N: "Homepage", I: "home", C: "s m l", U: "/index.html", },
-{ N: "search", I: "search", C: "s m l", U: "/search.html", },
-{ N: "page", I: "link", C: "s m l", U: "/page.html", },
+{ N: "web", I: "search", C: "s m l", U: "/search/web.html", },
+{ N: "ai", I: "link", C: "s m l", U: "/search/ai.html", },
 { N: "tmp", I: "link", C: "s m l", U: "/TMP.html", },
 ],
 
@@ -267,7 +267,7 @@ $template: `
 
 <ul class="list">
 
-<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, '', 'small-round']">
+<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, '', 'wave small-round']">
 <a :href="L.U"><i v-text="L.I"></i> <span v-text="L.N"></span></a>
 </li>
 
