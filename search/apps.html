@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+<!-- Viewport & Charset -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta charset="UTF-8">
+
+<!-- notranslate -->
+<meta name="google" content="notranslate">
+
+<!-- SEO & Social Sharing -->
+<title>Petite Vue</title>
+<meta name="description" content="Short description of your app or website.">
+<meta property="og:title" content="Petite Vue">
+<meta property="og:description" content="Short description of your app or website.">
+<meta property="og:url" content="https://example.com">
+<meta property="og:image" content="https://example.com/icons/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Petite Vue">
+<meta name="twitter:description" content="Short description of your app or website.">
+<meta name="twitter:image" content="https://example.com/icons/og-image.jpg">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://example.com">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+
+<!-- PWA Support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#5f52a7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Petite Vue">
+
+<!-- Performance -->
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+
+
+<!--  res -->
+<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.29/dist/cdn/beer.min.css" rel="stylesheet">
+<link href="/res/css/style.css" rel="stylesheet">
+<script src="/res/js/petite-vue.js"></script>
+
+
+</head>
+
+
+<body class="light">
+
+<div id="app" v-scope v-cloak @vue:mounted="mounted">
+
+<nav class="top primary" v-scope="$S.component.navTop(false)"></nav>
+
+<main class="responsive">
+
+<div class="vertical-padding" v-scope="$S.component.form()"></div>
+<div class="bottom-padding" v-scope="$S.component.tabs('apps')"></div>
+<div class="page left active" v-scope="$S.component.content(sites)"></div>
+
+<div class="padding" v-scope="{comments:false}">
+<div class="large-space"></div>
+
+<div>
+<h5>Feedback</h5>
+<p>request a website or report a problem in this Category.</p>
+<button v-if="!comments" class="transparent border small-round link" @click="comments = true">Show Comments</button>
+</div>
+
+<div v-if="comments" v-scope="$S.component.comments('apps')"></div>
+</div>
+
+
+<div v-scope="$S.component.drawer()"></div>
+<div v-scope="$S.component.moreMenu()"></div>
+<div class="large-padding large-margin" b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()"></div>
+<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
+
+</main>
+
+</div><!-- /app -->
+
+
+
+<script src="/res/js/script.js"></script>
+
+<script>
+const App = PetiteVue.createApp({
+/*________________________________________________________________*/
+
+$delimiters: ['{{', '}}'],
+$S : store,
+/*________________________________________________________________*/
+
+
+
+/*________________________________________________________________*/
+
+sites: [
+
+{
+N: "apple app store",
+L: { b: "apps.apple.com", p: "/search?term=", x: false },
+DL: { b: "itms-apps://itunes.apple.com", p: "/search?term=" }
+},
+{
+N: "google play", 
+L: { b: "play.google.com", p: "/store/search?q=", x: false },
+DL: { b: "market://search", p: "?q=" }
+},
+{
+N: "huawei appgallery", "I": "huawei.com",
+L: { b: "appgallery.huawei.com", x: false },
+DL: { b: "appmarket://details", p: "?id=" }
+},
+{
+N: "samsung galaxy store",
+L: { b: "galaxystore.samsung.com", p: "/detail/", x: false },
+DL: { b: "samsungapps://", p: "ProductDetail/" }
+},
+{
+N: "amazon appstore",
+L: { b: "www.amazon.com", p: "/s?k=", x: false },
+DL: { b: "amzn://apps", p: "/a?k=" }
+},
+{
+N: "apkmirror",
+L: { b: "apkmirror.com", p: "/?s=", x: false },
+DL: { b: "apkmirror://search", p: "?s=" }
+},
+{
+N: "apkpure",
+L: { b: "apkpure.com", p: "/search?q=", x: false },
+DL: { b: "apkpure://search", p: "?q=" }
+},
+{
+N: "f-droid",
+L: { b: "search.f-droid.org", p: "/?q=", x: false },
+DL: { b: "fdroid://" }
+},
+{
+N: "microsoft store",
+L: { b: "apps.microsoft.com", p: "/search?query=", x: false },
+DL: { b: "ms-windows-store://search", p: "?query=" }
+},
+{
+N: "mac app store",
+L: { b: "apps.apple.com", p: "/mac/search?term=", x: false },
+DL: { b: "macappstore://search", p: "?term=" }
+},
+{
+N: "snap store",
+L: { b: "snapcraft.io", p: "/search?q=", x: false },
+DL: { b: "snap://" }
+},
+{
+N: "steam",
+L: { b: "store.steampowered.com", p: "/search?term=", x: false },
+DL: { b: "steam://store" }
+},
+{
+N: "epic games store",
+L: { b: "store.epicgames.com", p: "/en-US/browse?q=", x: false },
+DL: { b: "epicgames://store" }
+},
+{
+N: "gog",
+L: { b: "www.gog.com", p: "//en/games?search=", x: false },
+DL: { b: "gog://", p: "?search=" }
+},
+{
+N: "xbox store",
+L: { b: "www.xbox.com", p: "/en-US/search?q=", x: false },
+DL: { b: "xbox://store", p: "/search?q=" }
+},
+{
+N: "playstation store",
+L: { b: "store.playstation.com", p: "/en-us/search?query=", x: false },
+DL: { b: "psstore://search", p: "?query=" }
+},
+{
+N: "nintendo eshop",
+L: { b: "www.nintendo.com", p: "/search?q=", x: false },
+DL: { b: "eshop://search", p: "?q=" }
+}
+
+],
+
+/*________________________________________________________________*/
+
+
+
+
+
+/*________________________________________________________________*/
+mounted() { this.$S.mounted();
+
+
+},
+/*________________________________________________________________*/
+}).mount("#app") 
+</script>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.29/dist/cdn/beer.min.js"></script>
+
+</body>
+
+</html>

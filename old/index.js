@@ -1,12 +1,17 @@
-const store = PetiteVue.reactive({
+
+const App = PetiteVue.createApp({
 /*________________________________________________________________*/
+$delimiters: ['{{', '}}'],
+/*________________________________________________________________*/
+
+
 
 title: "Every-Link",
 description: "",
 
 /*________________________________________________________________*/
 
-R: {
+Router: {
 // router
 
 
@@ -33,6 +38,9 @@ query: new URLSearchParams(window.location.search).get('q') || 'search',
 get encodedQuery() { return encodeURIComponent(this.query) },
 
 q: new URLSearchParams(window.location.search).get('q'),
+tab: new URLSearchParams(window.location.search).get('tab'),
+page: new URLSearchParams(window.location.search).get('page') || 'homepage',
+
 
 
 
@@ -119,9 +127,6 @@ Categories: JSON.parse(localStorage.getItem('categories')) || [
 ],
 
 
-
-
-
 /*________________________________________________________________*/
 
 //general
@@ -150,40 +155,11 @@ linksVisibility: JSON.parse(localStorage.getItem("linksVisibility") || "false"),
 /*________________________________________________________________*/
 
 X: {
-
-Engines: [
-  { N: "Google", L: {b: "google.com/search", p: "q"} },
-  { N: "Bing", L: {b: "bing.com/search", p: "q"} },
-  { N: "Yandex", L: {b: "yandex.com/search/", p: "text"} },
-  { N: "Yahoo", L: {b: "search.yahoo.com/search", p: "p"} },
-  { N: "Startpage", L: {b: "startpage.com/do/search", p: "q"} },
-  { N: "Qwant", L: {b: "www.qwant.com", p: "q"} },
-  { N: "Ecosia", L: {b: "ecosia.org/search", p: "q"} },
-  { N: "Entireweb", L: {b: "entireweb.com/search.php", p: "q"} },
-  { N: "Aol", L: {b: "search.aol.com/aol/search/", p: "q"} },
-  { N: "Searchalot", L: {b: "searchalot.com", p: "q"} },
-  { N: "Marginalia", L: {b: "marginalia-search.com/search", p: "query"} },
-  { N: "Duckduckgo", L: {b: "duckduckgo.com", p: "q"} },
-  { N: "Brave", L: {b: "search.brave.com/search", p: "q"} },
-  { N: "Yep", L: {b: "yep.com/web", p: "q"} },
-  { N: "Gibiru", L: {b: "gibiru.com/results.html", p: "q"} },
-  { N: "Myallsearch", L: {b: "www.myallsearch.com/search", p: "q"} },
-],
-
 engine: JSON.parse(localStorage.getItem("engine")) || { N: "Google", L: {b: "google.com/search", p: "q"} },
-
 get url(){ return `${this.engine.L.b}?${this.engine.L.p}=` },
-
-
 },
 
 /*________________________________________________________________*/
-
-
-
-
-/*________________________________________________________________*/
-
 
 component: {
 
@@ -195,27 +171,27 @@ changeTheme() {
 if (this.theme === "light") {this.theme = "dark"}
 else if (this.theme === "dark") {this.theme = "light"}
 document.body.className = this.theme; 
-this.$S.localSet("theme", this.theme);
+this.localSet("theme", this.theme);
 },
 
 moreMenu: m,
 
 $template: `
 
-<button :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border extra']" data-ui="#drawer">
-<i>menu</i><span v-if="$S.Device.display != 's'">Menu</span>
+<button :class="[ Device.display === 's' ? 'square' : 'small-round', 'transparent border extra']" data-ui="#drawer">
+<i>menu</i><span v-if="Device.display != 's'">Menu</span>
 </button>
 
 <div class="max"></div>
-<h5 class="center-align" v-text="$S.title"></h5>
+<h5 class="center-align" v-text="title"></h5>
 <div class="max"></div>
 
-<button v-show="moreMenu !== false" :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border']" data-ui="#moreMenu">
-<i>edit_note</i><span v-if="$S.Device.display != 's'">Edit</span>
+<button v-show="moreMenu !== false" :class="[ Device.display === 's' ? 'square' : 'small-round', 'transparent border']" data-ui="#moreMenu">
+<i>edit_note</i><span v-if="Device.display != 's'">Edit</span>
 </button>
 
 
-<button :class="[ $S.Device.display === 's' ? 'square' : 'small-round', 'transparent border']" @click="changeTheme()">
+<button :class="[ Device.display === 's' ? 'square' : 'small-round', 'transparent border']" @click="changeTheme()">
 <i v-text="theme + '_mode'"></i>
 </button>
 
@@ -229,7 +205,7 @@ url: window.location.href,
 
 $template: `
 
-<button class="transparent border primary-border fill elevate small-round margin large fixed bottom right s m" @click="$S.share(title, url)" v-show="$S.Device.type === 'mobile' || $S.Device.type === 'tablet'"><i>share</i> </button>
+<button class="transparent border primary-border fill elevate small-round margin large fixed bottom right s m" @click="share(title, url)" v-show="Device.type === 'mobile' || Device.type === 'tablet'"><i>share</i> </button>
 
 <div class="snackbar error" id="share"> Your browser is not supported</div>
 
@@ -264,7 +240,7 @@ $template: `
 
 <ul class="list">
 
-<li v-for="L in menu" :class="[{'fill border primary-border': $S.R.path === L.U}, L.C, '', 'wave small-round']">
+<li v-for="L in menu" :class="[{'fill border primary-border': Router.path === L.U}, L.C, '', 'wave small-round']">
 <a :href="L.U"><i v-text="L.I"></i> <span v-text="L.N"></span></a>
 </li>
 
@@ -331,12 +307,12 @@ $template: `
 
 <ul class="list border">
 
-<li v-for="(C, I) in $S.Categories" :key="C.id">
+<li v-for="(C, I) in Categories" :key="C.id">
 <i v-text="C.I"></i>
 <h6 class="small" v-text="C.N"></h6>
 <div class="max"></div>
 <label class="switch icon">
-<input v-model="C.V" type="checkbox" @change="$S.localSet('categories', $S.Categories)" :disabled="I === 0">
+<input v-model="C.V" type="checkbox" @change="localSet('categories', Categories)" :disabled="I === 0">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -349,7 +325,7 @@ $template: `
 <div class="wrap">Add more websites</div>
 </div>
 <label class="switch icon">
-<input v-model="$S.linksVisibility" type="checkbox" @change="$S.localSet('linksVisibility', $S.linksVisibility)">
+<input v-model="linksVisibility" type="checkbox" @change="localSet('linksVisibility', linksVisibility)">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -362,7 +338,7 @@ $template: `
 <div class="wrap">Use search engines</div>
 </div>
 <label class="switch icon">
-<input v-model="$S.advancedVisibility" type="checkbox" @change="$S.localSet('advanced', $S.advancedVisibility)">
+<input v-model="advancedVisibility" type="checkbox" @change="localSet('advanced', advancedVisibility)">
 <span> <i>visibility_off</i> <i>visibility</i> </span>
 </label>
 </li>
@@ -370,15 +346,7 @@ $template: `
 </ul>
 
 <div class="margin">
-<div class="field label prefix suffix border">
-<i>search</i>
-<select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
-<option v-for="(E, I) in $S.X.Engines" :key="E.L.b" :value="E" :selected="$S.X.engine.L.b === E.L.b" v-text="E.N"></option>
-</select>
-
-<label>Default Search Engine</label>
-<i>arrow_drop_down</i>
-</div>
+<div class="field label prefix suffix border" v-scope="component.input()"></div>
 </div>
 
 
@@ -442,11 +410,11 @@ form() {return {
 
 $template: `
 
-<form class="middle-align center-align top-margin bottom-margin" :action="$S.R.path" target="_self" method="GET">
-<nav :class="$S.Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
+<form class="middle-align center-align top-margin bottom-margin" :action="Router.path" target="_self" method="GET">
+<nav :class="Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
 
 <div class="max field border small-round primary-border">
-<input type="text" name="q" v-model="$S.R.query">
+<input type="text" name="q" v-model="Router.query">
 </div>
 <button type="submit" class="transparent border primary-border fill small-round large">
 <i>search</i> <span class="m l">Search</span>
@@ -457,12 +425,10 @@ $template: `
 
 `}},
 /*________________________________________________________________*/
-tabs(t) {return {
-
-tab: t,
+tabs() {return {
 
 scroll() {
-document.querySelector(`[data-tab=${this.tab}]`).scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
+document.querySelector(`[data-tab=${this.Router.tab}]`).scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
 },
 
 
@@ -470,17 +436,17 @@ $template: `
 
 <nav class="row scroll" @vue:mounted="scroll">
 
-<a v-for="(C, I) in $S.Categories.filter(C => C.V || C.id == tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == tab}, 'vertical padding small-round']" :href="'/search/' + C.id + '.html' + '?q=' + $S.R.encodedQuery" :data-tab="C.id">
+<a v-for="(C, I) in Categories.filter(C => C.V || C.id == Router.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == Router.tab}, 'vertical padding small-round']" :href="Router.path + '?tab=' + C.id + '&q=' + Router.encodedQuery" :data-tab="C.id">
   <i v-text="C.I"></i> <span v-text="C.N"></span>
 </a>
 
 
-<a data-ui="#links" :class="[{'border primary-border fill' : tab == 'my-links'}, 'vertical padding small-round']" v-show="$S.linksVisibility || tab == 'my-links'" :href="'/search/my-links.html' + '?q=' + $S.R.encodedQuery" data-tab="my-links">
+<a data-ui="#links" :class="[{'border primary-border fill' : Router.tab == 'my-links'}, 'vertical padding small-round']" v-show="linksVisibility || Router.tab == 'my-links'" :href="Router.path + '?tab=my-links' + '&q=' + Router.encodedQuery" data-tab="my-links">
 <i>edit_note</i> <span>My List</span>
 </a>
 
 
-<a data-ui="#advanced" :class="[{'border primary-border fill' : tab == 'advanced'}, 'vertical padding small-round']" v-show="$S.advancedVisibility || tab == 'advanced'" :href="'/search/advanced.html' + '?q=' + $S.R.encodedQuery" data-tab="advanced">
+<a data-ui="#advanced" :class="[{'border primary-border fill' : Router.tab == 'advanced'}, 'vertical padding small-round']" v-show="advancedVisibility || Router.tab == 'advanced'" :href="Router.path + '?tab=advanced' + '&q=' + Router.encodedQuery" data-tab="advanced">
 <i>pageview</i> <span>Advanced</span>
 </a>
 
@@ -505,13 +471,13 @@ $template: `
 
 <div class="row">
 
-<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '')" rel="nofollow" target="_blank">
+<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + Router.encodedQuery : '') + (S.L.s ? S.L.s : '')" rel="nofollow" target="_blank">
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
 <div class="max">
 <h5 class="small" v-text="S.N"></h5>
 <p class="row no-space" style="word-break: break-all; overflow: hidden;">
 <i v-if="!S.L.p" class="red-text">search_off</i>
-<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
+<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + Router.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
 </p>
 </div>
 </a>
@@ -534,7 +500,7 @@ $template: `
 <button :data-ui="'#sites-menu-' + I" class="small-round transparent border">
   <i>more_vert</i><span v-if="!S.L">menu</span>
 
-<menu :id="'sites-menu-' + I" :class="[I == 0 && $S.Device.display == 's' ? 'bottom' : I <= 1 && $S.Device.display == 'm' ? 'bottom' : I <= 2 && $S.Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
+<menu :id="'sites-menu-' + I" :class="[I == 0 && Device.display == 's' ? 'bottom' : I <= 1 && Device.display == 'm' ? 'bottom' : I <= 2 && Device.display == 'l' ? 'bottom' : 'top' , 'left no-wrap no-padding']">
 
 <li v-if="S.L && S.L.p">
 <a class="row" :href="'https://' + S.L.b" rel="nofollow" target="_blank">
@@ -542,21 +508,21 @@ $template: `
 </a>
 </li>
 <li v-if="S.L && S.L.x !== false">
-<a class="row" :href="'https://' + $S.X.url + 'site:' + S.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
-<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
+<a class="row" :href="'https://' + X.url + 'site:' + S.L.b + '+&quot;' + Router.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<i class="blue-text">travel_explore</i> <span v-text="X.engine.N + ' Search'"></span>
 </a>
 </li>
-<li v-if="S.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
-<a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + $S.R.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
+<li v-if="S.DL && (Device.os == 'android' || Device.os == 'ios' || Device.os == 'harmony')">
+<a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + Router.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i> <span>Open App</span>
 </a>
 </li>
-<li v-if="S.A && $S.Device.os == 'android'">
+<li v-if="S.A && Device.os == 'android'">
 <a class="row" :href="'market://details?id=' + S.A.a" rel="nofollow">
 <i>system_update</i> <span>Download App</span>
 </a>
 </li>
-<li v-if="S.A && $S.Device.os == 'ios'">
+<li v-if="S.A && Device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + S.A.i" rel="nofollow">
 <i>system_update</i> <span>Download App</span>
 </a>
@@ -564,11 +530,11 @@ $template: `
 
 <div class="divider"></div>
 
-<li v-if="S.L" @click="$S.copy( 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+<li v-if="S.L" @click="copy( 'https://' + S.L.b + (S.L.p ? S.L.p + Router.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
   <i>content_copy</i> <span>Copy link</span>
 </li>
 
-<li v-if="S.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + $S.R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+<li v-if="S.L && (Device.os == 'android' || Device.os == 'ios' )" @click="share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + Router.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
   <i>share</i> <span>Share link</span>
 </li>
 
@@ -584,7 +550,7 @@ $template: `
 <menu :id="'sites-menu-sub-' + i" class="top left no-wrap no-padding">
 
 <li v-if="s.L">
-<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + Router.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
 <i :class="s.L.p ? 'green-text' : 'red-text'" v-text="s.L.p ? 'pageview' : 'search_off'"></i> <span v-text="s.L.p ? 'open' : 'Homepage'"></span>
 </a>
 </li>
@@ -594,21 +560,21 @@ $template: `
 </a>
 </li>
 <li v-if="s.L && s.L.x !== false">
-<a class="row" :href="'https://' + $S.X.url + 'site:' + s.L.b + '+&quot;' + $S.R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
-<i class="blue-text">travel_explore</i> <span v-text="$S.X.engine.N + ' Search'"></span>
+<a class="row" :href="'https://' + X.url + 'site:' + s.L.b + '+&quot;' + Router.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<i class="blue-text">travel_explore</i> <span v-text="X.engine.N + ' Search'"></span>
 </a>
 </li>
-<li v-if="s.DL && ($S.Device.os == 'android' || $S.Device.os == 'ios' || $S.Device.os == 'harmony')">
-<a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + $S.R.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
+<li v-if="s.DL && (Device.os == 'android' || Device.os == 'ios' || Device.os == 'harmony')">
+<a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + Router.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i> <span>Open App</span>
 </a>
 </li>
-<li v-if="s.A && $S.Device.os == 'android'">
+<li v-if="s.A && Device.os == 'android'">
 <a class="row" :href="'market://details?id=' + s.A.a" rel="nofollow">
 <i>system_update</i> <span>Download App</span>
 </a>
 </li>
-<li v-if="s.A && $S.Device.os == 'ios'">
+<li v-if="s.A && Device.os == 'ios'">
 <a class="row" :href="'itms-apps://itunes.apple.com/app/' + s.A.i" rel="nofollow">
 <i>system_update</i> <span>Download App</span>
 </a>
@@ -616,10 +582,10 @@ $template: `
 
 <div class="divider"></div>
 
-<li v-if="s.L" @click="$S.copy( 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<li v-if="s.L" @click="copy( 'https://' + s.L.b + (s.L.p ? s.L.p + Router.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
 <i>content_copy</i> <span>Copy link</span>
 </li>
-<li v-if="s.L && ($S.Device.os == 'android' || $S.Device.os == 'ios' )" @click="$S.share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + $S.R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<li v-if="s.L && (Device.os == 'android' || Device.os == 'ios' )" @click="share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + Router.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
 <i>share</i> <span>Share link</span>
 </li>
 
@@ -633,17 +599,197 @@ $template: `
 </article>
 </div>
 
+<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
 
 
+`}},
+/*________________________________________________________________*/
+myLinks() {return {
+
+myLinks: {
+  
+  edit: false,
+  
+  links: JSON.parse(localStorage.getItem('links')) || [],
+  newLink: { N: "", L: {b: "", p: "" }},
+  
+  saveLinks() { localStorage.setItem("links", JSON.stringify(this.links)) },
+  
+  removeLink(index) {
+    this.links.splice(index, 1); 
+    this.saveLinks() 
+  },
+  
+  addLink() { 
+  this.links.push({ N: this.newLink.N, L: { b: this.newLink.L.b,  p: this.newLink.L.p }});
+  this.saveLinks();
+  this.edit = false;
+  this.newLink.N = '';
+  this.newLink.L.b = '';
+  this.newLink.L.p = '';
+},
+
+},
+
+
+
+$template: `
+
+
+
+<div v-scope="component.content(myLinks.links, myLinks)"></div>
+
+
+
+
+<nav class="right-align" v-show="!myLinks.edit">
+<button class="fill border primary-border small-round large" @click="myLinks.edit = !myLinks.edit">
+<i>forms_add_on</i>
+</button>
+</nav>
+
+
+<form class="middle-align center-align" @submit.prevent="myLinks.addLink()" v-show="myLinks.edit">
+
+<div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
+
+<p class="row no-space s12 m12 l12">
+<s class="red-text">https://</s><span class="green-text">google.com</span>
+<b class="blue-text">/search?q=</b><s class="red-text">news</s>
+</p>
+
+<div class="field label border large s12 m12 l12">
+<input type="text" v-model="myLinks.newLink.N" required>
+<label><b class="red-text">*</b>website name</label>
+</div>
+
+<div class="field label border large s12 m8 l7">
+<input type="text" v-model="myLinks.newLink.L.b" required>
+<label>
+<b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
+</label>
+</div>
+
+<div class="max field label border large s12 m4 l5">
+<input type="text" v-model="myLinks.newLink.L.p">
+<label> ex:<b class="blue-text">/search?q=</b></label>
+</div>
+
+<nav class="center-align s12 m12 l12">
+
+<button class="small-round border large" @click="myLinks.edit = false">
+<i>close</i>
+</button>
+
+<button class="transparent fill border border-primary small-round large" type="submit">
+<span>add</span> <i>add</i>
+</button>
+</nav>
+
+</div>
+
+
+</form>
+
+
+
+
+
+`}},
+/*________________________________________________________________*/
+advanced() {return {
+
+site: "",
+
+$template: `
+
+<form class="middle-align center-align" method="GET" :action="'https://' + X.engine.L.b" target="_blank">
+<input type="text" :name="X.engine.L.p" :value="'site:' + site + ' &quot;' + Router.query + '&quot;'" hidden>
+
+<div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
+
+<div class="field label suffix border large s12 m8 l7">
+<input type="text" v-model="site" required>
+<label>website.com</label>
+<i>link</i>
+</div>
+
+<div class="field label prefix suffix border large s12 m4 l5" v-scope="component.input()"></div>
+
+<nav class="center-align s12 m12 l12">
+<button class="transparent border primary-border fill large small-round" type="submit">
+<span>search</span> <i>search</i>
+</button>
+</nav>
+
+</div>
+
+
+</form>
+
+
+`}},
+/*________________________________________________________________*/
+input() {return {
+
+Engines: [
+  { N: "Google", L: {b: "google.com/search", p: "q"} },
+  { N: "Bing", L: {b: "bing.com/search", p: "q"} },
+  { N: "Yandex", L: {b: "yandex.com/search/", p: "text"} },
+  { N: "Yahoo", L: {b: "search.yahoo.com/search", p: "p"} },
+  { N: "Startpage", L: {b: "startpage.com/do/search", p: "q"} },
+  { N: "Qwant", L: {b: "www.qwant.com", p: "q"} },
+  { N: "Ecosia", L: {b: "ecosia.org/search", p: "q"} },
+  { N: "Entireweb", L: {b: "entireweb.com/search.php", p: "q"} },
+  { N: "Aol", L: {b: "search.aol.com/aol/search/", p: "q"} },
+  { N: "Searchalot", L: {b: "searchalot.com", p: "q"} },
+  { N: "Marginalia", L: {b: "marginalia-search.com/search", p: "query"} },
+  { N: "Duckduckgo", L: {b: "duckduckgo.com", p: "q"} },
+  { N: "Brave", L: {b: "search.brave.com/search", p: "q"} },
+  { N: "Yep", L: {b: "yep.com/web", p: "q"} },
+  { N: "Gibiru", L: {b: "gibiru.com/results.html", p: "q"} },
+  { N: "Myallsearch", L: {b: "www.myallsearch.com/search", p: "q"} },
+],
+
+$template: `
+<i>search</i>
+<select v-model="X.engine" @change="localSet('engine', X.engine)">
+<option v-for="(E, I) in Engines" :key="E.L.b" :value="E" :selected="X.engine.L.b === E.L.b" v-text="E.N"></option>
+</select>
+
+<label>advanced Search Engine</label>
+<i>arrow_drop_down</i>
 `}},
 /*________________________________________________________________*/
 
 
 
+
+
+},
+
+
+
+/*________________________________________________________________*/
+
+//content
+sites: null,
+
+async load() {
+try { this.sites ||= await fetch(`/res/json/${this.Router.tab}.json`).then(data => data.json()) } catch (error) { this.sites = null }
 },
 
 /*________________________________________________________________*/
+
+
+
+
+
+
+
+/*________________________________________________________________*/
 mounted() {
+
 
 //serviceWorker
 if ('serviceWorker' in navigator) {
@@ -654,7 +800,7 @@ if ('serviceWorker' in navigator) {
 
 
 //router
-this.R.hashUpdate();
+this.Router.hashUpdate();
 
 
 
@@ -663,12 +809,7 @@ if (theme) {document.body.className = theme};
 
 
 
-  
+
 },
-
 /*________________________________________________________________*/
-
-});
-
-// v-effect="watch()"
-// @vue:mounted="mounted()"
+}).mount("#app") 
