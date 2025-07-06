@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+<!-- Viewport & Charset -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta charset="UTF-8">
+
+<!-- notranslate -->
+<meta name="google" content="notranslate">
+
+<!-- SEO & Social Sharing -->
+<title>Petite Vue</title>
+<meta name="description" content="Short description of your app or website.">
+<meta property="og:title" content="Petite Vue">
+<meta property="og:description" content="Short description of your app or website.">
+<meta property="og:url" content="https://example.com">
+<meta property="og:image" content="https://example.com/icons/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Petite Vue">
+<meta name="twitter:description" content="Short description of your app or website.">
+<meta name="twitter:image" content="https://example.com/icons/og-image.jpg">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://example.com">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+
+<!-- PWA Support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#5f52a7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Petite Vue">
+
+<!-- Performance -->
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+
+
+<!--  res -->
+<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.29/dist/cdn/beer.min.css" rel="stylesheet">
+<link href="/res/css/style.css" rel="stylesheet">
+<script src="/res/js/petite-vue.js"></script>
+
+
+</head>
+
+
+<body class="light">
+
+<div id="app" v-scope v-cloak @vue:mounted="mounted">
+
+<nav class="top primary" v-scope="$S.component.navTop(false)"></nav>
+
+<main class="responsive">
+
+<div class="vertical-padding" v-scope="$S.component.form()"></div>
+<div class="bottom-padding" v-scope="$S.component.tabs('ai')"></div>
+<div class="page left active" v-scope="$S.component.content(sites)"></div>
+
+<div class="padding" v-scope="{comments:false}">
+<div class="large-space"></div>
+
+<div>
+<h5>Feedback</h5>
+<p>request a website or report a problem in this Category.</p>
+<button v-if="!comments" class="transparent border small-round link" @click="comments = true">Show Comments</button>
+</div>
+
+<div v-if="comments" v-scope="$S.component.comments('ai')"></div>
+</div>
+
+
+<div v-scope="$S.component.drawer()"></div>
+<div v-scope="$S.component.moreMenu()"></div>
+<div class="large-padding large-margin" b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()"></div>
+<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
+
+</main>
+
+</div><!-- /app -->
+
+
+
+<script src="/res/js/script.js"></script>
+
+<script>
+const App = PetiteVue.createApp({
+/*________________________________________________________________*/
+
+$delimiters: ['{{', '}}'],
+$S : store,
+/*________________________________________________________________*/
+
+//tabs
+
+
+/*________________________________________________________________*/
+
+sites: [
+
+{
+N: "ChatGpt",  
+I: "chat.openai.com",
+C: "s m l",
+L: {b: "chat.openai.com", p: "?q=", x: false},
+DL: {b: "com.openai.chat://"},
+A: { A: "com.openai.chatgpt", I: "id6448311069" }
+},
+
+{
+N: "Grok", I: "x.ai", 
+L: {b: "grok.com", p: "/?q=", x: false}
+},
+
+{
+N: "Micorsoft Copilot",
+L: {b: "copilot.microsoft.com", p: "/search?showconv=1&sendquery=1&q=", x: false}
+},
+
+{
+N: "Gemini", I: "gemini.google.com",
+L: { b: "gemini.google.com", x: false },
+DL: { b: "com.openai.chat://" },
+A: { a: "", i: "id6477489729" },
+alt: [
+    { N: "AI Studio", L: { b: "aistudio.google.com", x: false } },
+    { N: "Jules", L: { b: "jules.google.com", x: false } },
+    { N: "NotebookLM", L: { b: "notebooklm.google.com", x: false } }
+    ]
+},
+ 
+{
+N: "Perplexity", 
+L: {b: "www.perplexity.ai", p: "/search?q=", x: false}
+},
+
+
+{
+N: "Claude ai",L: {b: "claude.ai", p: "/new?q=", x: false}
+},
+  
+{
+N: "Meta ai",
+L: {b: "meta.ai", x: false},
+A: {a: "com.facebook.stella", a: "id1558240027"}
+},
+
+{
+N: "Ecosia ai", 
+L: {b: "ecosia.org", p: "/chat?q=", s: "", x: false}
+},
+
+
+{
+N: "duckduckgo ai", I: "duckduckgo.com",
+L: {b: "Duck.ai", p: "/new?q=", s: "", x: false}
+},
+
+
+{
+N: "Yep ai",
+L: {b: "yep.com", p: "/chat/?q=", s: "", x: false}
+}
+
+
+
+    
+],
+
+
+/*________________________________________________________________*/
+
+
+
+
+
+/*________________________________________________________________*/
+mounted() { this.$S.mounted();
+
+
+},
+/*________________________________________________________________*/
+}).mount("#app") 
+</script>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.29/dist/cdn/beer.min.js"></script>
+
+</body>
+
+</html>

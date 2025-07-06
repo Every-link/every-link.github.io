@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+<!-- Viewport & Charset -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta charset="UTF-8">
+
+<!-- notranslate -->
+<meta name="google" content="notranslate">
+
+<!-- SEO & Social Sharing -->
+<title>Petite Vue</title>
+<meta name="description" content="Short description of your app or website.">
+<meta property="og:title" content="Petite Vue">
+<meta property="og:description" content="Short description of your app or website.">
+<meta property="og:url" content="https://example.com">
+<meta property="og:image" content="https://example.com/icons/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Petite Vue">
+<meta name="twitter:description" content="Short description of your app or website.">
+<meta name="twitter:image" content="https://example.com/icons/og-image.jpg">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://example.com">
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+
+<!-- PWA Support -->
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#5f52a7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Petite Vue">
+
+<!-- Performance -->
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+
+
+<!--  res -->
+<link href="https://cdn.jsdelivr.net/npm/beercss@3.11.29/dist/cdn/beer.min.css" rel="stylesheet">
+<link href="/res/css/style.css" rel="stylesheet">
+<script src="/res/js/petite-vue.js"></script>
+
+
+</head>
+
+
+<body class="light">
+
+<div id="app" v-scope v-cloak @vue:mounted="mounted">
+
+<nav class="top primary" v-scope="$S.component.navTop(false)"></nav>
+
+<main class="responsive">
+
+<div class="vertical-padding" v-scope="$S.component.form()"></div>
+<div class="bottom-padding" v-scope="$S.component.tabs('advanced')"></div>
+
+
+
+
+<div class="page left active">
+
+<form class="middle-align center-align" method="GET" :action="'https://' + $S.X.engine.L.b" target="_blank">
+<input type="text" :name="$S.X.engine.L.p" :value="'site:' + site + ' &quot;' + $S.R.query + '&quot;'" hidden>
+
+<div :class="[$S.Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
+
+<div class="field label suffix border large s12 m8 l7">
+<input type="text" v-model="site" required>
+<label>website.com</label>
+<i>link</i>
+</div>
+
+<div class="field label suffix border large s12 m4 l5">
+<select v-model="$S.X.engine" @change="$S.localSet('engine', $S.X.engine)">
+<option v-for="E in $S.X.Engines" :key="E.L.b" :value="E" v-text="E.N"></option>
+</select>
+
+<label>Select Search Engine</label>
+<i>arrow_drop_down</i>
+</div>
+
+<nav class="center-align s12 m12 l12">
+<button class="transparent border primary-border fill large small-round" type="submit">
+<span>search</span> <i>search</i>
+</button>
+</nav>
+
+</div>
+
+
+</form>
+
+</div>
+
+
+
+
+<div v-scope="$S.component.drawer()"></div>
+<div v-scope="$S.component.moreMenu()"></div>
+
+<div class="large-padding large-margin" b-if="$S.Device.os == 'android' || $S.Device.os == 'ios'" v-scope="$S.component.share()"></div>
+
+</main>
+
+</div><!-- /app -->
+
+
+
+<script src="/res/js/script.js"></script>
+
+<script>
+const App = PetiteVue.createApp({
+/*________________________________________________________________*/
+
+$delimiters: ['{{', '}}'],
+$S : store,
+/*________________________________________________________________*/
+
+//advanced
+site: null,
+
+/*________________________________________________________________*/
+
+/*________________________________________________________________*/
+
+
+
+
+/*________________________________________________________________*/
+
+
+
+
+
+/*________________________________________________________________*/
+mounted() { this.$S.mounted();
+
+
+},
+/*________________________________________________________________*/
+}).mount("#app") 
+</script>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.29/dist/cdn/beer.min.js"></script>
+
+</body>
+
+</html>
