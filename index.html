@@ -44,7 +44,7 @@
 
 <!--  res -->
 <link href="https://cdn.jsdelivr.net/npm/beercss@3.11.30/dist/cdn/beer.min.css" rel="stylesheet">
-<link href="/old.index.css" rel="stylesheet">
+<link href="/res/css/index.css" rel="stylesheet">
 <script src="/res/js/petite-vue.js"></script>
 
 
@@ -58,21 +58,19 @@
 <nav class="top primary" v-scope="component.navTop(false)"></nav>
 
 
-
 <main class="responsive">
 
-<a class="button" href="/old/index.html#/search/?tab=web&q=test">test</a>
+<a class="button" href="#/search/?tab=web&q=test">test</a>
 
 
-{{Router.hash}}
 <br>
-{{Router.hash.tab}}
+{{R.tab}}
 <br>
-{{Router.hash.path}}
+{{R.path}}
 
 
 
-<template v-if="Router.page === 'homepage' && !Router.q"><div class="page left active">
+<template v-if="R.path === '/' && !R.q"><div class="page left active">
 
 <div class="padding center-align">
 <!--
@@ -83,9 +81,9 @@
 <p>Never miss a Link Search anything anywhere anytime</p>
 </div>
 
-<form :action="Router.path" target="_self" method="GET">
+<form :action="R.path" target="_self" method="GET">
 <div class="padding">
-<input type="hidden" name="tab" :value="Router.tab">
+<input type="hidden" name="tab" :value="R.tab">
 
 <div class="grid">
 
@@ -100,7 +98,7 @@
 <div class="s8 m4 l4">
 <div class="field prefix border label">
 <i class="front">list</i>
-<select v-model="Router.tab" required>
+<select v-model="R.tab" required>
 <option v-for="C in Categories.filter(C => C.V)" :key="C.id" v-text="C.N" :value="C.id"></option>
 <option v-if="linksVisibility" value="links">My List</option>
 <option v-if="advancedVisibility == true" value="advanced">Advanced Search</option>
@@ -129,16 +127,16 @@
 
 </div></template>
 
-<template v-else-if="Router.page === 'homepage' && Router.q"><div class="page left active">
+<template v-else-if="R.path === '/search/' && R.q"><div class="page left active">
 
 <div class="vertical-padding" v-scope="component.form()"></div>
 <div class="bottom-padding" v-scope="component.tabs()"></div>
 
 
 
-<div v-if="Router.tab === 'my-links'" v-scope="component.myLinks()"></div>
+<div v-if="R.tab === 'my-links'" v-scope="component.myLinks()"></div>
 
-<div v-else-if="Router.tab === 'advanced'" v-scope="component.advanced()"></div>
+<div v-else-if="R.tab === 'advanced'" v-scope="component.advanced()"></div>
 
 <div v-else @vue:mounted="load()" v-scope="component.content(sites)"></div>
 
@@ -151,12 +149,12 @@
     <button v-if="!comments" class="transparent border small-round link" @click="comments = true">Show Comments</button>
   </div>
   
-  <div v-if="comments" v-scope="component.comments(Router.tab)"></div>
+  <div v-if="comments" v-scope="component.comments(R.tab)"></div>
 </div>
 
 </div></template>
 
-<template v-else-if="Router.page === 'feedback'"><div class="page left active">
+<template v-else-if="R.path === '/feedback/'"><div class="page left active">
 
 <div class="padding">
 <h2>Feedaback </h2>
@@ -202,7 +200,7 @@
 
 
 
-<script src="/old/index.js"></script>
+<script src="/res/js/index.js"></script>
 
 <script type="module" src="https://cdn.jsdelivr.net/npm/beercss@3.11.30/dist/cdn/beer.min.js"></script>
 

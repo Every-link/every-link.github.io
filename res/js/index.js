@@ -11,33 +11,8 @@ description: "",
 
 /*________________________________________________________________*/
 
-Router: {
-// router
-
-
-// v-if="hash.path === '/'"
-
-// hash: window.location.hash || "#/",
-
-
-hash: {},
-getHash() {
-const hash = location.hash.slice(1);
-const [path, queryString] = hash.split('?');
-const query = new URLSearchParams(queryString || '');
-  this.hash = {
-    path: path || '/',
-    tab: query.get('tab') || '',
-    q: query.get('q') || ''
-  };
-},
-
-hashUpdate(){
-  this.getHash(); // Set initial value
-  window.addEventListener('hashchange', () => this.getHash());
-},
-
-
+R: {
+// Router
 
 //url 
 name: window.location.hostname,
@@ -47,20 +22,40 @@ url: window.location.origin + window.location.pathname, // nor params
 currentUrl: window.location.href,
 //url
 
-/*________________________*/
 
-query: new URLSearchParams(window.location.search).get('q') || 'search',
+query: new URLSearchParams(window.location.search).get('q'),
 get encodedQuery() { return encodeURIComponent(this.query) },
 
-q: new URLSearchParams(window.location.search).get('q'),
-tab: new URLSearchParams(window.location.search).get('tab'),
-page: new URLSearchParams(window.location.search).get('page') || 'homepage',
+
+path: "/",
+q: "",
+tab: "",
+
+
+hash() {
+const hash = location.hash.slice(1);
+const [path, queryString] = hash.split('?');
+const query = new URLSearchParams(queryString || '');
+
+this.path = path || '/';
+this.q = query.get('q') || '';
+this.tab = query.get('tab') || '';
+},
+
+hashUpdate(){
+  this.hash(); // Set initial value
+  window.addEventListener('hashchange', () => this.hash());
+},
 
 
 
 
+/*________________________*/
 
-}, //router
+
+
+
+}, //Router
 
 /*________________________________________________________________*/
 
@@ -256,7 +251,7 @@ $template: `
 
 <ul class="list">
 
-<li v-for="L in menu" :class="[{'fill border primary-border': Router.path === L.U}, L.C, '', 'wave small-round']">
+<li v-for="L in menu" :class="[{'fill border primary-border': R.path === L.U}, L.C, '', 'wave small-round']">
 <a :href="L.U"><i v-text="L.I"></i> <span v-text="L.N"></span></a>
 </li>
 
@@ -426,11 +421,11 @@ form() {return {
 
 $template: `
 
-<form class="middle-align center-align top-margin bottom-margin" :action="Router.path" target="_self" method="GET">
+<form class="middle-align center-align top-margin bottom-margin" :action="R.path" target="_self" method="GET">
 <nav :class="Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
 
 <div class="max field border small-round primary-border">
-<input type="text" name="q" v-model="Router.query">
+<input type="text" name="q" v-model="R.query">
 </div>
 <button type="submit" class="transparent border primary-border fill small-round large">
 <i>search</i> <span class="m l">Search</span>
@@ -444,7 +439,7 @@ $template: `
 tabs() {return {
 
 scroll() {
-document.querySelector(`[data-tab=${this.Router.tab}]`).scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
+document.querySelector(`[data-tab=${this.R.tab}]`).scrollIntoView({ behavior: 'auto', block: 'center', inline: 'center' });
 },
 
 
@@ -452,17 +447,17 @@ $template: `
 
 <nav class="row scroll" @vue:mounted="scroll">
 
-<a v-for="(C, I) in Categories.filter(C => C.V || C.id == Router.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == Router.tab}, 'vertical padding small-round']" :href="Router.path + '?tab=' + C.id + '&q=' + Router.encodedQuery" :data-tab="C.id">
+<a v-for="(C, I) in Categories.filter(C => C.V || C.id == R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == R.tab}, 'vertical padding small-round']" :href="R.path + '?tab=' + C.id + '&q=' + R.encodedQuery" :data-tab="C.id">
   <i v-text="C.I"></i> <span v-text="C.N"></span>
 </a>
 
 
-<a data-ui="#links" :class="[{'border primary-border fill' : Router.tab == 'my-links'}, 'vertical padding small-round']" v-show="linksVisibility || Router.tab == 'my-links'" :href="Router.path + '?tab=my-links' + '&q=' + Router.encodedQuery" data-tab="my-links">
+<a data-ui="#links" :class="[{'border primary-border fill' : R.tab == 'my-links'}, 'vertical padding small-round']" v-show="linksVisibility || R.tab == 'my-links'" :href="R.path + '?tab=my-links' + '&q=' + R.encodedQuery" data-tab="my-links">
 <i>edit_note</i> <span>My List</span>
 </a>
 
 
-<a data-ui="#advanced" :class="[{'border primary-border fill' : Router.tab == 'advanced'}, 'vertical padding small-round']" v-show="advancedVisibility || Router.tab == 'advanced'" :href="Router.path + '?tab=advanced' + '&q=' + Router.encodedQuery" data-tab="advanced">
+<a data-ui="#advanced" :class="[{'border primary-border fill' : R.tab == 'advanced'}, 'vertical padding small-round']" v-show="advancedVisibility || R.tab == 'advanced'" :href="R.path + '?tab=advanced' + '&q=' + R.encodedQuery" data-tab="advanced">
 <i>pageview</i> <span>Advanced</span>
 </a>
 
@@ -495,13 +490,13 @@ $template: `
 
 <div class="row">
 
-<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + Router.encodedQuery : '') + (S.L.s ? S.L.s : '')" rel="nofollow" target="_blank">
+<a v-if="S.L" class="row max" :href="'https://' + S.L.b + (S.L.p ? S.L.p + R.encodedQuery : '') + (S.L.s ? S.L.s : '')" rel="nofollow" target="_blank">
 <img class="round" :src="'https://www.google.com/s2/favicons?sz=256&domain=' + (S.I ? S.I : S.L.b)" alt="icon" loading="lazy">
 <div class="max">
 <h5 class="small" v-text="S.N"></h5>
 <p class="row no-space" style="word-break: break-all; overflow: hidden;">
 <i v-if="!S.L.p" class="red-text">search_off</i>
-<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + Router.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
+<span v-text="'https://' + S.L.b + (S.L.p ? S.L.p + R.query : '') + (S.L.s ? S.L.s : '')" class="link"></span>
 </p>
 </div>
 </a>
@@ -532,12 +527,12 @@ $template: `
 </a>
 </li>
 <li v-if="S.L && S.L.x !== false">
-<a class="row" :href="'https://' + X.url + 'site:' + S.L.b + '+&quot;' + Router.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + X.url + 'site:' + S.L.b + '+&quot;' + R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i> <span v-text="X.engine.N + ' Search'"></span>
 </a>
 </li>
 <li v-if="S.DL && (Device.os == 'android' || Device.os == 'ios' || Device.os == 'harmony')">
-<a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + Router.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
+<a class="row" :href="S.DL.b + (S.DL.p ? S.DL.p + R.encodedQuery : '') + (S.DL.s ? S.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i> <span>Open App</span>
 </a>
 </li>
@@ -554,11 +549,11 @@ $template: `
 
 <div class="divider"></div>
 
-<li v-if="S.L" @click="copy( 'https://' + S.L.b + (S.L.p ? S.L.p + Router.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+<li v-if="S.L" @click="copy( 'https://' + S.L.b + (S.L.p ? S.L.p + R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
   <i>content_copy</i> <span>Copy link</span>
 </li>
 
-<li v-if="S.L && (Device.os == 'android' || Device.os == 'ios' )" @click="share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + Router.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
+<li v-if="S.L && (Device.os == 'android' || Device.os == 'ios' )" @click="share( S.N, 'https://' + S.L.b + (S.L.p ? S.L.p + R.encodedQuery : '') + (S.L.s ? S.L.s : '') )">
   <i>share</i> <span>Share link</span>
 </li>
 
@@ -574,7 +569,7 @@ $template: `
 <menu :id="'sites-menu-sub-' + i" class="top left no-wrap no-padding">
 
 <li v-if="s.L">
-<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + Router.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + s.L.b + (s.L.p ? s.L.p + R.encodedQuery : '') + (s.L.s ? s.L.s : '')" rel="nofollow" target="_blank">
 <i :class="s.L.p ? 'green-text' : 'red-text'" v-text="s.L.p ? 'pageview' : 'search_off'"></i> <span v-text="s.L.p ? 'open' : 'Homepage'"></span>
 </a>
 </li>
@@ -584,12 +579,12 @@ $template: `
 </a>
 </li>
 <li v-if="s.L && s.L.x !== false">
-<a class="row" :href="'https://' + X.url + 'site:' + s.L.b + '+&quot;' + Router.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
+<a class="row" :href="'https://' + X.url + 'site:' + s.L.b + '+&quot;' + R.encodedQuery + '&quot;'" rel="nofollow" target="_blank">
 <i class="blue-text">travel_explore</i> <span v-text="X.engine.N + ' Search'"></span>
 </a>
 </li>
 <li v-if="s.DL && (Device.os == 'android' || Device.os == 'ios' || Device.os == 'harmony')">
-<a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + Router.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
+<a class="row" :href="s.DL.b + (s.DL.p ? s.DL.p + R.encodedQuery : '') + (s.DL.s ? s.DL.s : '')" rel="nofollow">
 <i>phone_iphone</i> <span>Open App</span>
 </a>
 </li>
@@ -606,10 +601,10 @@ $template: `
 
 <div class="divider"></div>
 
-<li v-if="s.L" @click="copy( 'https://' + s.L.b + (s.L.p ? s.L.p + Router.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<li v-if="s.L" @click="copy( 'https://' + s.L.b + (s.L.p ? s.L.p + R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
 <i>content_copy</i> <span>Copy link</span>
 </li>
-<li v-if="s.L && (Device.os == 'android' || Device.os == 'ios' )" @click="share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + Router.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
+<li v-if="s.L && (Device.os == 'android' || Device.os == 'ios' )" @click="share(s.N, 'https://' + s.L.b + (s.L.p ? s.L.p + R.encodedQuery : '') + (s.L.s ? s.L.s : '') )">
 <i>share</i> <span>Share link</span>
 </li>
 
@@ -728,7 +723,7 @@ site: "",
 $template: `
 
 <form class="middle-align center-align" method="GET" :action="'https://' + X.engine.L.b" target="_blank">
-<input type="text" :name="X.engine.L.p" :value="'site:' + site + ' &quot;' + Router.query + '&quot;'" hidden>
+<input type="text" :name="X.engine.L.p" :value="'site:' + site + ' &quot;' + R.query + '&quot;'" hidden>
 
 <div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
 
@@ -801,7 +796,7 @@ $template: `
 sites: null,
 
 async load() {
-try { this.sites ||= await fetch(`/res/json/${this.Router.tab}.json`).then(data => data.json()) } catch (error) { this.sites = null }
+try { this.sites ||= await fetch(`/res/json/${this.R.tab}.json`).then(data => data.json()) } catch (error) { this.sites = null }
 },
 
 /*________________________________________________________________*/
@@ -824,8 +819,8 @@ if ('serviceWorker' in navigator) {
 ;}
 
 
-//router
-this.Router.hashUpdate();
+//R
+this.R.hashUpdate();
 
 
 
