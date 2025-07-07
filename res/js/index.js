@@ -23,12 +23,13 @@ currentUrl: window.location.href,
 //url
 
 
-query: new URLSearchParams(window.location.search).get('q'),
 get encodedQuery() { return encodeURIComponent(this.query) },
 
 
 path: "/",
-q: "",
+query: "",
+//query: new URLSearchParams(window.location.search).get('q'),
+get encodedQuery() { return encodeURIComponent(this.query) },
 tab: "",
 
 
@@ -38,7 +39,7 @@ const [path, queryString] = hash.split('?');
 const query = new URLSearchParams(queryString || '');
 
 this.path = path || '/';
-this.q = query.get('q') || '';
+this.query = query.get('q') || '';
 this.tab = query.get('tab') || '';
 },
 
@@ -46,12 +47,6 @@ hashUpdate(){
   this.hash(); // Set initial value
   window.addEventListener('hashchange', () => this.hash());
 },
-
-
-
-
-/*________________________*/
-
 
 
 
@@ -226,10 +221,8 @@ drawer() {return {
 
 // name, icon, class
 menu: [
-{ N: "Homepage", I: "home", C: "s m l", U: "/index.html", },
-{ N: "web", I: "search", C: "s m l", U: "/search/web.html", },
-{ N: "ai", I: "link", C: "s m l", U: "/search/ai.html", },
-{ N: "tmp", I: "link", C: "s m l", U: "/TMP.html", },
+{ N: "Homepage", I: "home", C: "s m l", U: "#/", },
+{ N: "feedback", I: "link", C: "s m l", U: "#/feedback/", },
 ],
 
 
@@ -251,7 +244,7 @@ $template: `
 
 <ul class="list">
 
-<li v-for="L in menu" :class="[{'fill border primary-border': R.path === L.U}, L.C, '', 'wave small-round']">
+<li v-for="L in menu" :class="[{'fill border primary-border': R.path === L.U}, L.C, '', 'wave small-round']" data-ui="#drawer">
 <a :href="L.U"><i v-text="L.I"></i> <span v-text="L.N"></span></a>
 </li>
 
@@ -416,26 +409,6 @@ $template: `
 </div>
 `}},
 /*________________________________________________________________*/
-form() {return {
-
-
-$template: `
-
-<form class="middle-align center-align top-margin bottom-margin" :action="R.path" target="_self" method="GET">
-<nav :class="Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
-
-<div class="max field border small-round primary-border">
-<input type="text" name="q" v-model="R.query">
-</div>
-<button type="submit" class="transparent border primary-border fill small-round large">
-<i>search</i> <span class="m l">Search</span>
-</button>
-
-</nav>
-</form>
-
-`}},
-/*________________________________________________________________*/
 tabs() {return {
 
 scroll() {
@@ -447,17 +420,17 @@ $template: `
 
 <nav class="row scroll" @vue:mounted="scroll">
 
-<a v-for="(C, I) in Categories.filter(C => C.V || C.id == R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == R.tab}, 'vertical padding small-round']" :href="R.path + '?tab=' + C.id + '&q=' + R.encodedQuery" :data-tab="C.id">
+<a v-for="(C, I) in Categories.filter(C => C.V || C.id == R.tab )" :key="C.id" :class="[{'border primary-border fill' : C.id == R.tab}, 'vertical padding small-round']" :href="'#/search/?tab=' + C.id + '&q=' + R.encodedQuery" :data-tab="C.id">
   <i v-text="C.I"></i> <span v-text="C.N"></span>
 </a>
 
 
-<a data-ui="#links" :class="[{'border primary-border fill' : R.tab == 'my-links'}, 'vertical padding small-round']" v-show="linksVisibility || R.tab == 'my-links'" :href="R.path + '?tab=my-links' + '&q=' + R.encodedQuery" data-tab="my-links">
+<a data-ui="#links" :class="[{'border primary-border fill' : R.tab == 'my-links'}, 'vertical padding small-round']" v-show="linksVisibility || R.tab == 'my-links'" :href="'#/search/?tab=my-links' + '&q=' + R.encodedQuery" data-tab="my-links">
 <i>edit_note</i> <span>My List</span>
 </a>
 
 
-<a data-ui="#advanced" :class="[{'border primary-border fill' : R.tab == 'advanced'}, 'vertical padding small-round']" v-show="advancedVisibility || R.tab == 'advanced'" :href="R.path + '?tab=advanced' + '&q=' + R.encodedQuery" data-tab="advanced">
+<a data-ui="#advanced" :class="[{'border primary-border fill' : R.tab == 'advanced'}, 'vertical padding small-round']" v-show="advancedVisibility || R.tab == 'advanced'" :href="'#/search/?tab=advanced' + '&q=' + R.encodedQuery" data-tab="advanced">
 <i>pageview</i> <span>Advanced</span>
 </a>
 
@@ -623,132 +596,6 @@ $template: `
 
 `}},
 /*________________________________________________________________*/
-myLinks() {return {
-
-myLinks: {
-  
-  edit: false,
-  
-  links: JSON.parse(localStorage.getItem('links')) || [],
-  newLink: { N: "", L: {b: "", p: "" }},
-  
-  saveLinks() { localStorage.setItem("links", JSON.stringify(this.links)) },
-  
-  removeLink(index) {
-    this.links.splice(index, 1); 
-    this.saveLinks() 
-  },
-  
-  addLink() { 
-  this.links.push({ N: this.newLink.N, L: { b: this.newLink.L.b,  p: this.newLink.L.p }});
-  this.saveLinks();
-  this.edit = false;
-  this.newLink.N = '';
-  this.newLink.L.b = '';
-  this.newLink.L.p = '';
-},
-
-},
-
-
-
-$template: `
-
-
-
-<div v-scope="component.content(myLinks.links, myLinks)"></div>
-
-
-
-
-<nav class="right-align" v-show="!myLinks.edit">
-<button class="fill border primary-border small-round large" @click="myLinks.edit = !myLinks.edit">
-<i>forms_add_on</i>
-</button>
-</nav>
-
-
-<form class="middle-align center-align" @submit.prevent="myLinks.addLink()" v-show="myLinks.edit">
-
-<div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
-
-<p class="row no-space s12 m12 l12">
-<s class="red-text">https://</s><span class="green-text">google.com</span>
-<b class="blue-text">/search?q=</b><s class="red-text">news</s>
-</p>
-
-<div class="field label border large s12 m12 l12">
-<input type="text" v-model="myLinks.newLink.N" required>
-<label><b class="red-text">*</b>website name</label>
-</div>
-
-<div class="field label border large s12 m8 l7">
-<input type="text" v-model="myLinks.newLink.L.b" required>
-<label>
-<b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
-</label>
-</div>
-
-<div class="max field label border large s12 m4 l5">
-<input type="text" v-model="myLinks.newLink.L.p">
-<label> ex:<b class="blue-text">/search?q=</b></label>
-</div>
-
-<nav class="center-align s12 m12 l12">
-
-<button class="small-round border large" @click="myLinks.edit = false">
-<i>close</i>
-</button>
-
-<button class="transparent fill border border-primary small-round large" type="submit">
-<span>add</span> <i>add</i>
-</button>
-</nav>
-
-</div>
-
-
-</form>
-
-
-
-
-
-`}},
-/*________________________________________________________________*/
-advanced() {return {
-
-site: "",
-
-$template: `
-
-<form class="middle-align center-align" method="GET" :action="'https://' + X.engine.L.b" target="_blank">
-<input type="text" :name="X.engine.L.p" :value="'site:' + site + ' &quot;' + R.query + '&quot;'" hidden>
-
-<div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
-
-<div class="field label suffix border large s12 m8 l7">
-<input type="text" v-model="site" required>
-<label>website.com</label>
-<i>link</i>
-</div>
-
-<div class="field label prefix suffix border large s12 m4 l5" v-scope="component.input()"></div>
-
-<nav class="center-align s12 m12 l12">
-<button class="transparent border primary-border fill large small-round" type="submit">
-<span>search</span> <i>search</i>
-</button>
-</nav>
-
-</div>
-
-
-</form>
-
-
-`}},
-/*________________________________________________________________*/
 input() {return {
 
 Engines: [
@@ -795,13 +642,45 @@ $template: `
 //content
 sites: null,
 
+
+
 async load() {
-try { this.sites ||= await fetch(`/res/json/${this.R.tab}.json`).then(data => data.json()) } catch (error) { this.sites = null }
+  for (i in Categories) {
+    Categories[i].id
+  }
+  try { this.sites ||= await fetch(`/res/json/${id}.json`).then(data => data.json()) } catch (error) { this.sites = null }
+
 },
+
+
+
 
 /*________________________________________________________________*/
 
-
+myLinks: {
+  
+  edit: false,
+  
+  links: JSON.parse(localStorage.getItem('links')) || [],
+  newLink: { N: "", L: { b: "", p: "" } },
+  
+  saveLinks() { localStorage.setItem("links", JSON.stringify(this.links)) },
+  
+  removeLink(index) {
+    this.links.splice(index, 1);
+    this.saveLinks()
+  },
+  
+  addLink() {
+    this.links.push({ N: this.newLink.N, L: { b: this.newLink.L.b, p: this.newLink.L.p } });
+    this.saveLinks();
+    this.edit = false;
+    this.newLink.N = '';
+    this.newLink.L.b = '';
+    this.newLink.L.p = '';
+  },
+  
+},
 
 
 
@@ -810,23 +689,19 @@ try { this.sites ||= await fetch(`/res/json/${this.R.tab}.json`).then(data => da
 /*________________________________________________________________*/
 mounted() {
 
+const theme = JSON.parse(localStorage.getItem('theme')) || null;
+if (theme) {document.body.className = theme};
+
+
 
 //serviceWorker
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js');
-  });
-;}
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js') })
+}
 
 
 //R
 this.R.hashUpdate();
-
-
-
-const theme = JSON.parse(localStorage.getItem('theme')) || null;
-if (theme) {document.body.className = theme};
-
 
 
 

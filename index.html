@@ -70,7 +70,7 @@
 
 
 
-<template v-if="R.path === '/' && !R.q"><div class="page left active">
+<template v-if="R.path === '/' && !R.query"><div class="page left active">
 
 <div class="padding center-align">
 <!--
@@ -127,18 +127,111 @@
 
 </div></template>
 
-<template v-else-if="R.path === '/search/' && R.q"><div class="page left active">
+<template v-else-if="R.path === '/search/' && R.query"><div class="page left active">
 
-<div class="vertical-padding" v-scope="component.form()"></div>
+<div class="vertical-padding">
+
+<form class="middle-align center-align top-margin bottom-margin" :action="R.path" target="_self" method="GET">
+  <nav :class="Device.display === 's' ? 'medium-width' : 'large-width'" class="medium-width">
+    
+    <div class="max field border small-round primary-border">
+      <input type="text" name="q" v-model="R.query">
+    </div>
+    <button type="submit" class="transparent border primary-border fill small-round large">
+      <i>search</i> <span class="m l">Search</span>
+    </button>
+    
+  </nav>
+</form>
+
+</div>
 <div class="bottom-padding" v-scope="component.tabs()"></div>
 
 
+<div v-if="R.tab === 'my-links'">
+  
 
-<div v-if="R.tab === 'my-links'" v-scope="component.myLinks()"></div>
+<div v-scope="component.content(myLinks.links, myLinks)"></div>
 
-<div v-else-if="R.tab === 'advanced'" v-scope="component.advanced()"></div>
+<nav class="right-align" v-show="!myLinks.edit">
+<button class="fill border primary-border small-round large" @click="myLinks.edit = !myLinks.edit">
+<i>forms_add_on</i>
+</button>
+</nav>
 
-<div v-else @vue:mounted="load()" v-scope="component.content(sites)"></div>
+<form class="middle-align center-align" @submit.prevent="myLinks.addLink()" v-show="myLinks.edit">
+
+<div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
+
+<p class="row no-space s12 m12 l12">
+<s class="red-text">https://</s><span class="green-text">google.com</span>
+<b class="blue-text">/search?q=</b><s class="red-text">news</s>
+</p>
+
+<div class="field label border large s12 m12 l12">
+<input type="text" v-model="myLinks.newLink.N" required>
+<label><b class="red-text">*</b>website name</label>
+</div>
+
+<div class="field label border large s12 m8 l7">
+<input type="text" v-model="myLinks.newLink.L.b" required>
+<label>
+<b class="red-text">*</b><s>https://</s><b class="green-text">website.com</b>
+</label>
+</div>
+
+<div class="max field label border large s12 m4 l5">
+<input type="text" v-model="myLinks.newLink.L.p">
+<label> ex:<b class="blue-text">/search?q=</b></label>
+</div>
+
+<nav class="center-align s12 m12 l12">
+
+<button class="small-round border large" @click="myLinks.edit = false">
+<i>close</i>
+</button>
+
+<button class="transparent fill border border-primary small-round large" type="submit">
+<span>add</span> <i>add</i>
+</button>
+</nav>
+
+</div>
+
+
+</form>
+
+</div>
+
+<div v-else-if="R.tab === 'advanced'">
+
+<form class="middle-align center-align" method="GET" :action="'https://' + X.engine.L.b" target="_blank" v-scope="{site: null}">
+  <input type="text" :name="X.engine.L.p" :value="'site:' + site + ' &quot;' + R.query + '&quot;'" hidden>
+  
+  <div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
+    
+    <div class="field label suffix border large s12 m8 l7">
+      <input type="text" v-model="site" required>
+      <label>website.com</label>
+      <i>link</i>
+    </div>
+    
+    <div class="field label prefix suffix border large s12 m4 l5" v-scope="component.input()"></div>
+    
+    <nav class="center-align s12 m12 l12">
+      <button class="transparent border primary-border fill large small-round" type="submit">
+        <span>search</span> <i>search</i>
+      </button>
+    </nav>
+    
+  </div>
+  
+  
+</form>
+
+</div>
+
+<div v-else v-effect="load()" v-scope="component.content(sites)"></div>
 
 <div class="padding" v-scope="{comments:false}">
   <div class="large-space"></div>
@@ -182,7 +275,6 @@
 </div>
 
 </div></template>
-
 
 
 <div v-scope="component.drawer()"></div>
