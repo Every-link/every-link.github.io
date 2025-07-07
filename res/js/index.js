@@ -23,14 +23,12 @@ currentUrl: window.location.href,
 //url
 
 
-get encodedQuery() { return encodeURIComponent(this.query) },
-
-
-path: "/",
+path: "",
 query: "",
-//query: new URLSearchParams(window.location.search).get('q'),
-get encodedQuery() { return encodeURIComponent(this.query) },
 tab: "",
+
+get encodedQuery() { return encodeURIComponent(this.query) },
+//query: new URLSearchParams(window.location.search).get('q'),
 
 
 hash() {
@@ -39,8 +37,8 @@ const [path, queryString] = hash.split('?');
 const query = new URLSearchParams(queryString || '');
 
 this.path = path || '/';
-this.query = query.get('q') || '';
-this.tab = query.get('tab') || '';
+this.query = query.get('q') || 'search';
+this.tab = query.get('tab') || 'web';
 },
 
 hashUpdate(){
@@ -103,33 +101,33 @@ else { return "unknown" }
 }, //device
 
 /*________________________________________________________________*/
-
-Categories: JSON.parse(localStorage.getItem('categories')) || [
-{ N: "Web", id: "web", I: "globe", V: true },
-{ N: "AI", id: "ai", I: "robot_2", V: true },
-{ N: "Information", id: "information", I: "description", V: false },
-{ N: "News", id: "news", I: "newspaper", V: false },
-{ N: "Maps", id: "maps", I: "location_on", V: false },
-{ N: "Translation", id: "translation", I: "translate", V: false },
-{ N: "Sports", id: "sports", I: "sports_soccer", V: false },
-{ N: "Social Media", id: "socialMedia", I: "groups", V: false },
-{ N: "Jobs", id: "jobs", I: "badge", V: false },
-{ N: "Images", id: "images", I: "image", V: false },
-{ N: "Videos", id: "videos", I: "smart_display", V: false },
-{ N: "Music", id: "music", I: "library_music", V: false },
-{ N: "Movies & Shows", id: "moviesShows", I: "movie", V: false },
-{ N: "Books", id: "books", I: "menu_book", V: false },
-{ N: "Shopping", id: "shopping", I: "shopping_cart", V: false },
-{ N: "Hotels", id: "hotels", I: "apartment", V: false },
-{ N: "Flights", id: "flights", I: "flight", V: false },
-{ N: "Education", id: "education", I: "school", V: false },
-{ N: "Contacts", id: "contacts", I: "contacts", V: false },
-{ N: "Apps", id: "apps", I: "apps", V: false },
-{ N: "SEO", id: "seo", I: "web_traffic", V: false },
-{ N: "Marketing", id: "marketing", I: "bar_chart", V: false },
-{ N: "Developers", id: "developers", I: "terminal", V: false },
-{ N: "torrent", id: "torrent", I: "dns", V: false },
-{ N: "Others", id: "others", I: "more_horiz", V: false },
+//JSON.parse(localStorage.getItem('categories')) || 
+Categories: [
+{ N: "Web", id: "web", I: "globe", V: true, sites: null },
+{ N: "AI", id: "ai", I: "robot_2", V: true, sites: null },
+{ N: "Information", id: "information", I: "description", V: false, sites: null },
+{ N: "News", id: "news", I: "newspaper", V: false, sites: null },
+{ N: "Maps", id: "maps", I: "location_on", V: false, sites: null },
+{ N: "Translation", id: "translation", I: "translate", V: false, sites: null },
+{ N: "Sports", id: "sports", I: "sports_soccer", V: false, sites: null },
+{ N: "Social Media", id: "socialMedia", I: "groups", V: false, sites: null },
+{ N: "Jobs", id: "jobs", I: "badge", V: false, sites: null },
+{ N: "Images", id: "images", I: "image", V: false, sites: null },
+{ N: "Videos", id: "videos", I: "smart_display", V: false, sites: null },
+{ N: "Music", id: "music", I: "library_music", V: false, sites: null },
+{ N: "Movies & Shows", id: "moviesShows", I: "movie", V: false, sites: null },
+{ N: "Books", id: "books", I: "menu_book", V: false, sites: null },
+{ N: "Shopping", id: "shopping", I: "shopping_cart", V: false, sites: null },
+{ N: "Hotels", id: "hotels", I: "apartment", V: false, sites: null },
+{ N: "Flights", id: "flights", I: "flight", V: false, sites: null },
+{ N: "Education", id: "education", I: "school", V: false, sites: null },
+{ N: "Contacts", id: "contacts", I: "contacts", V: false, sites: null },
+{ N: "Apps", id: "apps", I: "apps", V: false, sites: null },
+{ N: "SEO", id: "seo", I: "web_traffic", V: false, sites: null },
+{ N: "Marketing", id: "marketing", I: "bar_chart", V: false, sites: null },
+{ N: "Developers", id: "developers", I: "terminal", V: false, sites: null },
+{ N: "torrent", id: "torrent", I: "dns", V: false, sites: null },
+{ N: "Others", id: "others", I: "more_horiz", V: false, sites: null },
 ],
 
 
@@ -204,17 +202,12 @@ $template: `
 `}},
 /*________________________________________________________________*/
 share() {return {
-
 title: document.title, 
 url: window.location.href,
 
-
 $template: `
-
-<button class="transparent border primary-border fill elevate small-round margin large fixed bottom right s m" @click="share(title, url)" v-show="Device.type === 'mobile' || Device.type === 'tablet'"><i>share</i> </button>
-
+<button class="transparent border primary-border fill elevate small-round margin large fixed bottom right s m" @click="share(title, url)" v-show="Device.os == 'android' || Device.os == 'ios'"><i>share</i> </button>
 <div class="snackbar error" id="share"> Your browser is not supported</div>
-
 `}},
 /*________________________________________________________________*/
 drawer() {return {
@@ -246,6 +239,11 @@ $template: `
 
 <li v-for="L in menu" :class="[{'fill border primary-border': R.path === L.U}, L.C, '', 'wave small-round']" data-ui="#drawer">
 <a :href="L.U"><i v-text="L.I"></i> <span v-text="L.N"></span></a>
+</li>
+
+
+<li v-for="C in Categories" :class="[{'fill border primary-border': R.tab === C.id}, '', 'wave small-round']" data-ui="#drawer">
+<a :href="'#/search/?tab=' + C.id + '&q=' + R.encodedQuery "><i v-text="C.I"></i> <span v-text="C.N"></span></a>
 </li>
 
 </ul>
@@ -402,10 +400,7 @@ document.body.appendChild(script);
 
 $template: `
 <div id="disqus_thread" @vue:mounted="comments">
-<div class="middle-align vertical padding">
-<progress class="circle"></progress> 
-<span>Loading</span>
-</div>
+<div v-scope="component.loading()"></div>
 </div>
 `}},
 /*________________________________________________________________*/
@@ -445,21 +440,11 @@ $template: `
 /*________________________________________________________________*/
 content(s,m) {return {
 
-data: s || [],
+S: s ,
 myLinks: m || {},
 
 $template: `
 
-<div v-if="data == null" class="middle-align vertical padding">
-<progress class="circle"></progress> 
-<span>Loading</span>
-</div>
-
-
-
-
-<div v-else class="grid">
-<article v-for="(S, I) in data" :class="[S.C, 's12 m6 l4 small-round']">
 
 <div class="row">
 
@@ -588,12 +573,6 @@ $template: `
 </button>
 
 </div>
-</article>
-</div>
-
-<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
-
-
 `}},
 /*________________________________________________________________*/
 input() {return {
@@ -627,6 +606,24 @@ $template: `
 <i>arrow_drop_down</i>
 `}},
 /*________________________________________________________________*/
+loading() {return {
+$template: `
+<div class="middle-align vertical padding">
+<progress class="circle"></progress>
+<span>Loading</span>
+</div>
+`}},
+/*________________________________________________________________*/
+copy() {return {
+$template: `
+<div class="snackbar" id="copy"><i>done</i> <span>Copied</span></div>
+`}},
+/*________________________________________________________________*/
+
+
+
+
+
 
 
 
@@ -638,20 +635,25 @@ $template: `
 
 /*________________________________________________________________*/
 
-
+/*
 //content
-sites: null,
-
-
-
 async load() {
-  for (i in Categories) {
-    Categories[i].id
+  for (i in this.Categories) {
+    if (this.Categories[i].id == this.R.tab) {
+      try { this.Categories[i].sites ||= await fetch(`/res/json/${this.Categories[i].id}.json`).then(data => data.json()) } catch (error) { this.sites = null }
+    }
   }
-  try { this.sites ||= await fetch(`/res/json/${id}.json`).then(data => data.json()) } catch (error) { this.sites = null }
-
 },
 
+
+  try { this.Categories[i].sites ||= await fetch(`/res/json/${this.Categories[i].id}.json`).then(data => data.json()) } catch (error) { this.Categories[i].sites = null }
+
+
+*/
+async load(i) {
+const C = this.Categories[i];
+try { C.sites ||= await fetch(`/res/json/${C.id}.json`).then(data => data.json()) } catch (error) { C.sites = null }
+},
 
 
 
