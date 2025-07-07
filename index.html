@@ -233,11 +233,6 @@
 
 <div v-else v-scope="component.loading()"></div>
 
-</div>
-</div>
-
-</div>
-
 <!-- comments -->
 <div class="padding" v-scope="{comments:false}">
   <div class="large-space"></div>
@@ -248,8 +243,15 @@
     <button v-if="!comments" class="transparent border small-round link" @click="comments = true">Show Comments</button>
   </div>
   
-  <div v-if="comments" v-scope="component.comments(R.tab)"></div>
+  <div v-if="comments" v-scope="component.comments(C.id)"></div>
 </div>
+
+
+</div>
+</div>
+
+</div>
+
 
 </div></template>
 
