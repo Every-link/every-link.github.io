@@ -381,36 +381,33 @@ $template: `
 comments(i) {return {
 
 identifier: i,
+get url() { return window.location.origin + '/#' + this.identifier; },
+loaded: false,
 
 comments(){
 
-
-if (window.DISQUS) {
-  
-window.DISQUS.reset({
-  reload: true,
-  config: function () {
-    this.page.url = window.location.origin;
-    this.page.identifier = this.identifier;
-  },
-});
-
-} else {
+if (window.DISQUS) { // Reset Disqus if already loaded
+  window.DISQUS.reset({
+    reload: true,
+    config: function () {
+      this.page.identifier = this.identifier;
+      this.page.url = this.url;
+    }.bind(this)
+  });
+        
+} else { // First time load
+  window.disqus_config = () => {
+  this.page.identifier = this.identifier;
+  this.page.url = this.url;
+  };
 
 const script = document.createElement('script');
 script.src = 'https://every-link.disqus.com/embed.js';
 script.async = true;
 script.setAttribute('data-timestamp', Date.now());
 document.body.appendChild(script);
-
-/*
-var disqus_config = function () {
-  this.page.url = window.location.origin;
-  this.page.identifier = this.identifier;
-};
-*/
-
-};
+this.loaded = true;
+}
 
 
 },
