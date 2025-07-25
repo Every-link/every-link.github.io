@@ -382,7 +382,6 @@ comments(i) {return {
 
 identifier: i,
 get url() { return window.location.origin + '/#' + this.identifier; },
-loaded: false,
 
 comments(){
 
@@ -406,7 +405,6 @@ script.src = 'https://every-link.disqus.com/embed.js';
 script.async = true;
 script.setAttribute('data-timestamp', Date.now());
 document.body.appendChild(script);
-this.loaded = true;
 }
 
 
