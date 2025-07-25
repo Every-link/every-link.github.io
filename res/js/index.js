@@ -384,24 +384,39 @@ identifier: i,
 
 comments(){
 
-if (this.identifier) {
-var disqus_config = function () {
-this.page.url = window.location.origin + window.location.pathname;
-this.page.identifier = this.identifier;
-};
-}
+
+if (window.DISQUS) {
+  
+window.DISQUS.reset({
+  reload: true,
+  config: function () {
+    this.page.url = window.location.origin;
+    this.page.identifier = this.identifier;
+  },
+});
+
+} else {
 
 const script = document.createElement('script');
 script.src = 'https://every-link.disqus.com/embed.js';
 script.async = true;
 script.setAttribute('data-timestamp', Date.now());
 document.body.appendChild(script);
+
+/*
+var disqus_config = function () {
+  this.page.url = window.location.origin;
+  this.page.identifier = this.identifier;
+};
+*/
+
+};
+
+
 },
 
 $template: `
-<div id="disqus_thread" @vue:mounted="comments">
-<div v-scope="component.loading()"></div>
-</div>
+<div id="disqus_thread" @vue:mounted="comments" v-scope="component.loading()"></div>
 `}},
 /*________________________________________________________________*/
 tabs() {return {
@@ -420,7 +435,7 @@ $template: `
 </a>
 
 
-<a data-ui="#links" :class="[{'border primary-border fill' : R.tab == 'my-links'}, 'vertical padding small-round']" v-show="linksVisibility || R.tab == 'my-links'" :href="'#/search/?tab=my-links' + '&q=' + R.encodedQuery" data-tab="my-links">
+<a data-ui="#links" :class="[{'border primary-border fill' : R.tab == 'links'}, 'vertical padding small-round']" v-show="linksVisibility || R.tab == 'links'" :href="'#/search/?tab=links' + '&q=' + R.encodedQuery" data-tab="links">
 <i>edit_note</i> <span>My List</span>
 </a>
 
@@ -635,24 +650,14 @@ $template: `
 
 /*________________________________________________________________*/
 
-/*
-//content
-async load() {
-  for (i in this.Categories) {
-    if (this.Categories[i].id == this.R.tab) {
-      try { this.Categories[i].sites ||= await fetch(`/res/json/${this.Categories[i].id}.json`).then(data => data.json()) } catch (error) { this.sites = null }
-    }
-  }
-},
-
-
-  try { this.Categories[i].sites ||= await fetch(`/res/json/${this.Categories[i].id}.json`).then(data => data.json()) } catch (error) { this.Categories[i].sites = null }
-
-
-*/
 async load(i) {
+  
 const C = this.Categories[i];
-try { C.sites ||= await fetch(`/res/json/${C.id}.json`).then(data => data.json()) } catch (error) { C.sites = null }
+
+if (!C.sites) {
+  try { C.sites = await fetch(`/res/json/${C.id}.json`).then(data => data.json()) } catch (error) { C.sites = null }
+};
+
 },
 
 
@@ -704,6 +709,9 @@ if ('serviceWorker' in navigator) {
 
 //R
 this.R.hashUpdate();
+
+//
+
 
 
 

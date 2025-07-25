@@ -60,6 +60,7 @@
 
 <main class="responsive">
 
+
 <template v-if="R.path === '/'"><div class="page left active">
 
 <div class="padding center-align">
@@ -137,10 +138,10 @@
 
 <div class="bottom-padding" v-scope="component.tabs()"></div>
 
-<div v-if="R.tab === 'my-links'">
-  
-<div v-if="C.sites" class="grid">
-<article v-for="(S, I) in C.sites" v-scope="component.content((myLinks.links, myLinks)" :class="[S.C, 's12 m6 l4 small-round']"></article>
+<div v-if="R.tab === 'links'">
+
+<div v-if="myLinks.links" class="grid">
+  <article v-for="(L, I) in myLinks.links" v-scope="component.content(L, myLinks)" class="s12 m6 l4 small-round"></article>
 </div>
 
 <nav class="right-align" v-show="!myLinks.edit">
@@ -150,6 +151,7 @@
 </nav>
 
 <form class="middle-align center-align" @submit.prevent="myLinks.addLink()" v-show="myLinks.edit">
+
 
 <div :class="[Device.display === 's' ? 'medium-width' : 'large-width', 'grid']">
 
@@ -177,7 +179,7 @@
 
 <nav class="center-align s12 m12 l12">
 
-<button class="small-round border large" @click="myLinks.edit = false">
+<button class="small-round border large" type="button" @click="myLinks.edit = false">
 <i>close</i>
 </button>
 
@@ -226,7 +228,6 @@
 
 <div v-for="(C, I) in Categories" :key="C.id">
 <div v-if="C.id == R.tab" @vue:mounted="load(I)" class="active page left">
-
 <div v-if="C.sites" class="grid">
 <article v-for="(S, I) in C.sites" v-scope="component.content(S)" :class="[S.C, 's12 m6 l4 small-round']"></article>
 </div>
@@ -249,6 +250,7 @@
 
 </div>
 </div>
+
 
 </div>
 
@@ -283,9 +285,6 @@
 </div>
 
 </div></template>
-
-
-
 
 
 <div v-scope="component.share()" class="large-padding large-margin"></div>
