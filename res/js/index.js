@@ -381,20 +381,22 @@ $template: `
 comments(i) {return {
 
 identifier: i,
+
 get url() { return window.location.origin + '/#' + this.identifier; },
 
-comments(){
+comments(i){
 
 if (window.DISQUS) { // Reset Disqus if already loaded
   window.DISQUS.reset({
-    reload: true,
-    config: function () {
+    reload: true, config: function () {
       this.page.identifier = this.identifier;
       this.page.url = this.url;
     }.bind(this)
   });
-        
-} else { // First time load
+
+} 
+
+else { // First time load
   window.disqus_config = () => {
   this.page.identifier = this.identifier;
   this.page.url = this.url;
@@ -411,7 +413,7 @@ document.body.appendChild(script);
 },
 
 $template: `
-<div id="disqus_thread" @vue:mounted="comments" v-scope="component.loading()"></div>
+<div id="disqus_thread" v-effect="comments()" v-scope="component.loading()"></div>
 `}},
 /*________________________________________________________________*/
 tabs() {return {
